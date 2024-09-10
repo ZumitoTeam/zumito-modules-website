@@ -2,13 +2,30 @@
     import { page } from '$app/stores';
     import { Prisma } from '@prisma/client'
 
-    let posts: Prisma.PostSelect[] = $page.data.posts;
+    let modules: Prisma.ModuleSelect[] = $page.data.modules;
 </script>
 
-{JSON.stringify(posts)}
+<div class="bg-gray-50">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div class="columns-2 md:columns-3 lg:columns-4 p-4">
+            {#each modules as module}
+                <div class="mb-4 p-4 bg-white rounded-xl break-inside-avoid-column">
+                    <img src="{module.banner}" alt="" class="w-full">
+                    <div>
+                        {module.name}
+                    </div>
+                    <div>
+                        {@html module.description}
+                    </div>
+                    {#if module.tags && module.tags.length}
+                        {#each module.tags as tag}
+                            <div class="">{tag.id}</div>
+                        {/each}
+                    {/if}
+                    <a href="{module.link}">Free</a>
+                </div>
+            {/each}
+        </div>
+    </div>
 
-<div>
-    {#each posts as post}
-        {post.title}
-    {/each}
-</div>
+</div>    

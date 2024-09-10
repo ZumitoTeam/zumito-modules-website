@@ -13,22 +13,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
+model Module {
   id        Int      @id @default(autoincrement())
-  title     String
-  content   String?
-  banner    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  endDate   DateTime?
-  published Boolean  @default(true)
+  name      String
+  description  String
+  instructions  String 
+  price     Decimal @default(0)
+  npm       String
+  sourceCode  String?
+  published   Boolean  @default(true)
+  aproved   Boolean @default(true)
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
+  comments     Comment[]  // Relation to comments
+  faqs         FAQ[]      // Relation to FAQs
+  installs     Install[]  // Relation to the Install model (User installs)
 }
 
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
-  name  String?
-  posts Post[]
+  username  String  @unique
+  password  String
+  modules Module[]
+  comments Comment[] // Relation to comments
+  installs Install[] // Relation to installs
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  module    Module   @relation(fields: [moduleId], references: [id])
+  moduleId  Int
+}
+
+model FAQ {
+  id        Int      @id @default(autoincrement())
+  question  String
+  answer    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  module    Module   @relation(fields: [moduleId], references: [id])
+  moduleId  Int
+}
+
+model Install {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  module    Module   @relation(fields: [moduleId], references: [id])
+  moduleId  Int
+  createdAt DateTime @default(now())
+
+  @@unique([userId, moduleId]) // Ensures a user can install a module only once
 }

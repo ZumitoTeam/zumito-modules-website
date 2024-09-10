@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Module` ADD COLUMN `installs` INTEGER NOT NULL DEFAULT 0;
