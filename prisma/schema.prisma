@@ -28,6 +28,7 @@ model Module {
   comments     Comment[]  // Relation to comments
   faqs         FAQ[]      // Relation to FAQs
   installs     Install[]  // Relation to the Install model (User installs)
+  images       Image[]    // Relation to images
 }
 
 model User {
@@ -70,4 +71,12 @@ model Install {
   createdAt DateTime @default(now())
 
   @@unique([userId, moduleId]) // Ensures a user can install a module only once
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  url       String   // URL or path to the image file
+  altText   String?  // Optional: description of the image for accessibility
+  module    Module   @relation(fields: [moduleId], references: [id])
+  moduleId  Int
 }

@@ -31,6 +31,8 @@
 		"@tiptap/starter-kit": "^2.6.6",
 		"embla-carousel-svelte": "^8.2.1",
 		"javascript-time-ago": "^2.5.11",
-		"rss-parser": "^3.13.0"
+		"minio": "^8.0.1",
+		"rss-parser": "^3.13.0",
+		"svelte-swiper-matrix": "^0.6.0"
 	}
 }

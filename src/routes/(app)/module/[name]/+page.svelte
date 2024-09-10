@@ -5,13 +5,7 @@
     import TimeAgo from 'javascript-time-ago';
     import en from 'javascript-time-ago/locale/en'
     import FaqItem from '$lib/components/FaqItem.svelte';
-    import emblaCarouselSvelte from 'embla-carousel-svelte'
-    let emblaApi: any;
-
-    function onInit(event: any) {
-        emblaApi = event.detail
-        console.log(emblaApi.slideNodes()) // Access API
-    }
+    import { Swiper } from "svelte-swiper-matrix";
 
     TimeAgo.addDefaultLocale(en)
     const timeAgo = new TimeAgo('en-US')
@@ -26,18 +20,10 @@
             {module.name}
         </h1>
 
-        <div class="embla" use:emblaCarouselSvelte  on:emblaInit="{onInit}">
-            <div class="embla__viewport">
-                <div class="embla__container">
-                <div class="embla__slide w-full bg-gray-100">Slide 1</div>
-                <div class="embla__slide w-full bg-gray-100">Slide 2</div>
-                <div class="embla__slide w-full bg-gray-100">Slide 3</div>
-                </div>
-            </div>
-            
-            <button class="embla__prev" on:click={emblaApi.scrollPrev}>Prev</button>
-            <button class="embla__next" on:click={emblaApi.scrollNext}>Next</button>
-
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 mb-4 mt-2">
+          <img src="https://placehold.co/600x350" class="rounded-xl snap-center flex-shrink-0 bg-red-500 text-white flex items-center justify-center h-[300px]">
+          <img src="https://placehold.co/600x350" class="rounded-xl snap-center flex-shrink-0 bg-red-500 text-white flex items-center justify-center h-[300px]">
+          <img src="https://placehold.co/600x350" class="rounded-xl snap-center flex-shrink-0 bg-red-500 text-white flex items-center justify-center h-[300px]">
         </div>
     </div>
 
