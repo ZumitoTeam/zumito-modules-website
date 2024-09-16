@@ -29,6 +29,7 @@ model Module {
   faqs         FAQ[]      // Relation to FAQs
   installs     Install[]  // Relation to the Install model (User installs)
   images       Image[]    // Relation to images
+  icon      String @default("")
 }
 
 model User {

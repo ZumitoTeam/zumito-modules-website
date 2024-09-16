@@ -9,8 +9,8 @@
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div class="columns-2 md:columns-3 lg:columns-4 p-4">
             {#each modules as module}
-                <div class="mb-4 p-4 bg-white rounded-xl break-inside-avoid-column">
-                    <img src="{module.banner}" alt="" class="w-full">
+                <a href="/module/{module.name}" class="block mb-4 p-4 bg-white rounded-xl break-inside-avoid-column">
+                    <img src="{module.icon}" alt="" class="w-full">
                     <div>
                         {module.name}
                     </div>
@@ -22,8 +22,8 @@
                             <div class="">{tag.id}</div>
                         {/each}
                     {/if}
-                    <a href="{module.link}">Free</a>
-                </div>
+                    <div>Free</div>
+                </a>
             {/each}
         </div>
     </div>

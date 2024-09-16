@@ -1,0 +1,1 @@
+export const logoImageUrl = 'https://docs.zumito.dev/_astro/zumito-hi.CVPMU07h_16SD6a.webp';

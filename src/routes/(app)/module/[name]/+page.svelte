@@ -28,9 +28,9 @@
     </div>
 
 
-    <div class="max-w-screen-xl mx-auto p-4 flex gap-12">
+    <div class="max-w-screen-xl mx-auto p-4 flex flex-col-reverse lg:flex-row gap-12">
 
-        <div class="flex flex-col w-4/6">
+        <div class="flex flex-col w-full lg:w-4/6">
                
             <div class="text-2xl mb-2">
                 Description
@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div class="w-2/6 sticky top-0 h-fit flex flex-col gap-5">
+        <div class="w-full lg:w-2/6 sticky top-0 h-fit flex flex-col gap-5">
 
             <button type="button" class="w-full text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-pink-600 dark:hover:bg-pink-700 focus:outline-none dark:focus:ring-pink-800">Install</button>
             
@@ -171,16 +171,3 @@
         }
     </script>
 </svelte:head>
-
-<style>
-    .embla {
-      overflow: hidden;
-    }
-    .embla__container {
-      display: flex;
-    }
-    .embla__slide {
-      width: 100%;
-      text-align: center;
-    }
-</style>

@@ -1,58 +1,121 @@
-<section class="relative bg-white overflow-hidden">
-    <img class="absolute left-0 top-0 bg-pink-300" src="flaro-assets/images/sign-in/gradient.svg" alt="">
-    <div class="relative z-10 flex flex-wrap -m-8">
-      <div class="w-full md:w-1/2 p-8">
-        <div class="container px-4 mx-auto">
-          <div class="flex flex-wrap">
-            <div class="w-full">
-              <div class="md:max-w-lg mx-auto pt-16 md:pb-32">
-                <a class="mb-28 inline-block" href="#">
-                  <img src="flaro-assets/logos/flaro-logo-black-xl.svg" alt="">
-                </a>
-                <h2 class="mb-32 text-6xl md:text-4xl font-bold font-heading tracking-px-n leading-tight">Signup now and start offering modules for zumito-framework</h2>
-                <h3 class="mb-9 text-xl font-bold font-heading leading-normal">Why should you join us?</h3>
-                <ul class="md:max-w-xs">
-                  <li class="mb-5 flex flex-wrap">
-                    <svg class="mr-2" width="25" height="26" viewbox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 23C18.0228 23 22.5 18.5228 22.5 13C22.5 7.47715 18.0228 3 12.5 3C6.97715 3 2.5 7.47715 2.5 13C2.5 18.5228 6.97715 23 12.5 23ZM17.1339 11.3839C17.622 10.8957 17.622 10.1043 17.1339 9.61612C16.6457 9.12796 15.8543 9.12796 15.3661 9.61612L11.25 13.7322L9.63388 12.1161C9.14573 11.628 8.35427 11.628 7.86612 12.1161C7.37796 12.6043 7.37796 13.3957 7.86612 13.8839L10.3661 16.3839C10.8543 16.872 11.6457 16.872 12.1339 16.3839L17.1339 11.3839Z" fill="#4F46E5"></path>
-                    </svg>
-                    <span class="flex-1 font-medium leading-relaxed">Reach more zumito-framework users</span>
-                  </li>
-                  <li class="mb-5 flex flex-wrap">
-                    <svg class="mr-2" width="25" height="26" viewbox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 23C18.0228 23 22.5 18.5228 22.5 13C22.5 7.47715 18.0228 3 12.5 3C6.97715 3 2.5 7.47715 2.5 13C2.5 18.5228 6.97715 23 12.5 23ZM17.1339 11.3839C17.622 10.8957 17.622 10.1043 17.1339 9.61612C16.6457 9.12796 15.8543 9.12796 15.3661 9.61612L11.25 13.7322L9.63388 12.1161C9.14573 11.628 8.35427 11.628 7.86612 12.1161C7.37796 12.6043 7.37796 13.3957 7.86612 13.8839L10.3661 16.3839C10.8543 16.872 11.6457 16.872 12.1339 16.3839L17.1339 11.3839Z" fill="#4F46E5"></path>
-                    </svg>
-                    <span class="flex-1 font-medium leading-relaxed">Make money for your work (coming soon)</span>
-                  </li>
-                </ul>
+<script>
+  import { logoImageUrl } from '$lib/globalVars';
+</script>
+<section class="bg-gray-50 dark:bg-gray-900">
+  <div class="max-w-screen-xl px-4 py-8 mx-auto lg:grid lg:gap-20 lg:py-16 lg:grid-cols-12">
+      <div class="flex-col justify-between hidden mr-auto lg:flex lg:col-span-5 xl:col-span-6 xl:mb-0">
+          <div>
+              <a href="/" class="inline-flex items-center mb-6 text-2xl font-semibold text-gray-900 lg:mb-10 dark:text-white">
+                  <img class="w-8 h-8 mr-2" src={logoImageUrl} alt="logo">
+                  Zumito Modules
+              </a>
+              <div class="flex">
+                  <svg class="w-5 h-5 mr-2 text-pink-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <div>
+                      <h3 class="mb-2 text-xl font-bold leading-none text-gray-900 dark:text-white">Get started
+                          quickly</h3>
+                      <p class="mb-2 font-light text-gray-500 dark:text-gray-400">Integrate with
+                          developer-friendly APIs or choose low-code.</p>
+                  </div>
               </div>
-            </div>
+              <div class="flex pt-8">
+                  <svg class="w-5 h-5 mr-2 text-pink-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"></path>
+                  </svg>
+                  <div>
+                      <h3 class="mb-2 text-xl font-bold leading-none text-gray-900 dark:text-white">Support any
+                          business model</h3>
+                      <p class="mb-2 font-light text-gray-500 dark:text-gray-400">Host code that you don't want to
+                          share with the world in private.</p>
+                  </div>
+              </div>
+              <div class="flex pt-8">
+                  <svg class="w-5 h-5 mr-2 text-pink-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"></path>
+                  </svg>
+                  <div>
+                      <h3 class="mb-2 text-xl font-bold leading-none text-gray-900 dark:text-white">Join millions
+                          of businesses</h3>
+                      <p class="mb-2 font-light text-gray-500 dark:text-gray-400">Flowbite is trusted by ambitious
+                          startups and enterprises of every size.</p>
+                  </div>
+              </div>
           </div>
-        </div>
+          <nav>
+              <ul class="flex space-x-4">
+                  <li>
+                      <a href="#"
+                          class="text-sm text-gray-500 hover:underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">About</a>
+                  </li>
+                  <li>
+                      <a href="#"
+                          class="text-sm text-gray-500 hover:underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Term
+                          & Conditions</a>
+                  </li>
+                  <li>
+                      <a href="#"
+                          class="text-sm text-gray-500 hover:underline hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">Contact</a>
+                  </li>
+              </ul>
+          </nav>
       </div>
-      <div class="w-full md:w-1/2 p-8">
-        <div class="p-4 py-16 flex flex-col justify-center bg-blueGray-100 h-full">
-          <form class="md:max-w-lg mx-auto">
-            <label class="block mb-4">
-              <p class="mb-2 text-gray-900 font-semibold leading-normal">Email Address *</p>
-              <input class="px-4 py-3.5 w-full text-gray-400 font-medium placeholder-gray-400 bg-white outline-none border border-gray-300 rounded-lg focus:ring focus:ring-pink-300" id="signInInput1-1" type="text" placeholder="Enter email address">
-            </label>
-            <label class="block mb-5">
-              <p class="mb-2 text-gray-900 font-semibold leading-normal">Password *</p>
-              <input class="px-4 py-3.5 w-full text-gray-400 font-medium placeholder-gray-400 bg-white outline-none border border-gray-300 rounded-lg focus:ring focus:ring-pink-300" id="signInInput1-2" type="password" placeholder="********">
-            </label>
-            <div class="flex flex-wrap justify-between -m-2 mb-4">
-              <div class="w-auto p-2">
-                <div class="flex items-center">
-                  <input class="w-4 h-4" id="default-checkbox" type="checkbox" value="">
-                  <label class="ml-2 text-sm text-gray-900 font-medium" for="default-checkbox">Remember Me</label>
-                </div>
-              </div>
-              <div class="w-auto p-2"><a class="text-sm text-pink-600 hover:text-pink-700 font-medium" href="#">Forgot Password?</a></div>
-            </div>
-            <button class="mb-9 py-4 px-9 w-full text-white font-semibold border border-pink-700 rounded-xl shadow-4xl focus:ring focus:ring-pink-300 bg-pink-600 hover:bg-pink-700 transition ease-in-out duration-200" type="button">Sign Up</button>
-          </form>
-        </div>
+      <div class="mb-6 text-center lg:hidden">
+          <a href="#"
+              class="inline-flex items-center text-2xl font-semibold text-gray-900 lg:hidden dark:text-white">
+              <img class="w-8 h-8 mr-2" src={logoImageUrl} alt="logo">
+              Zumito Modules
+          </a>
       </div>
-    </div>
-  </section>
+      <div
+          class="w-full mx-auto bg-white rounded-lg shadow dark:bg-gray-800 md:mt-0 sm:max-w-lg xl:p-0 lg:col-span-7 xl:col-span-6">
+          <div class="p-6 space-y-4 lg:space-y-6 sm:p-8">
+              <form class="space-y-4 lg:space-y-6" action="#">
+                  <div>
+                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                          email</label>
+                      <input type="email" name="email" id="email"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="name@company.com" required="">
+                  </div>
+                  <div>
+                      <label for="password"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                      <input type="password" name="password" id="password" placeholder="••••••••"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          required="">
+                  </div>
+                  <div class="flex items-start">
+                      <div class="flex items-center h-5">
+                          <input id="terms" aria-describedby="terms" type="checkbox"
+                              class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-pink-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-pink-600 dark:ring-offset-gray-800"
+                              required="">
+                      </div>
+                      <div class="ml-3 text-sm">
+                          <label for="terms" class="font-light text-gray-500 dark:text-gray-300">
+                              By signing up, you are creating a Zumito Modules account, and you agree to Zumito Modules’s <a
+                                  class="font-medium text-pink-600 dark:text-pink-500 hover:underline"
+                                  href="#">Terms of Use</a> and <a
+                                  class="font-medium text-pink-600 dark:text-pink-500 hover:underline"
+                                  href="#">Privacy Policy</a>.</label>
+                      </div>
+                  </div>
+                  <button type="submit" class="w-full text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">
+                      Create an account
+                  </button>
+                  <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                      Already have an account? <a href="/login" class="font-medium text-pink-600 hover:underline dark:text-pink-500">Sign in here</a>
+                  </p>
+              </form>
+          </div>
+      </div>
+  </div>
+</section>
