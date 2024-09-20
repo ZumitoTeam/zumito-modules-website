@@ -1,5 +1,5 @@
+import { createToken } from '$lib/tokenParser';
 import { redirect } from '@sveltejs/kit';
-import jwt from 'jsonwebtoken';
 
 export const actions = {
 	login: async ({ cookies, request }) => {
@@ -7,9 +7,11 @@ export const actions = {
 		const email = data.get('email');
 		const password = data.get('password');
 
-        var token = jwt.sign({ 
-            email: email
-         }, 'secret-key');
+        const token = createToken({ 
+            email: email as string,
+			userId: 1,
+			username: 'test'
+        });
 
 		cookies.set('token', token, { path: '/' });
 
