@@ -12,6 +12,7 @@
 
 <NavBar 
     isLoggedIn={data.isLoggedIn}
+    user={data.tokenData}
 />
 
 <slot></slot>

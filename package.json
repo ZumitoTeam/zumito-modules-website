@@ -31,6 +31,10 @@
 	"dependencies": {
 		"@ckeditor/ckeditor5-build-decoupled-document": "^43.1.0",
 		"@editorjs/editorjs": "^2.30.5",
+		"@milkdown/crepe": "^7.5.7",
+		"@milkdown/kit": "^7.5.5",
+		"@milkdown/plugin-listener": "^7.5.0",
+		"@milkdown/theme-nord": "^7.5.0",
 		"@nextlint/svelte": "^3.1.0",
 		"@prisma/client": "^5.17.0",
 		"@tinymce/tinymce-svelte": "^3.0.0",

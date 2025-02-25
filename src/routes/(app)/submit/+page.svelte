@@ -6,8 +6,13 @@
     import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
     import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
     import Submit from '$lib/components/marketing/submit.svelte';
+    import { enhance } from '$app/forms';
+    import Milkdown from '$lib/components/Milkdown.svelte';
 
     export let data;
+    export let form;
+
+    let description =  'Here goes a description for your module';
 
     // Register the plugins
     registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -50,23 +55,41 @@
 </script>
 
 {#if data.isLoggedIn}
-  <form method="POST" class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  <form use:enhance action="?/createModule" method="POST" class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <div class="flex flex-col gap-5 w-full">
+
+          <!-- errors -->
+            {#if form?.status === 400}
+                <div class="bg-red-50 p-4 rounded-md">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700">
+                                {form?.error}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {/if} 
+
           <div class="max-w-2xl">
               <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Module name</label>
-              <input type="text" id="first_name" on:keyup={formatName} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="zumito-framework" required />
+              <input type="text" id="first_name" name="name" on:keyup={formatName} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="zumito-framework" required />
           </div>
           <div>
               <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-              <Editor
-                  licenseKey="gpl"
-                  scriptSrc='tinymce/tinymce.min.js'
-                  value='<p>This is the initial content of the editor.</p>'
-                  {conf}
-              />
+              <input type="hidden" name="description" value={description} />
+              <div class="pl-[40px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">
+                <Milkdown bind:value={description} />
+              </div>
           </div>
 
-          <div>
+
+          <!--<div>
               <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Images</label>
               <FilePond bind:this={pond} {name}
               server="/api"
@@ -76,8 +99,9 @@
               max-files={6}
               allowReorder={true}
               instantUpload={false}
+              mul
               />
-          </div>
+          </div>-->
 
           <div>
             <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NPM package name</label>
@@ -85,7 +109,7 @@
               <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                 npm install
               </span>
-              <input type="text" id="website-admin" class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="zumito-framework">
+              <input type="text" name="npm" id="website-admin" class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="zumito-framework">
             </div>
           </div>
 
@@ -143,6 +167,8 @@
                     </div>
               </div>
           </div>
+
+          <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Submit</button>
 
       </div>
   </form>
