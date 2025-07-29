@@ -1,5 +1,7 @@
 <script>
+  import { enhance } from '$app/forms';
   import { logoImageUrl } from '$lib/globalVars';
+  export let form;
 </script>
 <section class="bg-gray-50 dark:bg-gray-900">
   <div class="max-w-screen-xl px-4 py-8 mx-auto lg:grid lg:gap-20 lg:py-16 lg:grid-cols-12">
@@ -78,7 +80,17 @@
       <div
           class="w-full mx-auto bg-white rounded-lg shadow dark:bg-gray-800 md:mt-0 sm:max-w-lg xl:p-0 lg:col-span-7 xl:col-span-6">
           <div class="p-6 space-y-4 lg:space-y-6 sm:p-8">
-              <form class="space-y-4 lg:space-y-6" action="#">
+              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 sm:text-2xl dark:text-white">
+                  Create a new account
+              </h1>
+              <form class="space-y-4 lg:space-y-6" method="post" action="?/login" use:enhance>
+                  <div>
+                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                          username</label>
+                      <input type="text" name="username" id="username"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="username" required="">
+                  </div>
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                           email</label>
@@ -90,6 +102,13 @@
                       <label for="password"
                           class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                       <input type="password" name="password" id="password" placeholder="••••••••"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          required="">
+                  </div>
+                  <div>
+                      <label for="password2"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat password</label>
+                      <input type="password" name="password2" id="password2" placeholder="••••••••"
                           class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           required="">
                   </div>
@@ -108,6 +127,11 @@
                                   href="#">Privacy Policy</a>.</label>
                       </div>
                   </div>
+                  {#if form?.message}
+                    <p class="text-sm font-light text-red-500 dark:text-red-400">
+                        {form.message}
+                    </p>
+                  {/if}
                   <button type="submit" class="w-full text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">
                       Create an account
                   </button>
