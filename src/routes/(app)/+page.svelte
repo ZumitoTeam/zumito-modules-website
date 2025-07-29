@@ -11,11 +11,11 @@
 
 <Background>
     <Container class="flex flex-wrap items-center justify-between pt-4">
-        <div class="columns md:columns-2 p-4">
+        <div class="flex w-full flex-col gap-4 p-4 md:grid md:grid-cols-2">
             {#each modules as module}
-                <a href="/module/{module.name}" class="flex gap-3 mb-4 p-4 bg-white rounded-xl break-inside-avoid-column w-full">
-                    <img src="{placeholderImage}" alt="" class="el codi que hi ha ara al sack ja te el codi que hi ha ara al sack ja te h-24 aspect-square rounded-md">
-                    <div class="flex flex-col w-full">
+                <a href="/module/{module.name}" class="flex w-full break-inside-avoid-column gap-3 rounded-xl bg-white p-4">
+                    <img src="{placeholderImage}" alt="" class="el codi que hi ha ara al sack ja te aspect-square h-24 rounded-md">
+                    <div class="flex w-full flex-col">
                         <div>
                             {module.name}
                         </div>
