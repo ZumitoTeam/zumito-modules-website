@@ -7,7 +7,8 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"start": "node ./build"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -35,6 +36,7 @@
 		"@milkdown/kit": "^7.5.5",
 		"@milkdown/plugin-listener": "^7.5.0",
 		"@milkdown/theme-nord": "^7.5.0",
+		"@midudev/tailwind-animations": "^0.1.0",
 		"@nextlint/svelte": "^3.1.0",
 		"@prisma/client": "^5.17.0",
 		"@tinymce/tinymce-svelte": "^3.0.0",
