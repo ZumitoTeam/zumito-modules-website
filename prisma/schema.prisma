@@ -16,7 +16,7 @@ datasource db {
 model Module {
   id        Int      @id @default(autoincrement())
   name      String
-  description  String
+  description String @db.Text
   instructions  String 
   price     Decimal @default(0)
   npm       String
