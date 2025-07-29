@@ -20,7 +20,7 @@
                             {module.name}
                         </div>
                         <div>
-                            {@html module.description}
+                            {@html module.shortDescription}
                         </div>
                         {#if module.tags && module.tags.length}
                             {#each module.tags as tag}

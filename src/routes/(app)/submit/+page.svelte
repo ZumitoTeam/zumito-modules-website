@@ -81,6 +81,10 @@
               <input type="text" id="first_name" name="name" on:keyup={formatName} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="zumito-framework" required />
           </div>
           <div>
+              <label for="short_description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short Description</label>
+              <input type="text" id="short_description" name="shortDescription" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="A short and concise description" required />
+          </div>
+          <div>
               <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
               <input type="hidden" name="description" value={description} />
               <div class="pl-[40px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pink-500 focus:border-pink-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500">

@@ -24,7 +24,7 @@
     <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
 
         <a href="/" class="flex w-3/12 items-center space-x-3 rtl:space-x-reverse">
-            <img src={logoImageUrl} class="h-8" alt="Flowbite Logo" />
+            <img src={logoImageUrl} class="h-8" alt="Zumtio Logo" />
             <span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">Zumito Modules</span>
         </a>
 

@@ -9,7 +9,16 @@ export async function load({ }) {
             }
         },
         "take": 10,
-        include: {
+        select: {
+            id: true,
+            name: true,
+            shortDescription: true,
+            description: true,
+            npm: true,
+            instructions: true,
+            published: true,
+            authorId: true,
+            icon: true,
             _count: {
                 select: {
                   installs: true, // Get the install count

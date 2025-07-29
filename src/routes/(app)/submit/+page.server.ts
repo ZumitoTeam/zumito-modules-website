@@ -12,6 +12,7 @@ export const actions = {
 		const inputs = await event.request.formData();
 		const name = inputs.get('name') as string;
 		const description = inputs.get('description') as string;
+		const shortDescription = inputs.get('shortDescription') as string;
 		const npm = inputs.get('npm') as string;
 		
 		
@@ -35,6 +36,7 @@ export const actions = {
 			data: {
 				name: name,
 				description: description || '',
+				shortDescription: shortDescription || '',
 				npm: npm || '',
 				instructions: '',
 				authorId: userId,
