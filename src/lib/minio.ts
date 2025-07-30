@@ -1,9 +1,13 @@
-import * as Minio from 'minio'
+import * as Minio from 'minio';
+
+import { PUBLIC_MINIO_URL } from '$env/static/public';
+import { MINIO_ACCESS_KEY, MINIO_SECRET_KEY } from '$env/static/private';
+const url = new URL(PUBLIC_MINIO_URL);
 
 export const minioClient = new Minio.Client({
-  endPoint: import.meta.env.MINIO_URL,
-  port: 9000,
-  useSSL: true,
-  accessKey: 'nBMBri4fkNnjs0BdYNcF',
-  secretKey: '4rNDbZOHxHVKsbIBA8KSIMlEPv8j9EIiUikNTIEv',
-})
+  endPoint: url.hostname,
+  port: parseInt(url.port || (url.protocol === 'https:' ? '443' : '80')),
+  useSSL: url.protocol === 'https:',
+  accessKey: MINIO_ACCESS_KEY,
+  secretKey: MINIO_SECRET_KEY,
+});

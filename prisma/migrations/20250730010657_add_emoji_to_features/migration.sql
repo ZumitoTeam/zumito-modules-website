@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Feature` ADD COLUMN `emoji` VARCHAR(191) NOT NULL DEFAULT '🔧';

@@ -14,33 +14,34 @@ datasource db {
 }
 
 model Module {
-  id        Int      @id @default(autoincrement())
-  name      String
-  description     String   @db.Text
-  shortDescription String? @db.Text
-  instructions  String 
-  price     Decimal @default(0)
-  npm       String
-  sourceCode  String?
-  published   Boolean  @default(true)
-  aproved   Boolean @default(true)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
-  comments     Comment[]  // Relation to comments
-  faqs         FAQ[]      // Relation to FAQs
-  installs     Install[]  // Relation to the Install model (User installs)
-  images       Image[]    // Relation to images
-  icon      String @default("")
+  id               Int        @id @default(autoincrement())
+  name             String
+  description      String     @db.Text
+  shortDescription String?    @db.Text
+  instructions     String
+  price            Decimal    @default(0)
+  npm              String
+  sourceCode       String?
+  published        Boolean    @default(true)
+  aproved          Boolean    @default(true)
+  author           User?      @relation(fields: [authorId], references: [id])
+  authorId         Int?
+  icon             String     @default("")
+  comments         Comment[]
+  faqs             FAQ[]
+  installs         Install[]
+  images           Image[]
+  features         Feature[]  @relation("ModuleFeatures")
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  username  String  @unique
-  password  String
-  modules Module[]
-  comments Comment[] // Relation to comments
-  installs Install[] // Relation to installs
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  username String    @unique
+  password String
+  modules  Module[]
+  comments Comment[]
+  installs Install[]
 }
 
 model Comment {
@@ -72,13 +73,20 @@ model Install {
   moduleId  Int
   createdAt DateTime @default(now())
 
-  @@unique([userId, moduleId]) // Ensures a user can install a module only once
+  @@unique([userId, moduleId])
 }
 
 model Image {
-  id        Int      @id @default(autoincrement())
-  url       String   // URL or path to the image file
-  altText   String?  // Optional: description of the image for accessibility
-  module    Module   @relation(fields: [moduleId], references: [id])
-  moduleId  Int
+  id       Int     @id @default(autoincrement())
+  url      String
+  altText  String?
+  module   Module  @relation(fields: [moduleId], references: [id])
+  moduleId Int
+}
+
+model Feature {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  emoji   String   @default("🔧")
+  modules Module[] @relation("ModuleFeatures")
 }

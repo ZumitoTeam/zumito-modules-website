@@ -20,6 +20,12 @@ export async function load({ params }) {
                   installs: true, // Get the install count
                 },
             },
+            images: {
+                select: {
+                    url: true,
+                    
+                }
+            }
         }
     })
 

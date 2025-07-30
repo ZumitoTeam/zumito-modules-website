@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Prisma } from '@prisma/client'
+    import { PUBLIC_MINIO_URL } from '$env/static/public';
     
     export let module: Prisma.ModuleSelect;
 </script>
@@ -7,7 +8,7 @@
 
 <li class="user-card flex items-center justify-between p-3">
     <div class="flex items-center">
-        <img class="h-10 w-10 rounded-full" src={module.icon} alt="{module.name} zumito module icon">
+        <img class="h-10 w-10 rounded-full" src={PUBLIC_MINIO_URL + module.icon} alt="{module.name} zumito module icon">
         <span class="ml-3 font-medium">{module.name}</span>
     </div>
     <div class="flex gap-3">

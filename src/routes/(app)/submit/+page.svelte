@@ -14,24 +14,50 @@
 
     let description =  'Here goes a description for your module';
 
+    const iconLabelIdle = "Drag & Drop your module icon or <span class=\"filepond--label-action\">Browse</span>";
+    const imagesLabelIdle = "Drag & Drop your module images or <span class=\"filepond--label-action\">Browse</span>";
+
     // Register the plugins
     registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
     // a reference to the component, used to call FilePond methods
-    let pond;
+    let iconPond;
+    let imagesPond;
 
-    // pond.getFiles() will return the active files
+    let iconUrl: string | null = null;
+    let imageUrls: string[] = [];
 
-    // the name to use for the internal file input
-    let name = 'filepond';
+    // FilePond server configuration
+    const filepondServer = {
+        process: '/upload',
+        revert: '/upload',
+        headers: {
+            // You might need to add CSRF tokens or other headers here
+        },
+    };
 
-    // handle filepond events
-    function handleInit() {
-        console.log('FilePond has initialised');
+    function handleIconProcess(error, file) {
+        if (!error) {
+            iconUrl = file.serverId; // FilePond returns the server response here
+        }
     }
 
-    function handleAddFile(err, fileItem) {
-        console.log('A file has been added', fileItem);
+    function handleIconRemove(error, file) {
+        if (!error) {
+            iconUrl = null;
+        }
+    }
+
+    function handleImagesProcess(error, file) {
+        if (!error) {
+            imageUrls = [...imageUrls, file.serverId];
+        }
+    }
+
+    function handleImagesRemove(error, file) {
+        if (!error) {
+            imageUrls = imageUrls.filter(url => url !== file.serverId);
+        }
     }
 
     let conf = {
@@ -93,19 +119,38 @@
           </div>
 
 
-          <!--<div>
-              <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Images</label>
-              <FilePond bind:this={pond} {name}
-              server="/api"
-              allowMultiple={true}
-              oninit={handleInit}
-              onaddfile={handleAddFile}
-              max-files={6}
-              allowReorder={true}
-              instantUpload={false}
-              mul
+          <div>
+              <label for="icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Module Icon</label>
+              <FilePond
+                  bind:this={iconPond}
+                  name="icon"
+                  acceptedFileTypes="image/*"
+                  allowMultiple={false}
+                  server={filepondServer}
+                  onprocessfile={handleIconProcess}
+                  onremovefile={handleIconRemove}
+                  labelIdle={iconLabelIdle}
               />
-          </div>-->
+              <input type="hidden" name="iconUrl" value={iconUrl || ''} />
+          </div>
+
+          <div>
+              <label for="images" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Module Images</label>
+              <FilePond
+                  bind:this={imagesPond}
+                  name="images"
+                  acceptedFileTypes="image/*"
+                  allowMultiple={true}
+                  allowReorder={true}
+                  server={filepondServer}
+                  onprocessfile={handleImagesProcess}
+                  onremovefile={handleImagesRemove}
+                  labelIdle={imagesLabelIdle}
+              />
+              {#each imageUrls as url}
+                  <input type="hidden" name="imageUrls" value={url} />
+              {/each}
+          </div>
 
           <div>
             <label for="website-admin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NPM package name</label>
@@ -113,8 +158,20 @@
               <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                 npm install
               </span>
-              <input type="text" name="npm" id="website-admin" class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="zumito-framework">
+              <input type="text" name="npm" id="website-admin" class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500" placeholder="zumito-framework">
             </div>
+          </div>
+
+          <div>
+              <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Features</label>
+              <div class="flex flex-wrap gap-3">
+                  {#each data.features as feature}
+                      <div class="flex items-center">
+                          <input type="checkbox" id="feature-{feature.id}" name="features" value={feature.name} class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                          <label for="feature-{feature.id}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{feature.name}</label>
+                      </div>
+                  {/each}
+              </div>
           </div>
 
           <div>

@@ -3,6 +3,13 @@ import Prisma from '$lib/prisma';
 import { redirect } from '@sveltejs/kit';
 import { decodeToken, isTokenValid } from '$lib/tokenParser';
 
+export async function load() {
+    const features = await Prisma.feature.findMany();
+    return {
+        features: JSON.parse(JSON.stringify(features))
+    };
+}
+
 export const actions = {
 	createModule: async (event) => {
 		const token =  event.cookies.get('token');
@@ -14,6 +21,9 @@ export const actions = {
 		const description = inputs.get('description') as string;
 		const shortDescription = inputs.get('shortDescription') as string;
 		const npm = inputs.get('npm') as string;
+		const iconUrl = inputs.get('iconUrl') as string;
+		const imageUrls = inputs.getAll('imageUrls') as string[];
+		const selectedFeatures = inputs.getAll('features') as string[];
 		
 		
 		if (name === '') 			return { status: 400, error: 'Name is required' };
@@ -41,6 +51,13 @@ export const actions = {
 				instructions: '',
 				authorId: userId,
 				published: false,
+				icon: iconUrl || null,
+				images: {
+					create: imageUrls.map(url => ({ url: url }))
+				},
+				features: {
+					connect: selectedFeatures.map(featureName => ({ name: featureName }))
+				}
 			},
 		});
 

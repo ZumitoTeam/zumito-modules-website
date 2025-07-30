@@ -7,6 +7,7 @@
     import FaqItem from '$lib/components/FaqItem.svelte';
     import { Swiper } from "svelte-swiper-matrix";
     import { marked } from 'marked';
+    import { PUBLIC_MINIO_URL } from '$env/static/public';
 
     TimeAgo.addDefaultLocale(en)
     const timeAgo = new TimeAgo('en-US')
@@ -22,9 +23,9 @@
         </h1>
 
         <div class="mb-4 mt-2 flex snap-x snap-mandatory gap-4 overflow-x-auto">
-          <img src="https://placehold.co/600x350" class="flex h-[300px] flex-shrink-0 snap-center items-center justify-center rounded-xl bg-red-500 text-white">
-          <img src="https://placehold.co/600x350" class="flex h-[300px] flex-shrink-0 snap-center items-center justify-center rounded-xl bg-red-500 text-white">
-          <img src="https://placehold.co/600x350" class="flex h-[300px] flex-shrink-0 snap-center items-center justify-center rounded-xl bg-red-500 text-white">
+            {#each module.images as image}
+                <img src={PUBLIC_MINIO_URL + image.url} class="flex h-[300px] flex-shrink-0 snap-center items-center justify-center rounded-xl bg-red-500 text-white">
+            {/each}
         </div>
     </div>
 
