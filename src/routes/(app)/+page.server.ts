@@ -35,6 +35,11 @@ export async function load({ url }) {
                     name: true
                 }
             },
+			author: {
+				select: {
+					username: true
+				}
+			},
             _count: {
                 select: {
                   installs: true, // Get the install count
