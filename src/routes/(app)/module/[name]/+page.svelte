@@ -18,13 +18,25 @@
 <div class="bg-gray-50">
 
     <div class="mx-auto max-w-screen-xl p-4">
-        <h1 class="text-4xl">
-            {module.name}
-        </h1>
+        <div class="mb-6">
+            <div class="flex items-center gap-4">
+                {#if module.icon}
+                    <img src={PUBLIC_MINIO_URL + module.icon} alt="{module.name} icon" class="h-16 w-16 rounded-xl border border-gray-200 object-cover shadow-lg lg:h-20 lg:w-20 dark:border-gray-700">
+                {/if}
+                <div class="flex-1">
+                    <h1 class="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-4xl font-bold text-transparent lg:text-5xl">
+                        {module.name}
+                    </h1>
+                    {#if module.shortDescription}
+                        <p class="mt-3 hidden text-lg text-gray-600 sm:block dark:text-gray-300">{module.shortDescription}</p>
+                    {/if}
+                </div>
+            </div>
+        </div>
 
-        <div class="mb-4 mt-2 flex snap-x snap-mandatory gap-4 overflow-x-auto">
+        <div class="mb-6 mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
             {#each module.images as image}
-                <img src={PUBLIC_MINIO_URL + image.url} class="flex h-[300px] flex-shrink-0 snap-center items-center justify-center rounded-xl bg-red-500 text-white">
+                <img src={PUBLIC_MINIO_URL + image.url} class="h-[300px] flex-shrink-0 snap-center rounded-xl border border-gray-200 object-cover shadow-lg transition-transform hover:scale-105 dark:border-gray-700">
             {/each}
         </div>
     </div>
@@ -34,37 +46,37 @@
 
         <div class="flex w-full flex-col lg:w-4/6">
                
-            <div class="mb-2 text-2xl">
-                Description
+            <div class="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
+                📝 Description
             </div>
-            <div class="prose min-w-full rounded-2xl bg-white p-5 shadow-sm">
+            <div class="prose prose-lg min-w-full max-w-none rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-200 dark:prose-invert dark:bg-gray-800 dark:ring-gray-700">
                 {@html marked(module.description)}
             </div>
     
             {#if module?.faqs && module?.faqs.length > 0}
-                <div class="mb-2 mt-10 text-2xl">
-                    Frequent Asked Questions
+                <div class="mb-4 mt-12 text-2xl font-semibold text-gray-900 dark:text-white">
+                    ❓ Frequent Asked Questions
                 </div>
-                <div class="flex flex-col gap-5 rounded-2xl bg-white p-5 shadow-sm">
+                <div class="flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-200 dark:bg-gray-800 dark:ring-gray-700">
                     {#each module?.faqs as faq}
                         <FaqItem question={faq.question} answer={faq.answer}></FaqItem>
                     {/each}
                 </div>
             {/if}
 
-            <div class="mb-2 mt-10 text-2xl">
-                Comments
+            <div class="mb-4 mt-12 text-2xl font-semibold text-gray-900 dark:text-white">
+                💬 Comments
             </div>
-            <div class="rounded-2xl bg-white p-5 shadow-sm">
+            <div class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-200 dark:bg-gray-800 dark:ring-gray-700">
                 {#each module.comments as comment}
-                    <div class="flex p-4 text-left text-gray-600">
-                        <img class="mr-5 block h-8 w-8 max-w-full rounded-xl text-left align-middle sm:h-16 sm:w-16" src="https://ui-avatars.com/api/?name={comment.author.username}" alt="{comment.author.username} Profile Picture" />
+                    <div class="flex border-b border-gray-100 p-4 text-left text-gray-600 last:border-b-0 dark:border-gray-700">
+                        <img class="mr-5 block h-10 w-10 max-w-full rounded-full border-2 border-gray-200 text-left align-middle shadow-sm sm:h-12 sm:w-12 dark:border-gray-600" src="https://ui-avatars.com/api/?name={comment.author.username}&background=f3f4f6&color=374151" alt="{comment.author.username} Profile Picture" />
                         <div class="w-full text-left">
-                            <div class="mb-2 flex flex-col justify-between text-gray-600 sm:flex-row">
-                                <h3 class="font-medium">{comment.author.username}</h3>
-                                <time class="text-xs" datetime="2022-11-13T20:00Z">{timeAgo.format(new Date(comment.createdAt))}</time>
+                            <div class="mb-2 flex flex-col justify-between text-gray-600 sm:flex-row dark:text-gray-300">
+                                <h3 class="font-semibold text-gray-900 dark:text-white">{comment.author.username}</h3>
+                                <time class="text-xs text-gray-500 dark:text-gray-400" datetime="2022-11-13T20:00Z">{timeAgo.format(new Date(comment.createdAt))}</time>
                             </div>
-                            <p class="text-sm">{comment.content}</p>
+                            <p class="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{comment.content}</p>
                         </div>
                     </div>
                 {/each}
