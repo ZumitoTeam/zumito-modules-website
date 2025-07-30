@@ -37,7 +37,7 @@
             <div class="mb-2 text-2xl">
                 Description
             </div>
-            <div class="prose rounded-2xl bg-white p-5 shadow-sm">
+            <div class="prose min-w-full rounded-2xl bg-white p-5 shadow-sm">
                 {@html marked(module.description)}
             </div>
     
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="sticky top-0 flex h-fit w-full flex-col gap-5 lg:w-2/6">
+        <div class="flex h-fit w-full flex-col gap-5 lg:sticky lg:top-[10px] lg:w-2/6">
 
             <button type="button" class="mb-2 me-2 w-full rounded-lg bg-pink-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-pink-800 focus:outline-none focus:ring-4 focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800">Install</button>
             
