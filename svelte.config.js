@@ -14,10 +14,7 @@ const config = {
 		adapter: adapter(),
 		csrf: {
 			checkOrigin: false,
-		},
-		bodyParser: {
-			limit: '10mb'
-		},
+		}
 	}
 };
 
