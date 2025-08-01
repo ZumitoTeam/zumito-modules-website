@@ -356,6 +356,22 @@
 </Background>    
 
 <svelte:head>
+    <title>{module.name} - Zumito Modules</title>
+    <meta name="description" content={module.shortDescription || 'Discover the module ' + module.name + ' on Zumito Modules.'} />
+    
+    <meta property="og:title" content={module.name + ' - Zumito Modules'} />
+    <meta property="og:description" content={module.shortDescription || 'Discover the module ' + module.name + ' on Zumito Modules.'} />
+    <meta property="og:image" content={PUBLIC_MINIO_URL + module.images[0].url} />
+    <meta property="og:url" content="https://zumito.dev/module/{module.name}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={module.name + ' - Zumito Modules'} />
+    <meta name="twitter:description" content={module.shortDescription || 'Discover the module ' + module.name + ' on Zumito Modules.'} />
+    <meta name="twitter:image" content={PUBLIC_MINIO_URL + module.images[0].url} />
+    <meta name="twitter:url" content="https://zumito.dev/module/{module.name}" />
+
+    <link rel="canonical" href="https://zumito.dev/module/{module.name}" />
+
     <script type="application/ld+json">
         {
             "@context": "https://schema.org/",

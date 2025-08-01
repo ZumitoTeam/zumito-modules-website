@@ -75,6 +75,20 @@
     }
 </style>
 
+<svelte:head>
+    <title>Zumito Modules</title>
+    <meta name="description" content="Discover powerful modules to enhance your projects. From APIs to UI components, find everything you need to build amazing applications." />
+
+    <meta property="og:title" content="Zumito Modules" />
+    <meta property="og:description" content="Discover powerful modules to enhance your projects. From APIs to UI components, find everything you need to build amazing applications." />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Zumito Modules" />
+    <meta name="twitter:description" content="Discover powerful modules to enhance your projects. From APIs to UI components, find everything you need to build amazing applications." />
+
+    <link rel="canonical" href="https://modules.zumito.dev" />
+</svelte:head>
+
 <Background>
     <!-- Hero Section -->
     <Container class="pb-12 pt-8">
