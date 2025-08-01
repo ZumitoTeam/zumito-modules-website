@@ -14,7 +14,64 @@
     TimeAgo.addDefaultLocale(en)
     const timeAgo = new TimeAgo('en-US')
 
-    let module: Module = $page.data.module;
+    // Extend Window interface for disqus
+    declare global {
+        interface Window {
+            disqus: {
+                pageUrl: string;
+                pageIdentifier: string;
+            };
+        }
+    }
+
+    let module: any = $page.data.module; // Using any type to avoid complex type issues
+    let showImageModal = false;
+    let selectedImage = '';
+    let selectedImageIndex = 0;
+
+    function openImageModal(imageUrl: string, index: number) {
+        selectedImage = imageUrl;
+        selectedImageIndex = index;
+        showImageModal = true;
+    }
+
+    function closeImageModal() {
+        showImageModal = false;
+        selectedImage = '';
+    }
+
+    function nextImage() {
+        if (selectedImageIndex < (module.images?.length || 0) - 1) {
+            selectedImageIndex++;
+            selectedImage = PUBLIC_MINIO_URL + (module.images?.[selectedImageIndex]?.url || '');
+        }
+    }
+
+    function prevImage() {
+        if (selectedImageIndex > 0) {
+            selectedImageIndex--;
+            selectedImage = PUBLIC_MINIO_URL + (module.images?.[selectedImageIndex]?.url || '');
+        }
+    }
+
+    function handleKeydown(event: KeyboardEvent) {
+        if (showImageModal) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            } else if (event.key === 'ArrowRight') {
+                nextImage();
+            } else if (event.key === 'ArrowLeft') {
+                prevImage();
+            }
+        }
+    }
+
+    function scrollToComments() {
+        const commentsSection = document.getElementById('comments-section');
+        if (commentsSection) {
+            commentsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
     onMount(() => {
         if (!module.giscusEnabled) {
@@ -25,6 +82,8 @@
         }
     }); 
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <Background>
 
@@ -45,11 +104,28 @@
             </div>
         </div>
 
-        <div class="mb-6 mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
-            {#each module.images as image}
-                <img src={PUBLIC_MINIO_URL + image.url} class="h-[300px] flex-shrink-0 snap-center rounded-xl border border-gray-200 object-cover shadow-lg transition-transform hover:scale-105 dark:border-gray-700">
-            {/each}
-        </div>
+        {#if module.images && module.images.length > 0}
+            <div class="mb-6 mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
+                {#each module.images as image, index}
+                    <button 
+                        on:click={() => openImageModal(PUBLIC_MINIO_URL + image.url, index)}
+                        class="group relative flex-shrink-0"
+                    >
+                        <img 
+                            src={PUBLIC_MINIO_URL + image.url} 
+                            alt="Module screenshot {index + 1}"
+                            class="h-[300px] w-auto min-w-[200px] cursor-pointer snap-center rounded-xl border border-gray-200 object-cover shadow-lg transition-transform group-hover:scale-105 dark:border-gray-700"
+                        />
+                        <!-- Overlay indicando que es clickeable -->
+                        <div class="absolute inset-0 flex items-center justify-center rounded-xl bg-black bg-opacity-0 transition-all group-hover:bg-opacity-20">
+                            <svg class="h-8 w-8 text-white opacity-0 transition-opacity group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </button>
+                {/each}
+            </div>
+        {/if}
     </div>
 
 
@@ -78,7 +154,7 @@
             <div class="mb-4 mt-12 text-2xl font-semibold text-gray-900 dark:text-white">
                 💬 Comments
             </div>
-            <div class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-200 dark:bg-gray-800 dark:ring-gray-700">
+            <div id="comments-section" class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-200 dark:bg-gray-800 dark:ring-gray-700">
                 {#if module.giscusEnabled}
                     <script src="https://giscus.app/client.js"
                             data-repo="ZumitoTeam/zumito-modules"
@@ -131,7 +207,7 @@
                         Price
                     </span>
                     <div class="flex items-center gap-x-2 whitespace-nowrap text-gray-500 hover:text-blue-600 focus:text-blue-600 focus:outline-none dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500">
-                      {module.price == 0 ? 'Free' : module.price}
+                      {Number(module.price) === 0 ? 'Free' : module.price}
                     </div>
                   </div>
                 </li>
@@ -154,51 +230,129 @@
             </ul>
             
             <ul class="flex flex-col justify-end -space-y-px text-start">
-                <li class="flex items-center gap-x-2 border bg-white p-3 text-sm text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
-                  <div class="flex w-full justify-between truncate">
-                    <span class="me-3 flex w-0 flex-1 items-center gap-2 truncate">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M20.975 11.33a9 9 0 1 0 -5.673 9.043" />
-                            <path d="M3.6 9h16.8" />
-                            <path d="M3.6 15h9.9" />
-                            <path d="M11.5 3a17 17 0 0 0 0 18" />
-                            <path d="M12.5 3a16.988 16.988 0 0 1 2.57 9.518m-1.056 5.403a17 17 0 0 1 -1.514 3.079" />
-                            <path d="M19 22v.01" />
-                            <path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" />
-                        </svg>
-                        Frequent Asked Questions
-                    </span>
-                    <button type="button" class="flex items-center gap-x-2 whitespace-nowrap text-gray-500 hover:text-blue-600 focus:text-blue-600 focus:outline-none dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M9 6l6 6l-6 6" />
-                      </svg>
+                {#if module?.faqs && module?.faqs.length > 0}
+                    <button class="flex items-center gap-x-2 border bg-white p-3 text-sm text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
+                        <div class="flex w-full justify-between truncate">
+                            <span class="me-3 flex w-0 flex-1 items-center gap-2 truncate">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M20.975 11.33a9 9 0 1 0 -5.673 9.043" />
+                                    <path d="M3.6 9h16.8" />
+                                    <path d="M3.6 15h9.9" />
+                                    <path d="M11.5 3a17 17 0 0 0 0 18" />
+                                    <path d="M12.5 3a16.988 16.988 0 0 1 2.57 9.518m-1.056 5.403a17 17 0 0 1 -1.514 3.079" />
+                                    <path d="M19 22v.01" />
+                                    <path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" />
+                                </svg>
+                                Frequent Asked Questions
+                            </span>
+                            <span class="flex items-center gap-x-2 whitespace-nowrap text-gray-500 hover:text-blue-600 focus:text-blue-600 focus:outline-none dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M9 6l6 6l-6 6" />
+                                </svg>
+                            </span>
+                        </div>
                     </button>
-                  </div>
-                </li>
-                <li class="flex items-center gap-x-2 border bg-white p-3 text-sm text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
+                {/if}
+                <button on:click={scrollToComments} class="flex items-center gap-x-2 border bg-white p-3 text-sm text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-200">
                     <div class="flex w-full justify-between truncate">
-                      <span class="me-3 flex w-0 flex-1 items-center gap-2 truncate">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M3 20l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c3.255 2.777 3.695 7.266 1.029 10.501c-2.666 3.235 -7.615 4.215 -11.574 2.293l-4.7 1" />
-                        </svg>
-                        Comments
-                      </span>
-                      <button type="button" class="flex items-center gap-x-2 whitespace-nowrap text-gray-500 hover:text-blue-600 focus:text-blue-600 focus:outline-none dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                          <path d="M9 6l6 6l-6 6" />
-                        </svg>
-                      </button>
+                        <span class="me-3 flex w-0 flex-1 items-center gap-2 truncate">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M3 20l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c3.255 2.777 3.695 7.266 1.029 10.501c-2.666 3.235 -7.615 4.215 -11.574 2.293l-4.7 1" />
+                            </svg>
+                            Comments
+                        </span>
+                        <span class="flex items-center gap-x-2 whitespace-nowrap text-gray-500 hover:text-blue-600 focus:text-blue-600 focus:outline-none dark:text-neutral-500 dark:hover:text-blue-500 dark:focus:text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M9 6l6 6l-6 6" />
+                            </svg>
+                        </span>
                     </div>
-                </li>
+                </button>
             </ul>
         </div>
 
 
     </div>
+
+    <!-- Modal de imagen -->
+    {#if showImageModal}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+        <div 
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
+            on:click={closeImageModal}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Image viewer"
+        >
+            <div class="relative max-h-full max-w-full">
+                <!-- Botón cerrar -->
+                <button 
+                    on:click={closeImageModal}
+                    class="absolute -right-4 -top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-800 shadow-lg transition-colors hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+                    aria-label="Close image"
+                >
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- Navegación anterior -->
+                {#if selectedImageIndex > 0}
+                    <button 
+                        on:click|stopPropagation={prevImage}
+                        class="absolute left-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white bg-opacity-80 text-gray-800 shadow-lg transition-colors hover:bg-opacity-100 dark:bg-gray-800 dark:bg-opacity-80 dark:text-white dark:hover:bg-opacity-100"
+                        aria-label="Previous image"
+                    >
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                {/if}
+
+                <!-- Navegación siguiente -->
+                {#if selectedImageIndex < (module.images?.length || 0) - 1}
+                    <button 
+                        on:click|stopPropagation={nextImage}
+                        class="absolute right-4 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white bg-opacity-80 text-gray-800 shadow-lg transition-colors hover:bg-opacity-100 dark:bg-gray-800 dark:bg-opacity-80 dark:text-white dark:hover:bg-opacity-100"
+                        aria-label="Next image"
+                    >
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                {/if}
+
+                <!-- Imagen principal -->
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+                <img 
+                    src={selectedImage} 
+                    alt="Module screenshot {selectedImageIndex + 1}"
+                    class="max-h-[90vh] max-w-full rounded-lg shadow-2xl"
+                    on:click|stopPropagation
+                />
+
+                <!-- Indicador de posición -->
+                {#if (module.images?.length || 0) > 1}
+                    <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 space-x-2">
+                        {#each (module.images || []) as _, index}
+                            <button
+                                on:click|stopPropagation={() => openImageModal(PUBLIC_MINIO_URL + (module.images?.[index]?.url || ''), index)}
+                                class="h-3 w-3 rounded-full transition-colors {index === selectedImageIndex ? 'bg-white' : 'bg-white bg-opacity-50'}"
+                                aria-label="Go to image {index + 1}"
+                            />
+                        {/each}
+                    </div>
+                {/if}
+            </div>
+        </div>
+    {/if}
+
 </Background>    
 
 <svelte:head>
