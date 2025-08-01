@@ -8,14 +8,25 @@
     import { Swiper } from "svelte-swiper-matrix";
     import { marked } from 'marked';
     import { PUBLIC_MINIO_URL } from '$env/static/public';
+    import Background from '$lib/components/structure/background.svelte';
+    import { onMount } from 'svelte';
 
     TimeAgo.addDefaultLocale(en)
     const timeAgo = new TimeAgo('en-US')
 
     let module: Module = $page.data.module;
+
+    onMount(() => {
+        if (!module.giscusEnabled) {
+            window.disqus = {
+                pageUrl: window.location.href,
+                pageIdentifier: $page.params.name
+            };
+        }
+    }); 
 </script>
 
-<div class="bg-gray-50">
+<Background>
 
     <div class="mx-auto max-w-screen-xl p-4">
         <div class="mb-6">
@@ -68,18 +79,38 @@
                 💬 Comments
             </div>
             <div class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-200 dark:bg-gray-800 dark:ring-gray-700">
-                {#each module.comments as comment}
-                    <div class="flex border-b border-gray-100 p-4 text-left text-gray-600 last:border-b-0 dark:border-gray-700">
-                        <img class="mr-5 block h-10 w-10 max-w-full rounded-full border-2 border-gray-200 text-left align-middle shadow-sm sm:h-12 sm:w-12 dark:border-gray-600" src="https://ui-avatars.com/api/?name={comment.author.username}&background=f3f4f6&color=374151" alt="{comment.author.username} Profile Picture" />
-                        <div class="w-full text-left">
-                            <div class="mb-2 flex flex-col justify-between text-gray-600 sm:flex-row dark:text-gray-300">
-                                <h3 class="font-semibold text-gray-900 dark:text-white">{comment.author.username}</h3>
-                                <time class="text-xs text-gray-500 dark:text-gray-400" datetime="2022-11-13T20:00Z">{timeAgo.format(new Date(comment.createdAt))}</time>
-                            </div>
-                            <p class="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{comment.content}</p>
-                        </div>
-                    </div>
-                {/each}
+                {#if module.giscusEnabled}
+                    <script src="https://giscus.app/client.js"
+                            data-repo="ZumitoTeam/zumito-modules"
+                            data-repo-id="R_kgDOMjaz4A"
+                            data-category="[NOMBRE CATEGORÍA]"
+                            data-category-id="[ID CATEGORÍA]"
+                            data-mapping="pathname"
+                            data-strict="0"
+                            data-reactions-enabled="1"
+                            data-emit-metadata="0"
+                            data-input-position="bottom"
+                            data-theme="preferred_color_scheme"
+                            data-lang="es"
+                            data-loading="lazy"
+                            crossorigin="anonymous"
+                            async>
+                    </script>
+                {:else if (typeof window !== 'undefined' && window.disqus)}
+                    <div id="disqus_thread"></div>
+                    <script>
+                        var disqus_config = function () {
+                            this.page.url = window.disqus.pageUrl;
+                            this.page.identifier = window.disqus.pageIdentifier;
+                        };
+                        (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://zumito-modules.disqus.com/embed.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                {/if}
             </div>
         </div>
 
@@ -168,7 +199,7 @@
 
 
     </div>
-</div>    
+</Background>    
 
 <svelte:head>
     <script type="application/ld+json">

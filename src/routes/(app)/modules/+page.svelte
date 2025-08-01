@@ -115,8 +115,8 @@
     <Container class="py-8">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="mb-4 text-4xl font-bold text-gray-800">Browse Modules</h1>
-            <p class="text-lg text-gray-600">Discover {data.totalCount} modules to enhance your projects</p>
+            <h1 class="mb-4 text-4xl font-bold text-gray-800 dark:text-white">Browse Modules</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300">Discover {data.totalCount} modules to enhance your projects</p>
         </div>
 
         <div class="flex flex-col gap-8 lg:flex-row">
@@ -124,7 +124,7 @@
             <div class="lg:hidden">
                 <button 
                     on:click={() => showMobileFilters = !showMobileFilters}
-                    class="flex w-full items-center justify-between rounded-lg border bg-white px-4 py-3 shadow-sm"
+                    class="flex w-full items-center justify-between rounded-lg border border-gray-300 bg-white px-4 py-3 shadow-sm dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                 >
                     <span class="font-medium">Filters</span>
                     <svg class="w-5 h-5 transition-transform {showMobileFilters ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,19 +135,19 @@
 
             <!-- Sidebar Filters -->
             <aside class="w-full lg:w-80 {showMobileFilters ? 'block' : 'hidden lg:block'}">
-                <div class="space-y-6 rounded-xl border bg-white p-6 shadow-sm">
+                <div class="space-y-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                     <!-- Search -->
                     <div>
-                        <label class="mb-2 block text-sm font-medium text-gray-700">Search</label>
+                        <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Search</label>
                         <form on:submit|preventDefault={handleSearch}>
                             <div class="relative">
                                 <input 
                                     type="text" 
                                     bind:value={searchQuery}
                                     placeholder="Search modules..."
-                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 pl-10 focus:border-pink-500 focus:ring-2 focus:ring-pink-500"
+                                    class="w-full rounded-lg border border-gray-300 px-4 py-2 pl-10 focus:border-pink-500 focus:ring-2 focus:ring-pink-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-pink-500"
                                 />
-                                <button type="submit" class="absolute right-2 top-2 bg-pink-600 text-white p-2 rounded-lg hover:bg-pink-700 transition-colors">
+                                <button type="submit" class="absolute right-2 top-2 bg-pink-600 text-white p-2 rounded-lg hover:bg-pink-700 transition-colors dark:bg-pink-600 dark:hover:bg-pink-700">
                                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
@@ -158,11 +158,11 @@
 
                     <!-- Sort -->
                     <div>
-                        <label class="mb-2 block text-sm font-medium text-gray-700">Sort by</label>
+                        <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Sort by</label>
                         <select 
                             bind:value={selectedSort}
                             on:change={updateFilters}
-                            class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-pink-500 focus:ring-2 focus:ring-pink-500"
+                            class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-pink-500 focus:ring-2 focus:ring-pink-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:focus:border-pink-500"
                         >
                             {#each sortOptions as option}
                                 <option value={option.value}>{option.label}</option>
@@ -172,7 +172,7 @@
 
                     <!-- Price Filter -->
                     <div>
-                        <label class="mb-3 block text-sm font-medium text-gray-700">Price</label>
+                        <label class="mb-3 block text-sm font-medium text-gray-700 dark:text-gray-300">Price</label>
                         <div class="space-y-2">
                             <label class="flex items-center">
                                 <input 
@@ -180,9 +180,9 @@
                                     bind:group={selectedPrice} 
                                     value="all"
                                     on:change={updateFilters}
-                                    class="text-pink-600 focus:ring-pink-500"
+                                    class="text-pink-600 focus:ring-pink-500 dark:bg-gray-700 dark:border-gray-600"
                                 />
-                                <span class="ml-2 text-sm">All</span>
+                                <span class="ml-2 text-sm dark:text-gray-300">All</span>
                             </label>
                             <label class="flex items-center">
                                 <input 
@@ -190,9 +190,9 @@
                                     bind:group={selectedPrice} 
                                     value="free"
                                     on:change={updateFilters}
-                                    class="text-pink-600 focus:ring-pink-500"
+                                    class="text-pink-600 focus:ring-pink-500 dark:bg-gray-700 dark:border-gray-600"
                                 />
-                                <span class="ml-2 text-sm">Free</span>
+                                <span class="ml-2 text-sm dark:text-gray-300">Free</span>
                             </label>
                             <label class="flex items-center">
                                 <input 
@@ -200,33 +200,33 @@
                                     bind:group={selectedPrice} 
                                     value="paid"
                                     on:change={updateFilters}
-                                    class="text-pink-600 focus:ring-pink-500"
+                                    class="text-pink-600 focus:ring-pink-500 dark:bg-gray-700 dark:border-gray-600"
                                 />
-                                <span class="ml-2 text-sm">Paid</span>
+                                <span class="ml-2 text-sm dark:text-gray-300">Paid</span>
                             </label>
                         </div>
                     </div>
 
                     <!-- Categories -->
                     <div>
-                        <label class="mb-3 block text-sm font-medium text-gray-700">Categories</label>
+                        <label class="mb-3 block text-sm font-medium text-gray-700 dark:text-gray-300">Categories</label>
                         <div class="max-h-64 space-y-1 overflow-y-auto">
                             <button 
                                 on:click={() => { selectedCategory = ''; updateFilters(); }}
-                                class="w-full text-left px-3 py-2 rounded-lg text-sm transition-colors {selectedCategory === '' ? 'bg-pink-100 text-pink-800' : 'hover:bg-gray-100'}"
+                                class="w-full text-left px-3 py-2 rounded-lg text-sm transition-colors {selectedCategory === '' ? 'bg-pink-100 text-pink-800 dark:bg-pink-800 dark:text-pink-200' : 'hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300'}"
                             >
                                 All Categories
                             </button>
                             {#each categories as category}
                                 <button 
                                     on:click={() => { selectedCategory = category.id; updateFilters(); }}
-                                    class="w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex items-center justify-between {selectedCategory === category.id ? 'bg-pink-100 text-pink-800' : 'hover:bg-gray-100'}"
+                                    class="w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex items-center justify-between {selectedCategory === category.id ? 'bg-pink-100 text-pink-800 dark:bg-pink-800 dark:text-pink-200' : 'hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300'}"
                                 >
                                     <span class="flex items-center gap-2">
                                         <span>{category.icon}</span>
                                         <span>{category.name}</span>
                                     </span>
-                                    <span class="text-xs text-gray-500">
+                                    <span class="text-xs text-gray-500 dark:text-gray-400">
                                         {Object.prototype.hasOwnProperty.call(data.categoryStats, category.id) ? data.categoryStats[category.id] : 0}
                                     </span>
                                 </button>
@@ -237,7 +237,7 @@
                     <!-- Clear Filters -->
                     <button 
                         on:click={clearFilters}
-                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm transition-colors hover:bg-gray-50"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
                     >
                         Clear All Filters
                     </button>
@@ -248,10 +248,10 @@
             <main class="flex-1">
                 <!-- Results Header -->
                 <div class="mb-6 flex items-center justify-between">
-                    <div class="text-sm text-gray-600">
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
                         Showing {(data.currentPage - 1) * 12 + 1}-{Math.min(data.currentPage * 12, data.totalCount)} of {data.totalCount} results
                         {#if searchQuery}
-                            for "<strong>{searchQuery}</strong>"
+                            for "<strong class="dark:text-white">{searchQuery}</strong>"
                         {/if}
                     </div>
                 </div>
@@ -261,28 +261,28 @@
                     <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                         {#each data.modules as module}
                             <a href="/module/{module.name}" 
-                               class="group rounded-xl border bg-white p-6 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg">
+                               class="group rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800">
                                 <div class="mb-4 flex items-start gap-4">
-                                    <img src="{placeholderImage}" alt="" class="h-16 w-16 rounded-lg border object-cover">
+                                    <img src="{placeholderImage}" alt="" class="h-16 w-16 rounded-lg border border-gray-200 object-cover dark:border-gray-600">
                                     <div class="min-w-0 flex-1">
-                                        <h3 class="truncate text-lg font-bold text-gray-800 transition-colors group-hover:text-pink-600">
+                                        <h3 class="truncate text-lg font-bold text-gray-800 transition-colors group-hover:text-pink-600 dark:text-white dark:group-hover:text-pink-400">
                                             {module.name}
                                         </h3>
-                                        <p class="mb-2 text-sm text-gray-600">
+                                        <p class="mb-2 text-sm text-gray-600 dark:text-gray-400">
                                             by {module.author?.username || 'Anonymous'}
                                         </p>
                                     </div>
                                 </div>
                                 
-                                <div class="mb-4 line-clamp-3 text-sm text-gray-600">
+                                <div class="mb-4 line-clamp-3 text-sm text-gray-600 dark:text-gray-300">
                                     {@html module.shortDescription || 'No description available'}
                                 </div>
                                 
                                 <div class="flex items-center justify-between">
-                                    <span class="rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800">
+                                    <span class="rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 dark:bg-green-800 dark:text-green-200">
                                         {Number(module.price) > 0 ? `$${module.price}` : 'Free'}
                                     </span>
-                                    <div class="flex items-center gap-4 text-sm text-gray-500">
+                                    <div class="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
                                         <div class="flex items-center gap-1">
                                             <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                 <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
@@ -303,11 +303,11 @@
                 {:else}
                     <div class="py-16 text-center">
                         <div class="mb-4 text-6xl">🔍</div>
-                        <h3 class="mb-2 text-xl font-semibold text-gray-800">No modules found</h3>
-                        <p class="mb-6 text-gray-600">Try adjusting your search criteria or browse all modules.</p>
+                        <h3 class="mb-2 text-xl font-semibold text-gray-800 dark:text-white">No modules found</h3>
+                        <p class="mb-6 text-gray-600 dark:text-gray-300">Try adjusting your search criteria or browse all modules.</p>
                         <button 
                             on:click={clearFilters}
-                            class="rounded-lg bg-pink-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-pink-700"
+                            class="rounded-lg bg-pink-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-pink-700 dark:bg-pink-600 dark:hover:bg-pink-700"
                         >
                             Clear Filters
                         </button>
@@ -322,7 +322,7 @@
                             <button 
                                 on:click={() => goToPage(data.currentPage - 1)}
                                 disabled={data.currentPage === 1}
-                                class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                                class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
                             >
                                 Previous
                             </button>
@@ -330,11 +330,11 @@
                             <!-- Page numbers -->
                             {#each getPaginationPages() as pageItem}
                                 {#if pageItem === '...'}
-                                    <span class="px-3 py-2 text-sm font-medium text-gray-700">...</span>
+                                    <span class="px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300">...</span>
                                 {:else}
                                     <button 
                                         on:click={() => goToPage(Number(pageItem))}
-                                        class="px-3 py-2 text-sm font-medium rounded-lg transition-colors {data.currentPage === pageItem ? 'bg-pink-600 text-white' : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'}"
+                                        class="px-3 py-2 text-sm font-medium rounded-lg transition-colors {data.currentPage === pageItem ? 'bg-pink-600 text-white' : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700'}"
                                     >
                                         {pageItem}
                                     </button>
@@ -345,7 +345,7 @@
                             <button 
                                 on:click={() => goToPage(data.currentPage + 1)}
                                 disabled={data.currentPage === data.totalPages}
-                                class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                                class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
                             >
                                 Next
                             </button>
