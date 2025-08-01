@@ -1,5 +1,6 @@
 <script lang="ts">
     import NavBar from "$lib/components/NavBar.svelte";
+    import Background from "$lib/components/structure/background.svelte";
     import type { LayoutData } from "../$types";
     import "../../app.css";
 
@@ -15,4 +16,6 @@
     user={data.tokenData}
 />
 
-<slot></slot>
+<Background>
+    <slot></slot>
+</Background>

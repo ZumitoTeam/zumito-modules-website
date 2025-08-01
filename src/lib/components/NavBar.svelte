@@ -7,6 +7,13 @@
     export let activePage = 'home';
     let openDropdown = false;
     let openMobileMenu = false;
+    let dropdownElement: HTMLDivElement;
+
+    function handleClickOutside(event: MouseEvent) {
+        if (openDropdown && dropdownElement && !dropdownElement.contains(event.target as Node)) {
+            openDropdown = false;
+        }
+    }
 
     const links = [{
         title: "Home",
@@ -20,6 +27,8 @@
     }]
 </script>
 
+<svelte:window on:click={handleClickOutside} />
+
 <nav class="border-gray-200 bg-white dark:bg-gray-900">
     <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
 
@@ -30,24 +39,29 @@
 
         <div class="relative flex w-3/12 items-center justify-end space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
             {#if isLoggedIn}
-                <button on:click={() => openDropdown = !openDropdown} type="button" class="flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 md:me-0 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                    <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name={user?.username}" alt="user photo">
-                </button>
-                <!-- Dropdown menu -->
-                <div class:hidden={!openDropdown} class="absolute -bottom-6 right-0 z-50 my-4 min-w-[200px] translate-y-full list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700" id="user-dropdown">
-                    <div class="px-4 py-3">
-                        <span class="block text-sm text-gray-900 dark:text-white">{user?.username}</span>
-                        <span class="block truncate text-sm text-gray-500 dark:text-gray-400">{user?.email}</span>
+                <div bind:this={dropdownElement}>
+                    <button on:click={() => openDropdown = !openDropdown} type="button" class="flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 md:me-0 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                        <span class="sr-only">Open user menu</span>
+                        <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name={user?.username}" alt="user photo">
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div class:hidden={!openDropdown} class="absolute -bottom-6 right-0 z-50 my-4 min-w-[200px] translate-y-full list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:divide-gray-600 dark:bg-gray-700" id="user-dropdown">
+                        <div class="px-4 py-3">
+                            <span class="block text-sm text-gray-900 dark:text-white">{user?.username}</span>
+                            <span class="block truncate text-sm text-gray-500 dark:text-gray-400">{user?.email}</span>
+                        </div>
+                        <ul class="py-2" aria-labelledby="user-menu-button">
+                            <li>
+                                <a href="/user/profile" on:click={() => openDropdown = false} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Mi perfil</a>
+                            </li>
+                            <li>
+                                <a href="/user/modules" on:click={() => openDropdown = false} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">My modules</a>
+                            </li>
+                            <li>
+                                <a href="/logout" on:click={() => openDropdown = false} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="py-2" aria-labelledby="user-menu-button">
-                        <li>
-                            <a href="/user/modules" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">My modules</a>
-                        </li>
-                        <li>
-                            <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                        </li>
-                    </ul>
                 </div>
             {:else}
             <div class="relative hidden w-3/12 items-center justify-end space-x-3 whitespace-nowrap md:order-2 md:space-x-0 lg:flex rtl:space-x-reverse">
