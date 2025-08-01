@@ -1,3 +1,11 @@
+<script lang="ts">
+    import { enhance } from '$app/forms';
+    import { goto } from '$app/navigation';
+    import type { ActionData } from './$types';
+
+    export let form: ActionData;
+</script>
+
 <section class="bg-gray-50 dark:bg-gray-900">
     <div class="mx-auto max-w-screen-xl px-4 py-8 lg:grid lg:grid-cols-12 lg:gap-20 lg:py-16">
         <div class="col-span-6 mr-auto hidden flex-col justify-between lg:flex xl:mb-0">
@@ -68,12 +76,35 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 sm:text-2xl dark:text-white">
                     Welcome back
                 </h1>
-                <form method="post" action="?/login" class="space-y-4 lg:space-y-6">
+                
+                {#if form?.error}
+                    <div class="rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+                        <div class="flex items-center">
+                            <svg class="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                            {form.error}
+                        </div>
+                    </div>
+                {/if}
+                
+                <form method="post" action="?/login" class="space-y-4 lg:space-y-6" use:enhance={({ formElement, formData, action, cancel, submitter }) => {
+                    return async ({ result, update }) => {
+                        if (result.type === 'success' && result.data?.success && result.data?.redirectTo) {
+                            // Redirigir cuando el login es exitoso
+                            goto(result.data.redirectTo);
+                        } else {
+                            // Para errores y otros resultados, actualizar normalmente
+                            await update();
+                        }
+                    };
+                }}>
                     <div>
                         <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
                             Email
                         </label>
                         <input type="email" name="email" id="email"
+                            value={form?.email || ''}
                             class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 focus:border-pink-600 focus:ring-pink-600 sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                             placeholder="Enter your email" required="">
                     </div>
@@ -88,9 +119,9 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-start">
-                            <div class="flex items-center h-5">
+                            <div class="flex h-5 items-center">
                                 <input id="remember" aria-describedby="remember" type="checkbox"
-                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-pink-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-pink-600 dark:ring-offset-gray-800"
+                                    class="focus:ring-3 h-4 w-4 rounded border border-gray-300 bg-gray-50 focus:ring-pink-300 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-pink-600"
                                 >
                             </div>
                             <div class="ml-3 text-sm">

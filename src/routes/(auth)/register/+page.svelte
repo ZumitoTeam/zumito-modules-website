@@ -1,5 +1,6 @@
 <script>
   import { enhance } from '$app/forms';
+  import { goto } from '$app/navigation';
   import { logoImageUrl } from '$lib/globalVars';
   export let form;
 </script>
@@ -83,11 +84,34 @@
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 sm:text-2xl dark:text-white">
                   Create a new account
               </h1>
-              <form class="space-y-4 lg:space-y-6" method="post" action="?/login" use:enhance>
+              
+              {#if form?.error}
+                  <div class="rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-800 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+                      <div class="flex items-center">
+                          <svg class="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                          </svg>
+                          {form.error}
+                      </div>
+                  </div>
+              {/if}
+              
+              <form class="space-y-4 lg:space-y-6" method="post" action="?/register" use:enhance={({ formElement, formData, action, cancel, submitter }) => {
+                  return async ({ result, update }) => {
+                      if (result.type === 'success' && result.data?.success && result.data?.redirectTo) {
+                          // Redirigir cuando el registro es exitoso
+                          goto(result.data.redirectTo);
+                      } else {
+                          // Para errores y otros resultados, actualizar normalmente
+                          await update();
+                      }
+                  };
+              }}>
                   <div>
                       <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                           username</label>
                       <input type="text" name="username" id="username"
+                          value={form?.username || ''}
                           class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="username" required="">
                   </div>
@@ -95,6 +119,7 @@
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                           email</label>
                       <input type="email" name="email" id="email"
+                          value={form?.email || ''}
                           class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="name@company.com" required="">
                   </div>

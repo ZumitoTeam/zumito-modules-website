@@ -1,53 +1,113 @@
-import { redirect } from '@sveltejs/kit';
-import jwt from 'jsonwebtoken';
+import { fail } from '@sveltejs/kit';
 import prisma from '$lib/prisma.js';
 import { createToken } from '$lib/tokenParser';
+import bcrypt from 'bcryptjs';
 
 export const actions = {
-	login: async ({ cookies, request }) => {
+	register: async ({ cookies, request }) => {
 		const data = await request.formData();
-		const email = data.get('email');
-		const username = data.get('username');
-		const password = data.get('password');
-		const password2 = data.get('password2');
+		const email = data.get('email') as string;
+		const username = data.get('username') as string;
+		const password = data.get('password') as string;
+		const password2 = data.get('password2') as string;
 
-		if (password != password2) return {
-			status: 400,
-			message: "Both passwords must be equal"
+		// Validación básica
+		if (!email || !username || !password || !password2) {
+			return fail(400, {
+				error: 'All fields are required',
+				email,
+				username
+			});
 		}
 
-		if (!isEmailValid(email as string)) return {
-			status: 400,
-			message: "Email is not valid"
+		if (!isEmailValid(email)) {
+			return fail(400, {
+				error: 'Please enter a valid email address',
+				email,
+				username
+			});
 		}
 
-		if (await userExists(email as string, username as string)) return {
-			status: 400,
-			message: "Email or username alredy in use"
+		if (username.length < 3) {
+			return fail(400, {
+				error: 'Username must be at least 3 characters long',
+				email,
+				username
+			});
 		}
 
-		const user = await prisma.user.create({
-			data: {
-				email: email as string,
-				password: password as string,
-				username: username as string,
+		if (password.length < 6) {
+			return fail(400, {
+				error: 'Password must be at least 6 characters long',
+				email,
+				username
+			});
+		}
+
+		if (password !== password2) {
+			return fail(400, {
+				error: 'Both passwords must be equal',
+				email,
+				username
+			});
+		}
+
+		if (await userExists(email, username)) {
+			return fail(400, {
+				error: 'Email or username already in use',
+				email,
+				username
+			});
+		}
+
+		try {
+			// Hash de la contraseña
+			const hashedPassword = await bcrypt.hash(password, 12);
+
+			const user = await prisma.user.create({
+				data: {
+					email,
+					password: hashedPassword,
+					username,
+				}
+			});
+
+			if (!user) {
+				return fail(500, {
+					error: 'Error creating user',
+					email,
+					username
+				});
 			}
-		});
 
-		if (!user) return {
-			status: 500,
-			message: "Error creating user"
+			const token = createToken({
+				email,
+				username: user.username,
+				userId: user.id,
+			});
+
+			// Establecer cookie con configuración de seguridad
+			cookies.set('token', token, { 
+				path: '/',
+				httpOnly: true,
+				secure: process.env.NODE_ENV === 'production',
+				sameSite: 'strict',
+				maxAge: 60 * 60 * 24 * 7 // 7 días
+			});
+
+			return {
+				success: true,
+				redirectTo: '/'
+			};
+
+		} catch (error) {
+			console.error('Registration error:', error);
+			return fail(500, {
+				error: 'An error occurred during registration. Please try again.',
+				email,
+				username
+			});
 		}
-
-        var token = createToken({
-            email: email as string,
-			username: user.username,
-			userId: user.id,
-         });
-
-		cookies.set('token', token, { path: '/' });
-
-		return redirect(303, '/');
 	},
 };
 
