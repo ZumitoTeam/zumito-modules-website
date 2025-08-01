@@ -1,9 +1,8 @@
 import prisma from '$lib/prisma.js';
-import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async ({ url }) => {
+export const load = async ({ url }) => {
     const searchQuery = url.searchParams.get('search') || '';
-    const category = url.searchParams.get('category') || '';
+    const selectedFeatures = url.searchParams.get('features')?.split(',').filter(Boolean) || [];
     const sortBy = url.searchParams.get('sort') || 'latest';
     const priceFilter = url.searchParams.get('price') || 'all';
     const page = parseInt(url.searchParams.get('page') || '1');
@@ -39,6 +38,16 @@ export const load: PageServerLoad = async ({ url }) => {
         ];
     }
 
+    if (selectedFeatures.length > 0) {
+        whereConditions.features = {
+            some: {
+                name: {
+                    in: selectedFeatures
+                }
+            }
+        };
+    }
+
     if (priceFilter === 'free') {
         whereConditions.price = 0;
     } else if (priceFilter === 'paid') {
@@ -71,7 +80,7 @@ export const load: PageServerLoad = async ({ url }) => {
     }
 
     try {
-        const [modules, totalCount, categories] = await Promise.all([
+        const [modules, totalCount, allFeatures, featureStats] = await Promise.all([
             // Get modules with pagination
             prisma.module.findMany({
                 where: whereConditions,
@@ -79,6 +88,12 @@ export const load: PageServerLoad = async ({ url }) => {
                     author: {
                         select: {
                             username: true
+                        }
+                    },
+                    features: {
+                        select: {
+                            name: true,
+                            emoji: true
                         }
                     },
                     _count: {
@@ -98,17 +113,63 @@ export const load: PageServerLoad = async ({ url }) => {
                 where: whereConditions
             }),
             
-            // Get popular categories (simulated for now)
-            prisma.module.findMany({
-                where: {
-                    published: true,
-                    aproved: true
-                },
+            // Get all features
+            prisma.feature.findMany({
                 select: {
-                    id: true,
-                    shortDescription: true
+                    name: true,
+                    emoji: true,
+                    _count: {
+                        select: {
+                            modules: true
+                        }
+                    }
                 },
-                take: 100
+                orderBy: {
+                    modules: {
+                        _count: 'desc'
+                    }
+                }
+            }),
+
+            // Get feature statistics for the current filter
+            prisma.feature.findMany({
+                select: {
+                    name: true,
+                    _count: {
+                        select: {
+                            modules: {
+                                where: {
+                                    published: true,
+                                    aproved: true,
+                                    ...(searchQuery && {
+                                        OR: [
+                                            {
+                                                name: {
+                                                    contains: searchQuery,
+                                                    mode: 'insensitive'
+                                                }
+                                            },
+                                            {
+                                                shortDescription: {
+                                                    contains: searchQuery,
+                                                    mode: 'insensitive'
+                                                }
+                                            },
+                                            {
+                                                description: {
+                                                    contains: searchQuery,
+                                                    mode: 'insensitive'
+                                                }
+                                            }
+                                        ]
+                                    }),
+                                    ...(priceFilter === 'free' && { price: 0 }),
+                                    ...(priceFilter === 'paid' && { price: { gt: 0 } })
+                                }
+                            }
+                        }
+                    }
+                }
             })
         ]);
 
@@ -118,19 +179,11 @@ export const load: PageServerLoad = async ({ url }) => {
             price: m.price?.toString?.() ?? m.price
         }));
 
-        // Extract categories from descriptions (simplified approach)
-        const categoryStats = {
-            'web-development': 45,
-            'api-integration': 32,
-            'data-processing': 28,
-            'authentication': 15,
-            'ui-components': 35,
-            'utilities': 22,
-            'database': 18,
-            'analytics': 12,
-            'payment': 8,
-            'email': 14
-        };
+        // Create feature stats object from database results
+        const featureStatsObject: Record<string, number> = {};
+        featureStats.forEach(feature => {
+            featureStatsObject[feature.name] = feature._count.modules;
+        });
 
         const totalPages = Math.ceil(totalCount / limit);
 
@@ -140,10 +193,11 @@ export const load: PageServerLoad = async ({ url }) => {
             totalPages,
             currentPage: page,
             searchQuery,
-            category,
+            selectedFeatures,
             sortBy,
             priceFilter,
-            categoryStats
+            allFeatures: JSON.parse(JSON.stringify(allFeatures)),
+            featureStats: featureStatsObject
         };
     } catch (error) {
         console.error('Error loading modules:', error);
@@ -153,10 +207,11 @@ export const load: PageServerLoad = async ({ url }) => {
             totalPages: 0,
             currentPage: 1,
             searchQuery: '',
-            category: '',
+            selectedFeatures: [],
             sortBy: 'latest',
             priceFilter: 'all',
-            categoryStats: {}
+            allFeatures: [],
+            featureStats: {}
         };
     }
 };

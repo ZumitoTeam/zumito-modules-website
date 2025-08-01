@@ -9,25 +9,12 @@
     export let data: PageData;
 
     let searchQuery = data.searchQuery;
-    let selectedCategory = data.category;
+    let selectedFeatures = data.selectedFeatures || [];
     let selectedSort = data.sortBy;
     let selectedPrice = data.priceFilter;
     let showMobileFilters = false;
 
     const placeholderImage = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIALcAwwMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAUBAgMGB//EAC4QAQACAQIEBAQGAwAAAAAAAAABAgMEEQUhMVESEyJBUmFxkSNCgaHB0TIzkv/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/APoIDo5gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM+G3wz9gYAAAAAAAAAAAAAAAAAAAAB202nvqL+GnKI627A548d8t4pjrNrT7QstPwusbTntvPw16fdM0+DHp6eHHH1n3l1ZtakaY8OPF/rx1r9IdN2BFa3pTJG16Vt9Y3Rc3DcF+dN8c/LnH2TAFFqNFmwbzMeKnxVR3pULV8Ppl3ti2pft7S1KzYpx0vgy0tNbY7bx8mFRoAAAAREzMREbzPtAt+F6etMUZpje9uk9oKRAjRamY38mdvnMOF6Wpaa3rNZj2mHpEfW6euowzy9dY3rP8M61iiAaZAAAZpW17xSkb2mdogHTTYL6jLFKfrPaF7hxUw44pSNoj92mk09dNiisc7TztPeXZm1qQARQAAAAAAAHmgG2AABe8PvF9Jj2/LHhn9FE7abU5NNfenOJ61npKVYv2uW8Y8dr26VjdBjiuPbnivE9o2Q9XrL6n07eGkflj+UxdRgGmQABbcM0vl0868eu0emO0InDtN5+XxWj8OnX5z2XSWtSADKgAAAAAAAAAKu3Cr/lzVn612Rs2iz4udqbx3rzXoupjzQvdRo8OfeZr4b/FVVanSZdPO9o8VPa0LqYjgKgAAAA2x0tlyVpSN7WnaGq34ZpvLx+bePXaOXyhKsSsGKuDFXHXpHWe8ugMtAAAAAAAAAAAAAABMRMbTG8ACs1nDtt76ePrT+la9Kh63Q1z73x7VyftZZUsUwzatqWmtomLR1iWGmQEjR6W2pv2pH+VgdOHaXzr+ZePw6z/ANSuWKUrjpFKRtWOkMsWtyAAAAAAAAAAAAAAAAAAAAI+r0mPUxz9N46WhXW4bqInaPDaO8SuRdTFZg4XO++e0bfDX+1lSlcdYrSsVrHSIZE1cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/9k=';
-
-    const categories = [
-        { id: 'web-development', name: 'Web Development', icon: '🌐' },
-        { id: 'api-integration', name: 'API Integration', icon: '🔗' },
-        { id: 'data-processing', name: 'Data Processing', icon: '📊' },
-        { id: 'authentication', name: 'Authentication', icon: '🔐' },
-        { id: 'ui-components', name: 'UI Components', icon: '🎨' },
-        { id: 'utilities', name: 'Utilities', icon: '🛠️' },
-        { id: 'database', name: 'Database', icon: '🗄️' },
-        { id: 'analytics', name: 'Analytics', icon: '📈' },
-        { id: 'payment', name: 'Payment', icon: '💳' },
-        { id: 'email', name: 'Email', icon: '📧' }
-    ];
 
     const sortOptions = [
         { value: 'latest', label: 'Latest' },
@@ -43,7 +30,7 @@
         const params = new URLSearchParams();
         
         if (searchQuery) params.set('search', searchQuery);
-        if (selectedCategory) params.set('category', selectedCategory);
+        if (selectedFeatures.length > 0) params.set('features', selectedFeatures.join(','));
         if (selectedSort !== 'latest') params.set('sort', selectedSort);
         if (selectedPrice !== 'all') params.set('price', selectedPrice);
         
@@ -53,9 +40,18 @@
 
     function clearFilters() {
         searchQuery = '';
-        selectedCategory = '';
+        selectedFeatures = [];
         selectedSort = 'latest';
         selectedPrice = 'all';
+        updateFilters();
+    }
+
+    function toggleFeature(featureName: string) {
+        if (selectedFeatures.includes(featureName)) {
+            selectedFeatures = selectedFeatures.filter(f => f !== featureName);
+        } else {
+            selectedFeatures = [...selectedFeatures, featureName];
+        }
         updateFilters();
     }
 
@@ -207,29 +203,34 @@
                         </div>
                     </div>
 
-                    <!-- Categories -->
+                    <!-- Features -->
                     <div>
-                        <label class="mb-3 block text-sm font-medium text-gray-700 dark:text-gray-300">Categories</label>
+                        <span class="mb-3 block text-sm font-medium text-gray-700 dark:text-gray-300">Features</span>
                         <div class="max-h-64 space-y-1 overflow-y-auto">
                             <button 
-                                on:click={() => { selectedCategory = ''; updateFilters(); }}
-                                class="w-full text-left px-3 py-2 rounded-lg text-sm transition-colors {selectedCategory === '' ? 'bg-pink-100 text-pink-800 dark:bg-pink-800 dark:text-pink-200' : 'hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300'}"
+                                on:click={() => { selectedFeatures = []; updateFilters(); }}
+                                class="w-full text-left px-3 py-2 rounded-lg text-sm transition-colors {selectedFeatures.length === 0 ? 'bg-pink-100 text-pink-800 dark:bg-pink-800 dark:text-pink-200' : 'hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300'}"
                             >
-                                All Categories
+                                All Features
                             </button>
-                            {#each categories as category}
-                                <button 
-                                    on:click={() => { selectedCategory = category.id; updateFilters(); }}
-                                    class="w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex items-center justify-between {selectedCategory === category.id ? 'bg-pink-100 text-pink-800 dark:bg-pink-800 dark:text-pink-200' : 'hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300'}"
-                                >
-                                    <span class="flex items-center gap-2">
-                                        <span>{category.icon}</span>
-                                        <span>{category.name}</span>
-                                    </span>
+                            {#each (data.allFeatures || []) as feature}
+                                <label class="flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
+                                    <div class="flex items-center gap-2">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={selectedFeatures.includes(feature.name)}
+                                            on:change={() => toggleFeature(feature.name)}
+                                            class="text-pink-600 focus:ring-pink-500 dark:bg-gray-700 dark:border-gray-600"
+                                        />
+                                        <span class="flex items-center gap-2">
+                                            <span>{feature.emoji}</span>
+                                            <span class="dark:text-gray-300">{feature.name}</span>
+                                        </span>
+                                    </div>
                                     <span class="text-xs text-gray-500 dark:text-gray-400">
-                                        {Object.prototype.hasOwnProperty.call(data.categoryStats, category.id) ? data.categoryStats[category.id] : 0}
+                                        {(data.featureStats && data.featureStats[feature.name]) || 0}
                                     </span>
-                                </button>
+                                </label>
                             {/each}
                         </div>
                     </div>
@@ -252,6 +253,9 @@
                         Showing {(data.currentPage - 1) * 12 + 1}-{Math.min(data.currentPage * 12, data.totalCount)} of {data.totalCount} results
                         {#if searchQuery}
                             for "<strong class="dark:text-white">{searchQuery}</strong>"
+                        {/if}
+                        {#if selectedFeatures.length > 0}
+                            with features: {selectedFeatures.map(f => `"${f}"`).join(', ')}
                         {/if}
                     </div>
                 </div>
