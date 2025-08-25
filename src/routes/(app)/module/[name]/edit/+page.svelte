@@ -16,6 +16,7 @@ import IconUploader from '$lib/components/IconUploader.svelte';
     let shortDescription = data.module.shortDescription || '';
     let description = data.module.description || '';
     let npm = data.module.npm || '';
+    let isAdult = data.module.adult || false;
 
 // Aplicar la corrección a las URLs
 let iconUrl: string | null = data.module.icon ? PUBLIC_MINIO_URL + data.module.icon : null;
@@ -195,6 +196,11 @@ let images: { id: string, url: string, relativePath?: string, file?: File }[] = 
                     </div>
                 {/each}
             </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <input type="checkbox" id="adult" name="adult" bind:checked={isAdult} class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-pink-600 focus:ring-2 focus:ring-pink-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-pink-600">
+            <label for="adult" class="text-sm font-medium text-gray-900 dark:text-gray-300">Contains +18 content</label>
         </div>
 
         <div>
