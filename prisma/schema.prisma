@@ -24,7 +24,6 @@ model Module {
   sourceCode       String?
   published        Boolean    @default(true)
   aproved          Boolean    @default(true)
-  adult            Boolean    @default(false)
   author           User?      @relation(fields: [authorId], references: [id])
   authorId         Int?
   icon             String     @default("")

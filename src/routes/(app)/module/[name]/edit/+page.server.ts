@@ -27,7 +27,6 @@ export async function load({ params, cookies }) {
             instructions: true,
             published: true,
             aproved: true,
-            adult: true,
             authorId: true,
             icon: true,
             images: {
@@ -79,7 +78,6 @@ export const actions = {
         const npm = inputs.get('npm') as string;
         let iconUrl = inputs.get('iconUrl') as string | null;
         const selectedFeatures = inputs.getAll('features') as string[];
-        const adult = inputs.has('adult');
         const removedImages = inputs.getAll('removedImages') as string[];
 
         // Procesar icono: si hay archivo, subirlo a Minio
@@ -176,8 +174,7 @@ export const actions = {
             },
             features: {
                 set: selectedFeatures.map((name) => ({ name }))
-            },
-            adult
+            }
         };
 
         // Solo actualizar el icono si hay iconUrl (ya sea nueva URL tras subir archivo o URL existente)

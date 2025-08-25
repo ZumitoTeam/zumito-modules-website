@@ -94,14 +94,9 @@
                     <img src={PUBLIC_MINIO_URL + module.icon} alt="{module.name} icon" class="h-16 w-16 rounded-xl border border-gray-200 object-cover shadow-lg lg:h-20 lg:w-20 dark:border-gray-700">
                 {/if}
                 <div class="flex-1">
-                    <div class="flex items-center gap-3">
-                        <h1 class="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-4xl font-bold text-transparent lg:text-5xl">
-                            {module.name}
-                        </h1>
-                        {#if module.adult}
-                            <span class="rounded bg-red-600 px-2 py-1 text-sm font-semibold text-white">+18</span>
-                        {/if}
-                    </div>
+                    <h1 class="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-4xl font-bold text-transparent lg:text-5xl">
+                        {module.name}
+                    </h1>
                     {#if module.shortDescription}
                         <p class="mt-3 hidden text-lg text-gray-600 sm:block dark:text-gray-300">{module.shortDescription}</p>
                     {/if}

@@ -230,10 +230,7 @@
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {#each modules as module}
                 <article class="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-pink-200 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:hover:border-pink-600">
-                    <a href="/module/{module.name}" class="block relative">
-                        {#if module.adult}
-                            <span class="absolute top-2 right-2 rounded bg-red-600 px-2 py-1 text-xs font-bold text-white">+18</span>
-                        {/if}
+                    <a href="/module/{module.name}" class="block">
                         <!-- Header with icon and basic info -->
                         <div class="p-6 pb-4">
                             <div class="mb-4 flex items-start gap-4">

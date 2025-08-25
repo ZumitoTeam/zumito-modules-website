@@ -12,7 +12,6 @@
     let selectedFeatures = data.selectedFeatures || [];
     let selectedSort = data.sortBy;
     let selectedPrice = data.priceFilter;
-    let show18 = data.show18;
     let showMobileFilters = false;
 
     const placeholderImage = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIALcAwwMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABAUBAgMGB//EAC4QAQACAQIEBAQGAwAAAAAAAAABAgMEEQUhMVESEyJBUmFxkSNCgaHB0TIzkv/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/APoIDo5gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM+G3wz9gYAAAAAAAAAAAAAAAAAAAAB202nvqL+GnKI627A548d8t4pjrNrT7QstPwusbTntvPw16fdM0+DHp6eHHH1n3l1ZtakaY8OPF/rx1r9IdN2BFa3pTJG16Vt9Y3Rc3DcF+dN8c/LnH2TAFFqNFmwbzMeKnxVR3pULV8Ppl3ti2pft7S1KzYpx0vgy0tNbY7bx8mFRoAAAAREzMREbzPtAt+F6etMUZpje9uk9oKRAjRamY38mdvnMOF6Wpaa3rNZj2mHpEfW6euowzy9dY3rP8M61iiAaZAAAZpW17xSkb2mdogHTTYL6jLFKfrPaF7hxUw44pSNoj92mk09dNiisc7TztPeXZm1qQARQAAAAAAAHmgG2AABe8PvF9Jj2/LHhn9FE7abU5NNfenOJ61npKVYv2uW8Y8dr26VjdBjiuPbnivE9o2Q9XrL6n07eGkflj+UxdRgGmQABbcM0vl0868eu0emO0InDtN5+XxWj8OnX5z2XSWtSADKgAAAAAAAAAKu3Cr/lzVn612Rs2iz4udqbx3rzXoupjzQvdRo8OfeZr4b/FVVanSZdPO9o8VPa0LqYjgKgAAAA2x0tlyVpSN7WnaGq34ZpvLx+bePXaOXyhKsSsGKuDFXHXpHWe8ugMtAAAAAAAAAAAAAABMRMbTG8ACs1nDtt76ePrT+la9Kh63Q1z73x7VyftZZUsUwzatqWmtomLR1iWGmQEjR6W2pv2pH+VgdOHaXzr+ZePw6z/ANSuWKUrjpFKRtWOkMsWtyAAAAAAAAAAAAAAAAAAAAI+r0mPUxz9N46WhXW4bqInaPDaO8SuRdTFZg4XO++e0bfDX+1lSlcdYrSsVrHSIZE1cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/9k=';
@@ -34,7 +33,6 @@
         if (selectedFeatures.length > 0) params.set('features', selectedFeatures.join(','));
         if (selectedSort !== 'latest') params.set('sort', selectedSort);
         if (selectedPrice !== 'all') params.set('price', selectedPrice);
-        if (show18) params.set('show18', 'true');
         
         const newUrl = params.toString() ? `/modules?${params.toString()}` : '/modules';
         goto(newUrl, { replaceState: true });
@@ -45,7 +43,6 @@
         selectedFeatures = [];
         selectedSort = 'latest';
         selectedPrice = 'all';
-        show18 = false;
         updateFilters();
     }
 
@@ -206,19 +203,6 @@
                         </div>
                     </div>
 
-                    <!-- Adult Filter -->
-                    <div class="pt-4">
-                        <label class="flex items-center">
-                            <input
-                                type="checkbox"
-                                bind:checked={show18}
-                                on:change={updateFilters}
-                                class="text-pink-600 focus:ring-pink-500 dark:bg-gray-700 dark:border-gray-600"
-                            />
-                            <span class="ml-2 text-sm dark:text-gray-300">Show +18 modules</span>
-                        </label>
-                    </div>
-
                     <!-- Features -->
                     <div>
                         <span class="mb-3 block text-sm font-medium text-gray-700 dark:text-gray-300">Features</span>
@@ -280,11 +264,8 @@
                 {#if data.modules.length > 0}
                     <div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
                         {#each data.modules as module}
-                            <a href="/module/{module.name}"
-                               class="group relative rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800">
-                                {#if module.adult}
-                                    <span class="absolute top-2 right-2 rounded bg-red-600 px-2 py-1 text-xs font-bold text-white">+18</span>
-                                {/if}
+                            <a href="/module/{module.name}" 
+                               class="group rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800">
                                 <div class="mb-4 flex items-start gap-4">
                                     <img src="{placeholderImage}" alt="" class="h-16 w-16 rounded-lg border border-gray-200 object-cover dark:border-gray-600">
                                     <div class="min-w-0 flex-1">

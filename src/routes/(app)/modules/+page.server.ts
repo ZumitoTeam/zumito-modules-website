@@ -5,7 +5,6 @@ export const load = async ({ url }) => {
     const selectedFeatures = url.searchParams.get('features')?.split(',').filter(Boolean) || [];
     const sortBy = url.searchParams.get('sort') || 'latest';
     const priceFilter = url.searchParams.get('price') || 'all';
-    const show18 = url.searchParams.get('show18') === 'true';
     const page = parseInt(url.searchParams.get('page') || '1');
     const limit = 12;
     const offset = (page - 1) * limit;
@@ -14,7 +13,6 @@ export const load = async ({ url }) => {
     const whereConditions: any = {
         published: true,
         aproved: true,
-        ...(show18 ? {} : { adult: false })
     };
 
     if (searchQuery) {
@@ -166,8 +164,7 @@ export const load = async ({ url }) => {
                                         ]
                                     }),
                                     ...(priceFilter === 'free' && { price: 0 }),
-                                    ...(priceFilter === 'paid' && { price: { gt: 0 } }),
-                                    ...(show18 ? {} : { adult: false })
+                                    ...(priceFilter === 'paid' && { price: { gt: 0 } })
                                 }
                             }
                         }
@@ -199,7 +196,6 @@ export const load = async ({ url }) => {
             selectedFeatures,
             sortBy,
             priceFilter,
-            show18,
             allFeatures: JSON.parse(JSON.stringify(allFeatures)),
             featureStats: featureStatsObject
         };
@@ -214,7 +210,6 @@ export const load = async ({ url }) => {
             selectedFeatures: [],
             sortBy: 'latest',
             priceFilter: 'all',
-            show18,
             allFeatures: [],
             featureStats: {}
         };

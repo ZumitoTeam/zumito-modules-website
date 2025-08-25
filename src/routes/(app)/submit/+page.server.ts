@@ -20,11 +20,10 @@ export const actions = {
 		const name = inputs.get('name') as string;
 		const description = inputs.get('description') as string;
 		const shortDescription = inputs.get('shortDescription') as string;
-                const npm = inputs.get('npm') as string;
-                const iconUrl = inputs.get('iconUrl') as string;
-                const imageUrls = inputs.getAll('imageUrls') as string[];
-                const selectedFeatures = inputs.getAll('features') as string[];
-                const adult = inputs.has('adult');
+		const npm = inputs.get('npm') as string;
+		const iconUrl = inputs.get('iconUrl') as string;
+		const imageUrls = inputs.getAll('imageUrls') as string[];
+		const selectedFeatures = inputs.getAll('features') as string[];
 		
 		
 		if (name === '') 			return { status: 400, error: 'Name is required' };
@@ -56,12 +55,11 @@ export const actions = {
 				images: {
 					create: imageUrls.map(url => ({ url: url }))
 				},
-                                features: {
-                                        connect: selectedFeatures.map(featureName => ({ name: featureName }))
-                                },
-                                adult: adult
-                        },
-                });
+				features: {
+					connect: selectedFeatures.map(featureName => ({ name: featureName }))
+				}
+			},
+		});
 
 		return redirect(303, `/module/${module.name}`);
 	},

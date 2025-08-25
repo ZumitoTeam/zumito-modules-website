@@ -174,11 +174,6 @@
               </div>
           </div>
 
-          <div class="flex items-center gap-2">
-              <input type="checkbox" id="adult" name="adult" class="w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-              <label for="adult" class="text-sm font-medium text-gray-900 dark:text-gray-300">Contains +18 content</label>
-          </div>
-
           <div>
               <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Price

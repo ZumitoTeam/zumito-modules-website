@@ -2,17 +2,10 @@ import type { RequestHandler } from '@sveltejs/kit';
 import prisma from '$lib/prisma';
 
 export async function load({ url }) {
-        const selectedFeatures = url.searchParams.get('features')?.split(',') || [];
+	const selectedFeatures = url.searchParams.get('features')?.split(',') || [];
 
-        const baseWhere: any = {
-            published: true,
-            aproved: true,
-            adult: false
-        };
-
-        const modules = await prisma.module.findMany({
+	const modules = await prisma.module.findMany({
         where: selectedFeatures.length > 0 ? {
-            ...baseWhere,
             features: {
                 some: {
                     name: {
@@ -20,7 +13,7 @@ export async function load({ url }) {
                     }
                 }
             }
-        } : baseWhere,
+        } : {},
         orderBy: {
             installs: {
                 _count: 'desc'
@@ -59,18 +52,18 @@ export async function load({ url }) {
 
 	// Calcular estadísticas dinámicas
 	const [moduleCount, downloadCount, developerCount, featureCount, popularFeatures] = await Promise.all([
-                prisma.module.count({
-                        where: { published: true, adult: false }
-                }),
-                prisma.install.count(),
-                prisma.module.findMany({
-                        where: { published: true, adult: false },
-                        select: { authorId: true },
-                        distinct: ['authorId']
-                }),
-                prisma.feature.count(),
-                // Obtener features populares con conteo de módulos
-                prisma.feature.findMany({
+		prisma.module.count({
+			where: { published: true }
+		}),
+		prisma.install.count(),
+		prisma.module.findMany({
+			where: { published: true },
+			select: { authorId: true },
+			distinct: ['authorId']
+		}),
+		prisma.feature.count(),
+		// Obtener features populares con conteo de módulos
+		prisma.feature.findMany({
 			select: {
 				id: true,
 				name: true,

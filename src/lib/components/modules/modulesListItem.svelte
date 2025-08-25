@@ -10,9 +10,6 @@
     <div class="flex items-center">
         <img class="h-10 w-10 rounded-full" src={PUBLIC_MINIO_URL + module.icon} alt="{module.name} zumito module icon">
         <span class="ml-3 font-medium">{module.name}</span>
-        {#if module.adult}
-            <span class="ml-2 rounded bg-red-600 px-1.5 text-xs font-bold text-white">+18</span>
-        {/if}
     </div>
     <div class="flex gap-3">
         <a href="/module/{module.name}" class="text-gray-500 hover:text-gray-700">
