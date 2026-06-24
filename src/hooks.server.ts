@@ -5,9 +5,9 @@ import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle } from '@sveltejs/kit';
 
 // --- Wuchale locale handling ---
-import * as main from '../locales/main.loader.server.svelte.js';
+import * as main from './locales/main.loader.server.svelte.js';
 import { runWithLocale, loadLocales } from 'wuchale/load-utils/server';
-import { locales } from '../locales/data.js';
+import { locales } from './locales/data.js';
 
 loadLocales(main.key, main.loadIDs, main.loadCatalog, locales);
 
