@@ -836,9 +836,8 @@ msgstr "{0} — Zumito Modules"
 #~ msgid "Install with Zumito <0/>"
 #~ msgstr "Install with Zumito <0/>"
 
-#: src/routes/(app)/module/[slug]/+page.svelte
-msgid "Mark as Installed"
-msgstr "Mark as Installed"
+#~ msgid "Mark as Installed"
+#~ msgstr "Mark as Installed"
 
 #~ msgid "Gallery"
 #~ msgstr "Gallery"

@@ -2,6 +2,7 @@
 	import { marked } from 'marked';
 	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
+	import Card from '$lib/components/ui/Card.svelte';
 
 	let { data, form }: { data: PageData; form?: any } = $props();
 	$effect(() => { if (form) data = { ...data, ...form }; });
@@ -56,8 +57,8 @@
 					<span class="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">{f.emoji} {f.name}</span>
 				{/each}
 			</div>
-		</div>
-	</div>
+			</div>
+		</Card>
 </div>
 
 <!-- Image Gallery -->
@@ -72,7 +73,7 @@
 					</div>
 				</button>
 			{/each}
-		</div>
+		</Card>
 	</div>
 {/if}
 
@@ -83,25 +84,25 @@
 		<div class="mb-4 text-2xl font-semibold text-zinc-900 dark:text-white">
 			Description
 		</div>
-		<div class="prose prose-lg min-w-full max-w-none rounded-2xl bg-white p-6 shadow-lg ring-1 ring-zinc-200 dark:prose-invert dark:bg-zinc-900 dark:ring-zinc-800">
+		<Card variant="shadow" padding="md" class="prose prose-lg min-w-full max-w-none dark:prose-invert">
 			{@html marked.parse(data.mod.description)}
-		</div>
+		</Card>
 
 		{#if data.mod.instructions}
 			<div class="mb-4 mt-12 text-2xl font-semibold text-zinc-900 dark:text-white">
 				Installation
 			</div>
-			<div class="prose prose-lg min-w-full max-w-none rounded-2xl bg-white p-6 shadow-lg ring-1 ring-zinc-200 dark:prose-invert dark:bg-zinc-900 dark:ring-zinc-800">
-				{@html marked.parse(data.mod.instructions)}
-			</div>
+			<Card variant="shadow" padding="md" class="prose prose-lg min-w-full max-w-none dark:prose-invert mb-12 mt-4">
+			{@html marked.parse(data.mod.instructions)}
+		</Card>
 		{/if}
 
 		{#if data.mod.faqs?.length > 0}
 			<div id="faq-section" class="mb-4 mt-12 text-2xl font-semibold text-zinc-900 dark:text-white">
 				FAQ
 			</div>
-			<div class="flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-lg ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-				{#each data.mod.faqs as faq}
+		<Card variant="shadow" padding="md" class="flex flex-col gap-5">
+			{#each data.mod.faqs as faq}
 					<details class="group border-b border-zinc-200 pb-4 last:border-0 last:pb-0 dark:border-zinc-800">
 						<summary class="flex cursor-pointer items-center justify-between font-semibold text-zinc-800 dark:text-zinc-200">
 							{faq.question}
@@ -116,7 +117,7 @@
 		<div id="comments-section" class="mb-4 mt-12 text-2xl font-semibold text-zinc-900 dark:text-white">
 			Comments ({data.mod._count.comments})
 		</div>
-		<div class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+		<Card variant="shadow" padding="md">
 			{#each data.mod.comments as comment}
 				<div class="border-b border-zinc-200 py-4 first:pt-0 last:border-0 last:pb-0 dark:border-zinc-800">
 					<div class="flex items-center gap-2 text-sm text-zinc-500">
@@ -132,7 +133,7 @@
 				<textarea name="content" rows={3} required placeholder="Write a comment..." class="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm text-zinc-900 placeholder:text-zinc-400 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600"></textarea>
 				<button type="submit" class="mt-3 rounded-full bg-zumito-600 px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-zumito-700 active:scale-[0.98]">Post Comment</button>
 			</form>
-		</div>
+		</Card>
 	</div>
 
 	<!-- Sidebar (right, 1/3) -->
@@ -145,14 +146,10 @@
 				class="w-full rounded-lg bg-zumito-600 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-zumito-700 focus:outline-none focus:ring-4 focus:ring-zumito-300 active:scale-[0.98] dark:focus:ring-zumito-800">
 				Install with Zumito
 			</button>
-			<form method="POST" action="?/install" use:enhance>
-				<input type="hidden" name="moduleId" value={data.mod.id} />
-				<button type="submit" class="mt-2 w-full rounded-lg border border-zinc-300 bg-white px-5 py-2 text-sm font-medium text-zinc-700 transition-all hover:border-zumito-300 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-200">Mark as Installed</button>
-			</form>
 		{/if}
 
 		<!-- Stats list -->
-		<div class="overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+		<Card variant="shadow" padding="sm" class="overflow-hidden !p-0">
 			<div class="flex items-center gap-3 border-b border-zinc-200 px-5 py-3 dark:border-zinc-800">
 				<svg class="h-4 w-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M14.8 9a2 2 0 00-1.8-1h-2a2 2 0 100 4h2a2 2 0 110 4h-2a2 2 0 01-1.8-1"/><path d="M12 7v10"/></svg>
 				<span class="flex-1 text-sm text-zinc-600 dark:text-zinc-400">Price</span>
@@ -163,11 +160,11 @@
 				<span class="flex-1 text-sm text-zinc-600 dark:text-zinc-400">Installs</span>
 				<span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{data.mod._count.installs}</span>
 			</div>
-		</div>
+			</Card>
 
 		<!-- Dependencies -->
 		{#if data.mod.dependencies?.length > 0}
-			<div class="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+			<Card variant="shadow" padding="md">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6.857 4.5h10.286c.955 0 1.857.536 2.329 1.401l1.143 2.057c.388.697.388 1.543 0 2.24l-1.143 2.057a2.571 2.571 0 01-2.329 1.401H6.857a2.571 2.571 0 01-2.329-1.401L3.385 10.2a2.571 2.571 0 010-2.24l1.143-2.057A2.571 2.571 0 016.857 4.5z"/></svg>
 					Dependencies
@@ -188,7 +185,7 @@
 		{/if}
 
 		<!-- Sidebar links: FAQ, Comments -->
-		<div class="overflow-hidden rounded-2xl bg-white shadow-lg ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+		<Card variant="shadow" padding="sm" class="overflow-hidden !p-0">
 			{#if data.mod.faqs?.length > 0}
 				<button onclick={() => scrollTo('faq-section')} class="flex w-full items-center gap-3 border-b border-zinc-200 px-5 py-3 text-left text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
 					<svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M20.975 11.33a9 9 0 10-5.673 9.043"/><path d="M3.6 9h16.8"/><path d="M3.6 15h9.9"/><path d="M11.5 3a17 17 0 000 18"/><path d="M12.5 3a16.988 16.988 0 012.57 9.518"/></svg>
@@ -201,12 +198,13 @@
 				<span class="flex-1">Comments</span>
 				<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
 			</button>
-		</div>
+		</Card>
 
 		{#if data.mod.sourceCode}
-			<a href={data.mod.sourceCode} target="_blank" rel="noopener noreferrer" class="block w-full rounded-2xl bg-white p-5 text-center text-sm font-medium text-zinc-600 shadow-lg ring-1 ring-zinc-200 transition-colors hover:text-zumito-600 dark:bg-zinc-900 dark:text-zinc-400 dark:ring-zinc-800 dark:hover:text-zumito-400">
+			<Card variant="shadow" padding="sm" class="text-center">
 				View Source Code
 			</a>
+			</Card>
 		{/if}
 	</div>
 </div>
