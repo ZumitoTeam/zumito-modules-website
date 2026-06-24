@@ -11,29 +11,31 @@
 
 	const onProfileUpdate: SubmitFunction = () => {
 		profileLoading = true;
-		const toastId = sileo.loading({ title: 'Saving...', description: 'Updating your profile', fill: '#fafafa', styles: { title: 'text-zinc-900', description: 'text-zinc-500' } });
+		const { promise, resolve, reject } = Promise.withResolvers<void>();
+		sileo.promise(promise, {
+			loading: { title: 'Saving...', description: 'Updating your profile', fill: '#fafafa', styles: { title: 'text-zinc-900', description: 'text-zinc-500' } },
+			success: { title: 'Profile updated', description: 'Your changes have been saved.', fill: '#f0fdf4', styles: { title: 'text-green-800', description: 'text-green-600' } },
+			error: { title: 'Update failed', description: 'Please try again.', fill: '#fef2f2', styles: { title: 'text-red-800', description: 'text-red-600' } },
+		});
 		return async ({ result }) => {
 			profileLoading = false;
-			sileo.dismiss(toastId);
-			if (result.type === 'success') {
-				sileo.success({ title: 'Profile updated', description: 'Your changes have been saved.', fill: '#f0fdf4', styles: { title: 'text-green-800', description: 'text-green-600' } });
-			} else if (result.type === 'failure') {
-				sileo.error({ title: 'Update failed', description: result.data?.error || 'Please try again.', fill: '#fef2f2', styles: { title: 'text-red-800', description: 'text-red-600' } });
-			}
+			if (result.type === 'success') resolve();
+			else reject(new Error(result.data?.error));
 		};
 	};
 
 	const onPasswordChange: SubmitFunction = () => {
 		passwordLoading = true;
-		const toastId = sileo.loading({ title: 'Changing password...', description: 'Please wait', fill: '#fafafa', styles: { title: 'text-zinc-900', description: 'text-zinc-500' } });
+		const { promise, resolve, reject } = Promise.withResolvers<void>();
+		sileo.promise(promise, {
+			loading: { title: 'Changing password...', description: 'Please wait', fill: '#fafafa', styles: { title: 'text-zinc-900', description: 'text-zinc-500' } },
+			success: { title: 'Password changed', description: 'Your password has been updated.', fill: '#f0fdf4', styles: { title: 'text-green-800', description: 'text-green-600' } },
+			error: { title: 'Change failed', description: 'Current password is incorrect.', fill: '#fef2f2', styles: { title: 'text-red-800', description: 'text-red-600' } },
+		});
 		return async ({ result }) => {
 			passwordLoading = false;
-			sileo.dismiss(toastId);
-			if (result.type === 'success') {
-				sileo.success({ title: 'Password changed', description: 'Your password has been updated.', fill: '#f0fdf4', styles: { title: 'text-green-800', description: 'text-green-600' } });
-			} else if (result.type === 'failure') {
-				sileo.error({ title: 'Change failed', description: result.data?.error || 'Current password is incorrect.', fill: '#fef2f2', styles: { title: 'text-red-800', description: 'text-red-600' } });
-			}
+			if (result.type === 'success') resolve();
+			else reject(new Error(result.data?.error));
 		};
 	};
 </script>
