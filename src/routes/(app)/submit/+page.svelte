@@ -3,6 +3,7 @@
 	import type { PageData } from './$types';
 	import Container from '$lib/components/layout/Container.svelte';
 	import { sileo } from 'svelte-sileo';
+	import { marked } from 'marked';
 
 	let { data, form }: { data: PageData; form?: any } = $props();
 
@@ -186,7 +187,7 @@
 								<span class="text-xs font-medium text-green-700 dark:text-green-400">Loaded from npm README</span>
 								<button type="button" onclick={() => descriptionLocked = false} class="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">Unlock to edit</button>
 							</div>
-							<div class="prose prose-sm max-w-none text-zinc-600 dark:text-zinc-400 line-clamp-6">{@html descriptionValue}</div>
+							<div class="prose prose-sm max-w-none text-zinc-600 dark:text-zinc-400 line-clamp-6">{@html marked.parse(descriptionValue)}</div>
 						</div>
 						<textarea name="description" class="hidden">{descriptionValue}</textarea>
 					{:else}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { sileo } from 'svelte-sileo';
+	import { marked } from 'marked';
 	import type { PageData } from './$types';
 	import type { SubmitFunction } from '@sveltejs/kit';
 	import Container from '$lib/components/layout/Container.svelte';
@@ -10,6 +11,7 @@
 	let loading = $state(false);
 	let descriptionLocked = $state(false);
 	let loadingReadme = $state(false);
+	let descriptionValue = $state(data.mod.description ?? '');
 
 	async function loadReadme() {
 		const pkg = data.mod.npm;
@@ -28,6 +30,7 @@
 			{
 				loading: { title: 'Fetching README...', description: `Loading from ${pkg.trim()}`, fill: '#fafafa', styles: { title: 'text-zinc-900', description: 'text-zinc-500' } },
 				success: (d: any) => {
+					descriptionValue = d.readme;
 					descriptionLocked = true;
 					return { title: 'README loaded', description: `${pkg.trim()} description updated.`, fill: '#f0fdf4', styles: { title: 'text-green-800', description: 'text-green-600' } };
 				},
@@ -98,12 +101,12 @@
 							<span class="text-xs font-medium text-green-700 dark:text-green-400">Loaded from npm README</span>
 							<button type="button" onclick={() => descriptionLocked = false} class="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">Unlock to edit</button>
 						</div>
-						<div class="prose prose-sm max-w-none text-zinc-600 dark:text-zinc-400 line-clamp-6">{@html data.mod.description}</div>
+						<div class="prose prose-sm max-w-none text-zinc-600 dark:text-zinc-400 line-clamp-6">{@html marked.parse(descriptionValue)}</div>
 					</div>
-					<textarea name="description" class="hidden">{data.mod.description}</textarea>
+					<textarea name="description" class="hidden">{descriptionValue}</textarea>
 				{:else}
 					<p class="mt-1 text-xs text-zinc-400">Full description in Markdown. Explain what the module does, its features, and how to use it.</p>
-					<textarea id="description" name="description" rows={10} required class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm font-mono leading-relaxed text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600">{data.mod.description}</textarea>
+					<textarea id="description" name="description" rows={10} required class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm font-mono leading-relaxed text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" bind:value={descriptionValue}></textarea>
 				{/if}
 			</div>
 
