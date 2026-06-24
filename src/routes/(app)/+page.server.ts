@@ -1,4 +1,5 @@
-import { getModuleStats, getPopularFeatures, getPopularModules } from '$lib/server/db/modules';
+import { getModuleStats, getPopularModules } from '$lib/server/db/modules';
+import { getPopularFeatures } from '$lib/server/db/features';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
