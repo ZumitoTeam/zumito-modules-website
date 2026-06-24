@@ -1122,3 +1122,7 @@ msgstr "<0/>Cargar desde npm"
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 msgid "No FAQs yet. Click \"Add FAQ\" to get started."
 msgstr "Aún no hay FAQs. Haz clic en \"Agregar FAQ\" para comenzar."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Server error"
+msgstr "Error del servidor"

@@ -95,7 +95,7 @@ export const actions: Actions = {
 				},
 				dependencies: { deleteMany: {}, create: dependencyIds.map(id => ({ dependencyId: id })) },
 				addonTargets: { deleteMany: {}, create: addonIds.map(id => ({ baseModuleId: id })) },
-				faqs: { deleteMany: {}, create: faqs },
+				...(faqs.length > 0 ? { faqs: { deleteMany: {}, create: faqs } } : {}),
 			},
 		});
 

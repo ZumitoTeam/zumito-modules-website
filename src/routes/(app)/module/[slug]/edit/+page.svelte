@@ -49,7 +49,7 @@
 		return async ({ result }) => {
 			loading = false;
 			if (result.type === 'success' || result.type === 'redirect') resolve();
-			else reject(new Error(result.data?.error || 'Update failed'));
+			else reject(new Error(result.data?.error || (result.type === 'error' ? 'Server error' : 'Update failed')));
 		};
 	};
 </script>
