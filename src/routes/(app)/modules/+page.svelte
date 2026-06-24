@@ -10,7 +10,7 @@
 	<title>Browse Modules — Zumito Modules</title>
 </svelte:head>
 
-<Container class="max-w-6xl py-12">
+<Container class="py-12">
 	<h1 class="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">All Modules</h1>
 
 	<form method="GET" class="mt-8 space-y-4">

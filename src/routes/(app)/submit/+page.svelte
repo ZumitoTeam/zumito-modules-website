@@ -29,10 +29,10 @@
 	<title>Submit Module — Zumito Modules</title>
 </svelte:head>
 
-<div class="mx-auto max-w-6xl px-4 py-12">
+<div class="mx-auto max-w-6xl px-4">
 	{#if !data.user}
 		<!-- ═══════════ NOT LOGGED IN — Bento Landing ═══════════ -->
-		<div class="text-center">
+		<div class="py-12 text-center">
 			<h1 class="text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100 lg:text-5xl">
 				Share your <span class="text-zumito-600">module</span> with the world
 			</h1>
