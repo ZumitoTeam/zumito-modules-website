@@ -13,3 +13,8 @@
   --color-zumito-900: #881337;
 }
 
+/* Sileo: offset below navbar */
+section:where([data-sileo-viewport]) {
+  top: 3.75rem;
+}
+
