@@ -539,6 +539,7 @@ msgstr "Existing tags to categorize your module. You can add new ones."
 #~ msgid "Or type a new feature name and press Enter..."
 #~ msgstr "Or type a new feature name and press Enter..."
 
+#: src/lib/components/ui/ImagePicker.svelte
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Enter"
@@ -1126,22 +1127,43 @@ msgstr "Server error"
 #~ msgid "You'll be able to upload screenshots and an icon for your module after publishing."
 #~ msgstr "You'll be able to upload screenshots and an icon for your module after publishing."
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-#: src/routes/(app)/submit/+page.svelte
-msgid "Icon"
-msgstr "Icon"
+#~ msgid "Icon"
+#~ msgstr "Icon"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-#: src/routes/(app)/submit/+page.svelte
-msgid "A square image shown in module cards. PNG or JPG, max 1MB."
-msgstr "A square image shown in module cards. PNG or JPG, max 1MB."
+#~ msgid "A square image shown in module cards. PNG or JPG, max 1MB."
+#~ msgstr "A square image shown in module cards. PNG or JPG, max 1MB."
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Screenshots"
 msgstr "Screenshots"
 
+#~ msgid "Upload screenshots showing your module in action. PNG or JPG."
+#~ msgstr "Upload screenshots showing your module in action. PNG or JPG."
+
+#: src/routes/(app)/module/[slug]/edit/+page.server.ts
+msgid "Failed to upload images."
+msgstr "Failed to upload images."
+
+#: src/routes/(app)/submit/+page.server.ts
+msgid "Failed to upload images. Please try again."
+msgstr "Failed to upload images. Please try again."
+
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "Drag & drop or click to browse"
+msgstr "Drag & drop or click to browse"
+
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
-msgid "Upload screenshots showing your module in action. PNG or JPG."
-msgstr "Upload screenshots showing your module in action. PNG or JPG."
+msgid "Module Icon"
+msgstr "Module Icon"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "A square image shown in module cards. PNG or JPG."
+msgstr "A square image shown in module cards. PNG or JPG."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Upload screenshots showing your module in action."
+msgstr "Upload screenshots showing your module in action."

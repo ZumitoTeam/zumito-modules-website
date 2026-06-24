@@ -5,6 +5,7 @@
 	import { sileo } from 'svelte-sileo';
 	import { marked } from 'marked';
 	import Tabs from '$lib/components/ui/Tabs.svelte';
+	import ImagePicker from '$lib/components/ui/ImagePicker.svelte';
 
 	let { data, form }: { data: PageData; form?: any } = $props();
 
@@ -122,16 +123,8 @@
 					<!-- TAB 2: Images -->
 					<div class:hidden={activeTab !== 2}>
 						<div class="space-y-6">
-							<div>
-								<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Icon</label>
-								<p class="mt-1 text-xs text-zinc-400">A square image shown in module cards. PNG or JPG, max 1MB.</p>
-								<input type="file" name="icon" accept="image/png,image/jpeg" class="mt-2 block w-full text-sm text-zinc-500 file:mr-4 file:rounded-full file:border-0 file:bg-zumito-50 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-zumito-700 hover:file:bg-zumito-100 dark:text-zinc-400 dark:file:bg-zumito-600/10 dark:file:text-zumito-400" />
-							</div>
-							<div>
-								<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Screenshots</label>
-								<p class="mt-1 text-xs text-zinc-400">Upload screenshots showing your module in action. PNG or JPG.</p>
-								<input type="file" name="screenshots" accept="image/png,image/jpeg" multiple class="mt-2 block w-full text-sm text-zinc-500 file:mr-4 file:rounded-full file:border-0 file:bg-zumito-50 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-zumito-700 hover:file:bg-zumito-100 dark:text-zinc-400 dark:file:bg-zumito-600/10 dark:file:text-zumito-400" />
-							</div>
+							<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." />
+							<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple />
 						</div>
 					</div>
 
