@@ -13,8 +13,7 @@
   --color-zumito-900: #881337;
 }
 
-/* Sileo toasts: below navbar */
-[data-sileo-viewport] {
+[data-sileo-viewport][data-position="top-center"] {
   top: 4rem !important;
 }
 

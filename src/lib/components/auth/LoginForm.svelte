@@ -14,13 +14,13 @@
     sileo.promise(
       authClient.signIn.email({ email, password }),
       {
-        loading: { title: 'Signing in...', description: 'Please wait', styles: { boxShadow: '0 0 0 1px rgba(148,163,184,0.25), 0 8px 32px rgba(0,0,0,0.12)' } },
+        loading: { title: 'Signing in...', description: 'Please wait' },
         success: (result) => {
           if (result.error) throw result.error;
           setTimeout(() => goto('/'), 600);
-          return { title: 'Welcome back!', description: 'You have been logged in successfully.', styles: { boxShadow: '0 0 0 1px rgba(34,197,94,0.25), 0 8px 32px rgba(0,0,0,0.12)' } };
+          return { title: 'Welcome back!', description: 'Logged in successfully' };
         },
-        error: { title: 'Login failed', description: 'Check your credentials and try again.', styles: { boxShadow: '0 0 0 1px rgba(239,68,68,0.25), 0 8px 32px rgba(0,0,0,0.12)' } },
+        error: { title: 'Login failed', description: 'Check your credentials' },
       }
     ).finally(() => { loading = false; });
   }
