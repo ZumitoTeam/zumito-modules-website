@@ -37,9 +37,17 @@
 
 	const onUpdate: SubmitFunction = ({ formData }) => {
 		loading = true;
-		console.log('onUpdate - screenshotFiles:', screenshotFiles.length, screenshotFiles.map(f => f.size));
+		// Clear existing empty entries from the form, then re-add files
+		const entriesToRemove: string[] = [];
+		for (const [key, value] of formData.entries()) {
+			if ((key === 'icon' || key === 'screenshots') && (typeof value === 'string' || (value instanceof File && value.size === 0))) {
+				entriesToRemove.push(key);
+			}
+		}
+		for (const key of entriesToRemove) formData.delete(key);
 		for (const f of iconFiles) formData.append('icon', f);
 		for (const f of screenshotFiles) formData.append('screenshots', f);
+		console.log('FormData after:', { icon: formData.getAll('icon'), screenshots: formData.getAll('screenshots').map(v => v instanceof File ? `File(${v.size}b)` : typeof v) });
 
 		const { promise, resolve, reject } = Promise.withResolvers<void>();
 		sileo.promise(promise, {

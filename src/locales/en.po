@@ -1198,6 +1198,8 @@ msgid "Failed to update module."
 msgstr "Failed to update module."
 
 #. 0: f.size
+#. 0: v.size
 #: src/routes/(app)/module/[slug]/edit/+page.server.ts
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 msgid "File({0}b)"
 msgstr "File({0}b)"
