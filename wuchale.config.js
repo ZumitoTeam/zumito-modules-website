@@ -3,7 +3,7 @@ import { adapter as svelte } from '@wuchale/svelte';
 import { adapter as js } from 'wuchale/adapter-vanilla';
 import { defineConfig } from 'wuchale';
 
-const OPENCODE_API_KEY = process.env.OPENCODE_API_KEY || 'sk-kLdp8gUgaHTE7AgOOEdc0ItSyPZ0h7CUBNMtbmJhPBB7lml9vDLYOTR0W4W0Ucpe';
+const OPENCODE_API_KEY = process.env.OPENCODE_API_KEY || 'sk-kKH0Ki1mnA7rRfB1lEknvgeAKCdkZJdUhWBSLxBN5Z3tsq8vBZEN2ZEPZq4A3XRk';
 const OPENCODE_BASE_URL = 'https://opencode.ai/zen/go/v1';
 const MODEL = 'deepseek-v4-flash';
 
