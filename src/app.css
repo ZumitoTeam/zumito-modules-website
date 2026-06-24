@@ -13,27 +13,38 @@
   --color-zumito-900: #881337;
 }
 
-/* Page transitions via View Transitions API */
-::view-transition-old(root) {
-  animation: slide-out 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+/* Page transitions: navbar + footer stay identical, root crossfade is seamless */
+/* Exclude navbar/footer from transitions */
+nav, footer {
+  view-transition-name: none;
 }
-::view-transition-new(root) {
-  animation: slide-in 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+
+main {
+  view-transition-name: page-content;
+  contain: paint;
 }
-@keyframes slide-out {
+
+::view-transition-old(page-content) {
+  animation: frame-out 0.4s ease-out both;
+}
+::view-transition-new(page-content) {
+  animation: frame-in 0.4s ease-out both;
+}
+
+@keyframes frame-out {
   to {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: scale(0.96);
   }
 }
-@keyframes slide-in {
+@keyframes frame-in {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: scale(0.96);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 

@@ -6,7 +6,7 @@
 
 <div class="min-h-screen bg-white dark:bg-zinc-950">
 	<Navbar />
-	<main class="min-h-[calc(100vh-8rem)]">
+	<main class="min-h-[calc(100vh-8rem)] overflow-x-hidden">
 		{@render children()}
 	</main>
 	<Footer />

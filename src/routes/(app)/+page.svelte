@@ -13,8 +13,7 @@
 	<title>Zumito Modules — Discord Bot Marketplace</title>
 </svelte:head>
 
-<main class="overflow-x-hidden">
-	<!-- ═══════════ HERO ═══════════ -->
+<!-- ═══════════ HERO ═══════════ -->
 	<section class="relative flex min-h-[90dvh] items-center px-6 py-24 lg:px-16">
 		<div class="relative z-10 mx-auto max-w-6xl w-full">
 			<h1 class="max-w-3xl text-5xl font-extrabold tracking-tight text-zinc-900 lg:text-7xl dark:text-zinc-100">
@@ -174,4 +173,4 @@
 			</div>
 		</div>
 	</section>
-</main>
+
