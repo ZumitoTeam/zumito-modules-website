@@ -1,5 +1,6 @@
 // @ts-check
 import { adapter as svelte } from '@wuchale/svelte';
+import { adapter as js } from 'wuchale/adapter-vanilla';
 import { defineConfig } from 'wuchale';
 
 const OPENCODE_API_KEY = process.env.OPENCODE_API_KEY || 'sk-kLdp8gUgaHTE7AgOOEdc0ItSyPZ0h7CUBNMtbmJhPBB7lml9vDLYOTR0W4W0Ucpe';
@@ -12,6 +13,13 @@ export default defineConfig({
   adapters: {
     main: svelte({
       loader: 'sveltekit'
+    }),
+    js: js({
+      loader: 'vite',
+      files: [
+        'src/**/+{page,layout}.{js,ts}',
+        'src/**/+{page,layout}.server.{js,ts}',
+      ],
     })
   },
   ai: {

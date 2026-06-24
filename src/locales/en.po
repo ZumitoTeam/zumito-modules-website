@@ -608,6 +608,7 @@ msgstr "Your password has been updated."
 msgid "Change failed"
 msgstr "Change failed"
 
+#: src/routes/(app)/user/profile/+page.server.ts
 #: src/routes/(app)/user/profile/+page.svelte
 msgid "Current password is incorrect."
 msgstr "Current password is incorrect."
@@ -884,3 +885,27 @@ msgstr "Source Code"
 #: src/routes/(app)/module/[slug]/+page.svelte
 msgid "View on GitHub <0/>"
 msgstr "View on GitHub <0/>"
+
+#: src/routes/(app)/submit/+page.server.ts
+msgid "Name, slug, description, and npm package are required."
+msgstr "Name, slug, description, and npm package are required."
+
+#: src/routes/(app)/submit/+page.server.ts
+msgid "A module with this slug already exists."
+msgstr "A module with this slug already exists."
+
+#: src/routes/(app)/user/profile/+page.server.ts
+msgid "Username must be at least 3 characters."
+msgstr "Username must be at least 3 characters."
+
+#: src/routes/(app)/user/profile/+page.server.ts
+msgid "Both fields are required."
+msgstr "Both fields are required."
+
+#: src/routes/(app)/user/profile/+page.server.ts
+msgid "New password must be at least 8 characters."
+msgstr "New password must be at least 8 characters."
+
+#: src/routes/(app)/module/[slug]/edit/+page.server.ts
+msgid "Name, description, and npm package are required."
+msgstr "Name, description, and npm package are required."
