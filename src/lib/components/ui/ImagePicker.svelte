@@ -85,10 +85,20 @@
 
 	function removeNew(idx: number) { uploadedUrls = uploadedUrls.filter((_, i) => i !== idx); }
 
-	function moveNewUp(idx: number) { if (idx <= 0) return; const items = [...uploadedUrls]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; uploadedUrls = items; }
-	function moveNewDown(idx: number) { if (idx >= uploadedUrls.length - 1) return; const items = [...uploadedUrls]; [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; uploadedUrls = items; }
-	function moveExistingUp(idx: number) { if (idx <= 0) return; const items = [...existingOrder]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; existingOrder = items; }
-	function moveExistingDown(idx: number) { if (idx >= existingOrder.length - 1) return; const items = [...existingOrder]; [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; existingOrder = items; }
+	async function reorderViaApi() {
+		if (!moduleSlug) return;
+		const urls = [...existingOrder, ...uploadedUrls];
+		if (urls.length === 0) return;
+		const form = new FormData();
+		form.append('action', 'reorder');
+		for (const url of urls) form.append('urls', url);
+		await fetch(`/api/modules/${moduleSlug}/images`, { method: 'POST', body: form });
+	}
+
+	function moveNewUp(idx: number) { if (idx <= 0) return; const items = [...uploadedUrls]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; uploadedUrls = items; reorderViaApi(); }
+	function moveNewDown(idx: number) { if (idx >= uploadedUrls.length - 1) return; const items = [...uploadedUrls]; [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; uploadedUrls = items; reorderViaApi(); }
+	function moveExistingUp(idx: number) { if (idx <= 0) return; const items = [...existingOrder]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; existingOrder = items; reorderViaApi(); }
+	function moveExistingDown(idx: number) { if (idx >= existingOrder.length - 1) return; const items = [...existingOrder]; [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; existingOrder = items; reorderViaApi(); }
 
 	function dropZoneDragOver(e: DragEvent) { e.preventDefault(); dragging = true; }
 	function dropZoneDragLeave() { dragging = false; }

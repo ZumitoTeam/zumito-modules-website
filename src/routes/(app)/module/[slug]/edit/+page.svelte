@@ -114,9 +114,11 @@
 				</div></div>
 			</div>
 
+			{#if activeTab !== 2}
 			<div class="flex items-center gap-4 pt-4 border-t border-zinc-200 dark:border-zinc-800">
 				<button type="submit" disabled={loading} class="flex items-center gap-2 rounded-full bg-zumito-600 px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-zumito-700 active:scale-[0.98] disabled:opacity-70">{#if loading}<svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>{/if}{loading ? 'Saving...' : 'Save Changes'}</button>
 			</div>
+			{/if}
 		</form>
 	</Card>
 </Container>
