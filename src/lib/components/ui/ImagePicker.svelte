@@ -29,8 +29,6 @@
 
 	let inputEl: HTMLInputElement;
 	let dragging = $state(false);
-	let dragSrcIdx = $state<number | null>(null);
-	let dragDstIdx = $state<number | null>(null);
 	let selectedFiles = $state<{ file: File; url: string }[]>([]);
 	let existingOrder = $state([...existingPreviews]);
 	let errors = $state<{ name: string; reason: string }[]>([]);
@@ -99,45 +97,49 @@
 		}
 	}
 
-	// Internal reorder (new files only)
+	// Internal reorder (new files)
+	let dragSrcKey = $state<string | null>(null);
+	let dragDstKey = $state<string | null>(null);
+
 	function dragStartNew(idx: number, e: DragEvent) {
-		dragSrcIdx = idx;
+		dragSrcKey = `new:${idx}`;
 		e.dataTransfer!.effectAllowed = 'move';
 	}
 	function dragOverNew(idx: number, e: DragEvent) {
 		e.preventDefault();
-		dragDstIdx = idx;
+		dragDstKey = `new:${idx}`;
 	}
 	function dragEndNew() {
-		if (dragSrcIdx !== null && dragDstIdx !== null && dragSrcIdx !== dragDstIdx) {
+		if (dragSrcKey && dragDstKey && dragSrcKey !== dragDstKey) {
+			const srcIdx = parseInt(dragSrcKey.split(':')[1]);
+			const dstIdx = parseInt(dragDstKey.split(':')[1]);
 			const items = [...selectedFiles];
-			const [moved] = items.splice(dragSrcIdx, 1);
-			items.splice(dragDstIdx, 0, moved);
+			const [moved] = items.splice(srcIdx, 1);
+			items.splice(dstIdx, 0, moved);
 			selectedFiles = items;
 		}
-		dragSrcIdx = null; dragDstIdx = null;
+		dragSrcKey = null; dragDstKey = null;
 	}
 
 	// Internal reorder (existing files)
 	function dragStartExisting(origIdx: number, e: DragEvent) {
-		// Track by the actual array index within existingOrder
-		const arrIdx = existingOrder.findIndex((_, i) => i === origIdx);
-		dragSrcIdx = arrIdx;
+		dragSrcKey = `existing:${origIdx}`;
 		e.dataTransfer!.effectAllowed = 'move';
 	}
 	function dragOverExisting(origIdx: number, e: DragEvent) {
 		e.preventDefault();
-		const arrIdx = existingOrder.findIndex((_, i) => i === origIdx);
-		dragDstIdx = arrIdx;
+		dragDstKey = `existing:${origIdx}`;
 	}
 	function dragEndExisting() {
-		if (dragSrcIdx !== null && dragDstIdx !== null && dragSrcIdx !== dragDstIdx) {
+		if (dragSrcKey && dragDstKey && dragSrcKey !== dragDstKey) {
+			const srcIdx = parseInt(dragSrcKey.split(':')[1]);
+			const dstIdx = parseInt(dragDstKey.split(':')[1]);
 			const items = [...existingOrder];
-			const [moved] = items.splice(dragSrcIdx, 1);
-			items.splice(dragDstIdx, 0, moved);
+			const [moved] = items.splice(srcIdx, 1);
+			items.splice(dstIdx, 0, moved);
 			existingOrder = items;
 		}
-		dragSrcIdx = null; dragDstIdx = null;
+		dragSrcKey = null; dragDstKey = null;
 	}
 </script>
 
@@ -182,10 +184,10 @@
 
 					<div
 						class="group/item relative overflow-hidden rounded-xl border border-zinc-200 transition-all dark:border-zinc-800
-							{dragDstIdx !== null && isNew && dragDstIdx === newIdx ? 'border-zumito-500' : ''}
-							{dragSrcIdx !== null && isNew && dragSrcIdx === newIdx ? 'opacity-30' : ''}
-							{!isNew && dragDstIdx !== null && dragDstIdx === origIdx ? 'border-zumito-500' : ''}
-							{!isNew && dragSrcIdx !== null && dragSrcIdx === origIdx ? 'opacity-30' : ''}"
+							{dragDstKey !== null && isNew && dragDstKey === `new:${newIdx}` ? 'border-zumito-500' : ''}
+							{dragSrcKey !== null && isNew && dragSrcKey === `new:${newIdx}` ? 'opacity-30' : ''}
+							{!isNew && dragDstKey !== null && dragDstKey === `existing:${origIdx}` ? 'border-zumito-500' : ''}
+							{!isNew && dragSrcKey !== null && dragSrcKey === `existing:${origIdx}` ? 'opacity-30' : ''}"
 						class:cursor-grab={multiple}
 						draggable={multiple}
 						ondragstart={(e: DragEvent) => isNew ? dragStartNew(newIdx, e) : dragStartExisting(origIdx, e)}
