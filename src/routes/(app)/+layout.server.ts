@@ -1,13 +1,10 @@
+import { getUserById } from '$lib/server/db/users';
 import type { LayoutServerLoad } from './$types';
-import prisma from '$lib/server/prisma';
 
 export const load: LayoutServerLoad = async (event) => {
 	let user: any = null;
 	if (event.locals.user) {
-		user = await prisma.user.findUnique({
-			where: { id: event.locals.user.id },
-			select: { id: true, username: true, email: true, role: true, banned: true },
-		});
+		user = await getUserById(event.locals.user.id);
 	}
 	return { user: JSON.parse(JSON.stringify(user)) };
 };
