@@ -141,7 +141,7 @@
 	}
 </script>
 
-<div class="space-y-3">
+<div class="relative space-y-3">
 	<!-- File input:
 	     - When NO previews: overlay on drop zone, transparent but clickable (native clicks)
 	     - When HAS previews: off-screen, clickable only via JS (addMore button)

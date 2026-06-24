@@ -1175,9 +1175,8 @@ msgstr "Sube capturas de pantalla que muestren tu módulo en acción."
 msgid "Only images allowed"
 msgstr "Solo imágenes permitidas"
 
-#: src/lib/components/ui/ImagePicker.svelte
-msgid "Max 1MB"
-msgstr "Máximo 1MB"
+#~ msgid "Max 1MB"
+#~ msgstr "Máximo 1MB"
 
 #. 0: maxFiles
 #: src/lib/components/ui/ImagePicker.svelte
@@ -1188,3 +1187,8 @@ msgstr "Máximo {0} archivos"
 #: src/lib/components/ui/ImagePicker.svelte
 msgid "{0} of {1} file{2} selected"
 msgstr "{0} de {1} archivo{2} seleccionado"
+
+#. 0: Math.round(maxSize / 1_000_000)
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "Max {0}MB"
+msgstr "Máx. {0}MB"
