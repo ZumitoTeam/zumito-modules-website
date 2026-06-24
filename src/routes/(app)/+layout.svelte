@@ -4,8 +4,10 @@
 	let { children } = $props();
 </script>
 
-<Navbar />
-<main class="min-h-[calc(100vh-8rem)]">
-	{@render children()}
-</main>
-<Footer />
+<div class="min-h-screen bg-white dark:bg-zinc-950">
+	<Navbar />
+	<main class="min-h-[calc(100vh-8rem)]">
+		{@render children()}
+	</main>
+	<Footer />
+</div>
