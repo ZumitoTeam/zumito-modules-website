@@ -97,8 +97,14 @@ export const actions: Actions = {
 
 		// Handle existing images reorder/delete
 		const existingOrder = form.getAll('existing_order') as string[];
-		const existing = await prisma.module.findUnique({ where: { slug: params.slug }, select: { images: true } });
-		const originalUrls = existing?.images.map(i => i.url) ?? [];
+		const existing = await prisma.module.findUnique({
+			where: { slug: params.slug },
+			select: { id: true, images: true, authorId: true },
+		});
+		if (!existing || existing.authorId !== locals.user.id) {
+			throw redirect(303, `/module/${params.slug}`);
+		}
+		const originalUrls = existing.images.map(i => i.url) ?? [];
 		const deletedUrls = originalUrls.filter(url => !existingOrder.includes(url));
 
 		// Delete removed images from storage
@@ -109,17 +115,12 @@ export const actions: Actions = {
 
 		// Prepare final image order: existing (reordered) + new uploads
 		const finalImages = [
-			...existingOrder.map((url, i) => ({ url, altText: originalUrls.includes(url) ? (existing?.images.find(im => im.url === url)?.altText ?? '') : '' })),
+			...existingOrder.map((url, i) => ({ url, altText: existing.images.find(im => im.url === url)?.altText ?? '' })),
 			...imageRecords,
 		];
 
 		if (!name || !description || !npm) {
 			return fail(400, { error: 'Name, description, and npm package are required.' });
-		}
-
-		const existing = await prisma.module.findUnique({ where: { slug: params.slug } });
-		if (!existing || existing.authorId !== locals.user.id) {
-			throw redirect(303, `/module/${params.slug}`);
 		}
 
 		await prisma.module.update({
