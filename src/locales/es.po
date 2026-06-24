@@ -951,3 +951,7 @@ msgstr "Comentarios"
 #: src/routes/(app)/module/[slug]/+page.svelte
 msgid "View Source Code"
 msgstr "Ver código fuente"
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "Edit"
+msgstr "Editar"

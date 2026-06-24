@@ -58,7 +58,7 @@
 				{/each}
 			</div>
 			</div>
-		</Card>
+		</div>
 </div>
 
 <!-- Image Gallery -->
@@ -73,7 +73,7 @@
 					</div>
 				</button>
 			{/each}
-		</Card>
+		</div>
 	</div>
 {/if}
 
@@ -201,10 +201,11 @@
 		</Card>
 
 		{#if data.mod.sourceCode}
-			<Card variant="shadow" padding="sm" class="text-center">
-				View Source Code
+			<a href={data.mod.sourceCode} target="_blank" rel="noopener noreferrer" class="block w-full">
+				<Card variant="shadow" padding="sm" class="text-center !font-medium text-zinc-600 transition-colors hover:!text-zumito-600 dark:text-zinc-400 dark:hover:!text-zumito-400">
+					View Source Code
+				</Card>
 			</a>
-			</Card>
 		{/if}
 	</div>
 </div>
