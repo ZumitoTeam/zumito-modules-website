@@ -8,6 +8,33 @@
 	let { data, form }: { data: PageData; form?: any } = $props();
 
 	let loading = $state(false);
+	let descriptionLocked = $state(false);
+	let loadingReadme = $state(false);
+
+	async function loadReadme() {
+		const pkg = data.mod.npm;
+		if (!pkg?.trim()) return;
+		loadingReadme = true;
+		sileo.promise(
+			fetch('/api/npm/readme', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ package: pkg.trim() }),
+			}).then(async (r) => {
+				const d = await r.json();
+				if (!d.ok) throw new Error(d.error);
+				return d;
+			}),
+			{
+				loading: { title: 'Fetching README...', description: `Loading from ${pkg.trim()}`, fill: '#fafafa', styles: { title: 'text-zinc-900', description: 'text-zinc-500' } },
+				success: (d: any) => {
+					descriptionLocked = true;
+					return { title: 'README loaded', description: `${pkg.trim()} description updated.`, fill: '#f0fdf4', styles: { title: 'text-green-800', description: 'text-green-600' } };
+				},
+				error: { title: 'Could not load README', description: 'Package not found or has no README.', fill: '#fef2f2', styles: { title: 'text-red-800', description: 'text-red-600' } },
+			}
+		).finally(() => { loadingReadme = false; });
+	}
 
 	const onUpdate: SubmitFunction = () => {
 		loading = true;
@@ -65,8 +92,19 @@
 				<label for="description" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
 					Description <span class="text-zumito-600">*</span>
 				</label>
-				<p class="mt-1 text-xs text-zinc-400">Full description in Markdown. Explain what the module does, its features, and how to use it.</p>
-				<textarea id="description" name="description" rows={10} required class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm font-mono leading-relaxed text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600">{data.mod.description}</textarea>
+				{#if descriptionLocked}
+					<div class="mt-2 rounded-xl border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950">
+						<div class="flex items-center justify-between mb-2">
+							<span class="text-xs font-medium text-green-700 dark:text-green-400">Loaded from npm README</span>
+							<button type="button" onclick={() => descriptionLocked = false} class="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">Unlock to edit</button>
+						</div>
+						<div class="prose prose-sm max-w-none text-zinc-600 dark:text-zinc-400 line-clamp-6">{@html data.mod.description}</div>
+					</div>
+					<textarea name="description" class="hidden">{data.mod.description}</textarea>
+				{:else}
+					<p class="mt-1 text-xs text-zinc-400">Full description in Markdown. Explain what the module does, its features, and how to use it.</p>
+					<textarea id="description" name="description" rows={10} required class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm font-mono leading-relaxed text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600">{data.mod.description}</textarea>
+				{/if}
 			</div>
 
 			<!-- Instructions -->
@@ -86,6 +124,15 @@
 						<p class="mt-1 text-xs leading-relaxed text-zinc-400">The exact name used in <code class="rounded bg-zinc-100 px-1 py-0.5 font-mono text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">npm publish</code>.</p>
 					</div>
 					<input id="npm" name="npm" required value={data.mod.npm} class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" />
+					<button type="button" onclick={loadReadme} disabled={loadingReadme}
+						class="mt-2 flex items-center gap-1.5 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 transition-all hover:border-zumito-300 hover:text-zumito-600 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:border-zumito-600/40">
+						{#if loadingReadme}
+							<svg class="h-3.5 w-3.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+						{:else}
+							<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 18a3.5 3.5 0 000-7h-1a5 4.5 0 00-11-2 4.6 4.4 0 00-2.1 8.4"/><path d="M12 13v9"/><path d="M9 19l3 3 3-3"/></svg>
+						{/if}
+						Load from npm
+					</button>
 				</div>
 				<div>
 					<div class="min-h-[4rem]">

@@ -1020,3 +1020,45 @@ msgstr "Slug de URL"
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 msgid "Or type a new feature and press Enter..."
 msgstr "O escribe una nueva característica y presiona Enter..."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Fetching README..."
+msgstr "Obteniendo README..."
+
+#. 0: pkg.trim()
+#. 0: npmValue.trim()
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Loading from {0}"
+msgstr "Cargando desde {0}"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "README loaded"
+msgstr "README cargado"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Could not load README"
+msgstr "No se pudo cargar el README"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Package not found or has no README."
+msgstr "Paquete no encontrado o no tiene README."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Loaded from npm README"
+msgstr "Cargado desde el README de npm"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Unlock to edit"
+msgstr "Desbloquear para editar"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Load from npm"
+msgstr "<0/> Cargar desde npm"
