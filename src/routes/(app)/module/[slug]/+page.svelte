@@ -103,16 +103,16 @@
 			</div>
 		<Card variant="shadow" padding="md" class="flex flex-col gap-5">
 			{#each data.mod.faqs as faq}
-					<details class="group border-b border-zinc-200 pb-4 last:border-0 last:pb-0 dark:border-zinc-800">
-						<summary class="flex cursor-pointer items-center justify-between font-semibold text-zinc-800 dark:text-zinc-200">
-							{faq.question}
-							<svg class="h-5 w-5 shrink-0 text-zinc-400 transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-						</summary>
-						<div class="prose prose-sm mt-3 text-zinc-600 dark:prose-invert dark:text-zinc-400">{@html marked.parse(faq.answer)}</div>
-					</details>
-				{/each}
-			</div>
-		{/if}
+				<details class="group border-b border-zinc-200 pb-4 last:border-0 last:pb-0 dark:border-zinc-800">
+					<summary class="flex cursor-pointer items-center justify-between font-semibold text-zinc-800 dark:text-zinc-200">
+						{faq.question}
+						<svg class="h-5 w-5 shrink-0 text-zinc-400 transition-transform group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+					</summary>
+					<div class="prose prose-sm mt-3 text-zinc-600 dark:prose-invert dark:text-zinc-400">{@html marked.parse(faq.answer)}</div>
+				</details>
+			{/each}
+		</Card>
+	{/if}
 
 		<div id="comments-section" class="mb-4 mt-12 text-2xl font-semibold text-zinc-900 dark:text-white">
 			Comments ({data.mod._count.comments})
@@ -181,7 +181,7 @@
 						</a>
 					{/each}
 				</div>
-			</div>
+			</Card>
 		{/if}
 
 		<!-- Sidebar links: FAQ, Comments -->

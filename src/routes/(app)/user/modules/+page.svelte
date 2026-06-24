@@ -3,12 +3,6 @@
 	import Container from '$lib/components/layout/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	let { data }: { data: PageData } = $props();
-
-	function badgeVariant(mod: { approved: boolean; published: boolean }) {
-		if (!mod.approved) return { text: 'Pending', variant: 'warning' as const };
-		if (!mod.published) return { text: 'Draft', variant: 'default' as const };
-		return { text: 'Live', variant: 'success' as const };
-	}
 </script>
 
 <svelte:head><title>My Modules — Zumito Modules</title></svelte:head>
@@ -31,11 +25,13 @@
 					</div>
 					<div class="flex items-center gap-3 text-sm shrink-0">
 						<span class="text-zinc-400 dark:text-zinc-600">{mod._count.installs} installs</span>
-						{@const b = badgeVariant(mod)}
-						<span class="rounded-full border px-2.5 py-0.5 text-xs font-medium
-							{b.variant === 'success' ? 'border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-green-400' : ''}
-							{b.variant === 'warning' ? 'border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-400' : ''}
-							{b.variant === 'default' ? 'border-zinc-200 bg-zinc-100 text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400' : ''}">{b.text}</span>
+						{#if !mod.approved}
+							<span class="rounded-full border border-yellow-200 bg-yellow-50 px-2.5 py-0.5 text-xs font-medium text-yellow-700 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-400">Pending</span>
+						{:else if !mod.published}
+							<span class="rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">Draft</span>
+						{:else}
+							<span class="rounded-full border border-green-200 bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-green-400">Live</span>
+						{/if}
 						<a href="/module/{mod.slug}/edit" class="text-xs text-zinc-400 transition-colors hover:text-zumito-600">Edit</a>
 					</div>
 				</div>
