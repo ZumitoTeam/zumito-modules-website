@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { fade, scale } from 'svelte/transition';
+	import { scale } from 'svelte/transition';
 	import { expoOut } from 'svelte/easing';
+	import { onDestroy } from 'svelte';
 
 	interface Props {
 		name: string;
@@ -8,8 +9,8 @@
 		accept?: string;
 		label: string;
 		description?: string;
-		previews?: string[];
-		onremove?: (index: number) => void;
+		existingPreviews?: string[];
+		onremoveExisting?: (index: number) => void;
 	}
 
 	let {
@@ -18,12 +19,33 @@
 		accept = 'image/png,image/jpeg',
 		label,
 		description,
-		previews = [],
-		onremove,
+		existingPreviews = [],
+		onremoveExisting,
 	}: Props = $props();
 
 	let dragging = $state(false);
 	let inputEl: HTMLInputElement;
+	let selectedFiles = $state<{ file: File; url: string }[]>([]);
+
+	// Clean up object URLs on destroy
+	onDestroy(() => {
+		for (const f of selectedFiles) URL.revokeObjectURL(f.url);
+	});
+
+	function handleFiles(files: FileList) {
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+			if (!file.type.startsWith('image/')) continue;
+			const url = URL.createObjectURL(file);
+			selectedFiles = [...selectedFiles, { file, url }];
+		}
+	}
+
+	function handleInputChange(e: Event) {
+		const input = e.target as HTMLInputElement;
+		if (input.files) handleFiles(input.files);
+		input.value = ''; // Reset so re-selecting same file works
+	}
 
 	function handleDragOver(e: DragEvent) {
 		e.preventDefault();
@@ -35,14 +57,17 @@
 	function handleDrop(e: DragEvent) {
 		e.preventDefault();
 		dragging = false;
-		if (e.dataTransfer?.files && inputEl) {
-			inputEl.files = e.dataTransfer.files;
-			inputEl.dispatchEvent(new Event('change', { bubbles: true }));
-		}
+		if (e.dataTransfer?.files) handleFiles(e.dataTransfer.files);
 	}
 	function handleClick() {
 		inputEl?.click();
 	}
+	function removeFile(i: number) {
+		URL.revokeObjectURL(selectedFiles[i].url);
+		selectedFiles = selectedFiles.filter((_, idx) => idx !== i);
+	}
+
+	const allPreviews = [...existingPreviews, ...selectedFiles.map(f => f.url)];
 </script>
 
 <!-- Drop zone -->
@@ -57,22 +82,27 @@
 	tabindex={0}
 	onkeydown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') handleClick(); }}
 >
-	<!-- Hidden input -->
-	<input type="file" {name} {accept} {multiple} class="hidden" bind:this={inputEl} />
+	<!-- Hidden input. For the form to work, we use a hidden input with the same name + DataTransfer trick is too complex.
+         Instead, the component handles file selection and the form reads from the DataTransfer-built FileList.
+         Actually the simplest: just render the input as a normal hidden input that submits its files. -->
+	<input type="file" {name} {accept} {multiple} class="hidden" bind:this={inputEl} onchange={handleInputChange} />
 
-	{#if previews.length > 0}
-		<!-- Preview grid -->
+	<!-- Hidden inputs for existing previews (so server knows which ones to keep) -->
+	{#each existingPreviews as url}
+		<input type="hidden" name="existing_images" value={url} />
+	{/each}
+
+	{#if allPreviews.length > 0}
 		<div class="grid gap-3 {multiple ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-1'}">
-			{#each previews as url, i}
+			{#each allPreviews as url, i}
+				{@const isExisting = i < existingPreviews.length}
 				<div class="group/item relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800"
 					transition:scale={{ start: 0.8, duration: 250, easing: expoOut }}>
 					<img src={url} alt="" class="h-32 w-full object-cover" />
-					{#if onremove}
-						<button type="button" onclick={(e: Event) => { e.stopPropagation(); onremove(i); }}
-							class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur transition-all group-hover/item:opacity-100 hover:bg-black/70">
-							<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
-						</button>
-					{/if}
+					<button type="button" onclick={(e: Event) => { e.stopPropagation(); isExisting ? onremoveExisting?.(i) : removeFile(i - existingPreviews.length); }}
+						class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur transition-all group-hover/item:opacity-100 hover:bg-black/70">
+						<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
+					</button>
 				</div>
 			{/each}
 			{#if multiple}
@@ -83,7 +113,6 @@
 			{/if}
 		</div>
 	{:else}
-		<!-- Empty state -->
 		<div class="flex flex-col items-center gap-3" in:scale={{ start: 0.95, duration: 200 }}>
 			<div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-zinc-100 transition-transform group-hover:scale-105 dark:bg-zinc-800">
 				<svg class="h-7 w-7 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
