@@ -54,6 +54,7 @@ msgid "Creators"
 msgstr "Creadores"
 
 #: src/routes/(app)/+page.svelte
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/features/+page.svelte
@@ -431,10 +432,12 @@ msgstr "Completa los siguientes detalles para publicar tu módulo en el mercado.
 msgid "<0/> There was a problem with your submission"
 msgstr "<0/> Hubo un problema con tu envío"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Module Name <0/>"
 msgstr "Nombre del módulo <0/>"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "The display name shown in the marketplace."
 msgstr "El nombre que se muestra en el mercado."
@@ -456,18 +459,22 @@ msgstr "Generado automáticamente a partir del nombre. Usa letras minúsculas y 
 msgid "Short Description"
 msgstr "Descripción breve"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "A one-line summary shown in module cards. Max ~120 characters."
 msgstr "Un resumen de una línea que se muestra en las tarjetas del módulo. Máx. ~120 caracteres."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Adds a powerful music queue system with Spotify and YouTube support"
 msgstr "Añade un potente sistema de cola de música con soporte para Spotify y YouTube"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Description <0/>"
 msgstr "Descripción <0/>"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Full description in Markdown. Explain what the module does, its features, and how to use it."
 msgstr "Descripción completa en Markdown. Explica qué hace el módulo, sus características y cómo usarlo."
@@ -482,6 +489,7 @@ msgstr "{0} caracteres"
 msgid "Installation Instructions"
 msgstr "Instrucciones de instalación"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Step-by-step guide in Markdown. Include npm install command, setup steps, and configuration."
 msgstr "Guía paso a paso en Markdown. Incluye el comando npm install, pasos de configuración y ajustes."
@@ -491,6 +499,7 @@ msgstr "Guía paso a paso en Markdown. Incluye el comando npm install, pasos de 
 msgid "NPM Package Name <0/>"
 msgstr "Nombre del paquete NPM <0/>"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "The exact name used in <0/>."
 msgstr "El nombre exacto utilizado en <0/>."
@@ -500,27 +509,33 @@ msgstr "El nombre exacto utilizado en <0/>."
 msgid "Source Code URL"
 msgstr "URL del código fuente"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Link to the GitHub repository or source code."
 msgstr "Enlace al repositorio de GitHub o al código fuente."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Pricing"
 msgstr "Precios"
 
 #: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Free"
 msgstr "Gratuito"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Paid"
 msgstr "De pago"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Paid modules will be available soon. All modules are free for now."
 msgstr "Los módulos de pago estarán disponibles pronto. Todos los módulos son gratuitos por ahora."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Existing tags to categorize your module. You can add new ones."
 msgstr "Etiquetas existentes para categorizar tu módulo. Puedes añadir nuevas."
@@ -529,14 +544,17 @@ msgstr "Etiquetas existentes para categorizar tu módulo. Puedes añadir nuevas.
 msgid "Or type a new feature name and press Enter..."
 msgstr "O escribe un nombre de característica nueva y presiona Enter..."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Enter"
 msgstr "Enter"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Dependencies"
 msgstr "Dependencias"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Other modules yours depends on. Hold Ctrl/Cmd to select multiple."
 msgstr "Otros módulos de los que depende el tuyo. Mantén presionado Ctrl/Cmd para seleccionar varios."
@@ -565,6 +583,8 @@ msgstr "Bienvenido de nuevo a <0>Zumito</0> Módulos"
 msgid "No account? <0>Register</0>"
 msgstr "¿No tienes cuenta? <0>Regístrate</0>"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 msgid "Saving..."
@@ -582,10 +602,12 @@ msgstr "Perfil actualizado"
 msgid "Your changes have been saved."
 msgstr "Tus cambios han sido guardados."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 msgid "Update failed"
 msgstr "Actualización fallida"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 msgid "Please try again."
 msgstr "Por favor, inténtalo de nuevo."
@@ -692,7 +714,6 @@ msgstr "Módulos — Administración"
 msgid "All"
 msgstr "Todos"
 
-#: src/routes/(app)/user/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Pending"
 msgstr "Pendiente"
@@ -810,17 +831,14 @@ msgstr "Editar {0} — Módulos de Zumito"
 msgid "Edit: {0}"
 msgstr "Editar: {0}"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-msgid "Name <0/>"
-msgstr "Nombre <0/>"
+#~ msgid "Name <0/>"
+#~ msgstr "Nombre <0/>"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-msgid "Description (Markdown) <0/>"
-msgstr "Descripción (Markdown) <0/>"
+#~ msgid "Description (Markdown) <0/>"
+#~ msgstr "Descripción (Markdown) <0/>"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-msgid "Price (USD)"
-msgstr "Precio (USD)"
+#~ msgid "Price (USD)"
+#~ msgstr "Precio (USD)"
 
 #. 0: data.mod.name
 #: src/routes/(app)/module/[slug]/+page.svelte
@@ -955,3 +973,50 @@ msgstr "Ver código fuente"
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "Edit"
 msgstr "Editar"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Updating your module"
+msgstr "Actualizando tu módulo"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Module updated"
+msgstr "Módulo actualizado"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Changes saved successfully."
+msgstr "Cambios guardados exitosamente."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Update your module details. All fields marked with <0/> are required."
+msgstr "Actualiza los detalles de tu módulo. Todos los campos marcados con <0/> son obligatorios."
+
+#~ msgid "Slug"
+#~ msgstr "Slug"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Cannot be changed after creation."
+msgstr "No se puede cambiar después de la creación."
+
+#~ msgid "A one-line summary shown in module cards."
+#~ msgstr "Un resumen de una línea que se muestra en las tarjetas de módulo."
+
+#~ msgid "Full description in Markdown. Explain features and usage."
+#~ msgstr "Descripción completa en Markdown. Explica las características y el uso."
+
+#~ msgid "Step-by-step guide in Markdown. Include npm install command."
+#~ msgstr "Guía paso a paso en Markdown. Incluye el comando npm install."
+
+#~ msgid "Link to the GitHub repository."
+#~ msgstr "Enlace al repositorio de GitHub."
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "Pending review"
+msgstr "Revisión pendiente"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "URL Slug"
+msgstr "Slug de URL"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Or type a new feature and press Enter..."
+msgstr "O escribe una nueva característica y presiona Enter..."

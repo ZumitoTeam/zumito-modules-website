@@ -54,6 +54,7 @@ msgid "Creators"
 msgstr "Creators"
 
 #: src/routes/(app)/+page.svelte
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/features/+page.svelte
@@ -431,10 +432,12 @@ msgstr "Fill in the details below to publish your module to the marketplace. All
 msgid "<0/> There was a problem with your submission"
 msgstr "<0/> There was a problem with your submission"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Module Name <0/>"
 msgstr "Module Name <0/>"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "The display name shown in the marketplace."
 msgstr "The display name shown in the marketplace."
@@ -456,18 +459,22 @@ msgstr "Auto-generated from name. Use lowercase letters and dashes."
 msgid "Short Description"
 msgstr "Short Description"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "A one-line summary shown in module cards. Max ~120 characters."
 msgstr "A one-line summary shown in module cards. Max ~120 characters."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Adds a powerful music queue system with Spotify and YouTube support"
 msgstr "Adds a powerful music queue system with Spotify and YouTube support"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Description <0/>"
 msgstr "Description <0/>"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Full description in Markdown. Explain what the module does, its features, and how to use it."
 msgstr "Full description in Markdown. Explain what the module does, its features, and how to use it."
@@ -482,6 +489,7 @@ msgstr "{0} characters"
 msgid "Installation Instructions"
 msgstr "Installation Instructions"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Step-by-step guide in Markdown. Include npm install command, setup steps, and configuration."
 msgstr "Step-by-step guide in Markdown. Include npm install command, setup steps, and configuration."
@@ -491,6 +499,7 @@ msgstr "Step-by-step guide in Markdown. Include npm install command, setup steps
 msgid "NPM Package Name <0/>"
 msgstr "NPM Package Name <0/>"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "The exact name used in <0/>."
 msgstr "The exact name used in <0/>."
@@ -500,27 +509,33 @@ msgstr "The exact name used in <0/>."
 msgid "Source Code URL"
 msgstr "Source Code URL"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Link to the GitHub repository or source code."
 msgstr "Link to the GitHub repository or source code."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Pricing"
 msgstr "Pricing"
 
 #: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Free"
 msgstr "Free"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Paid"
 msgstr "Paid"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Paid modules will be available soon. All modules are free for now."
 msgstr "Paid modules will be available soon. All modules are free for now."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Existing tags to categorize your module. You can add new ones."
 msgstr "Existing tags to categorize your module. You can add new ones."
@@ -529,14 +544,17 @@ msgstr "Existing tags to categorize your module. You can add new ones."
 msgid "Or type a new feature name and press Enter..."
 msgstr "Or type a new feature name and press Enter..."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Enter"
 msgstr "Enter"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Dependencies"
 msgstr "Dependencies"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Other modules yours depends on. Hold Ctrl/Cmd to select multiple."
 msgstr "Other modules yours depends on. Hold Ctrl/Cmd to select multiple."
@@ -565,6 +583,8 @@ msgstr "Welcome back to <0>Zumito</0> Modules"
 msgid "No account? <0>Register</0>"
 msgstr "No account? <0>Register</0>"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 msgid "Saving..."
@@ -582,10 +602,12 @@ msgstr "Profile updated"
 msgid "Your changes have been saved."
 msgstr "Your changes have been saved."
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 msgid "Update failed"
 msgstr "Update failed"
 
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 msgid "Please try again."
 msgstr "Please try again."
@@ -692,7 +714,6 @@ msgstr "Modules — Admin"
 msgid "All"
 msgstr "All"
 
-#: src/routes/(app)/user/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Pending"
 msgstr "Pending"
@@ -810,17 +831,14 @@ msgstr "Edit {0} — Zumito Modules"
 msgid "Edit: {0}"
 msgstr "Edit: {0}"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-msgid "Name <0/>"
-msgstr "Name <0/>"
+#~ msgid "Name <0/>"
+#~ msgstr "Name <0/>"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-msgid "Description (Markdown) <0/>"
-msgstr "Description (Markdown) <0/>"
+#~ msgid "Description (Markdown) <0/>"
+#~ msgstr "Description (Markdown) <0/>"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-msgid "Price (USD)"
-msgstr "Price (USD)"
+#~ msgid "Price (USD)"
+#~ msgstr "Price (USD)"
 
 #. 0: data.mod.name
 #: src/routes/(app)/module/[slug]/+page.svelte
@@ -955,3 +973,50 @@ msgstr "View Source Code"
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "Edit"
 msgstr "Edit"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Updating your module"
+msgstr "Updating your module"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Module updated"
+msgstr "Module updated"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Changes saved successfully."
+msgstr "Changes saved successfully."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Update your module details. All fields marked with <0/> are required."
+msgstr "Update your module details. All fields marked with <0/> are required."
+
+#~ msgid "Slug"
+#~ msgstr "Slug"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Cannot be changed after creation."
+msgstr "Cannot be changed after creation."
+
+#~ msgid "A one-line summary shown in module cards."
+#~ msgstr "A one-line summary shown in module cards."
+
+#~ msgid "Full description in Markdown. Explain features and usage."
+#~ msgstr "Full description in Markdown. Explain features and usage."
+
+#~ msgid "Step-by-step guide in Markdown. Include npm install command."
+#~ msgstr "Step-by-step guide in Markdown. Include npm install command."
+
+#~ msgid "Link to the GitHub repository."
+#~ msgstr "Link to the GitHub repository."
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "Pending review"
+msgstr "Pending review"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "URL Slug"
+msgstr "URL Slug"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Or type a new feature and press Enter..."
+msgstr "Or type a new feature and press Enter..."
