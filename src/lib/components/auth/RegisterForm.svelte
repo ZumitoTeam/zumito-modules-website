@@ -15,13 +15,13 @@
     sileo.promise(
       authClient.signUp.email({ email, password, name: username, username }),
       {
-        loading: { title: 'Creating account...', description: 'Please wait', styles: { border: '1px solid rgba(148,163,184,0.2)' } },
+        loading: { title: 'Creating account...', description: 'Please wait', styles: { border: '1px solid rgba(148,163,184,0.15)', borderRadius: '20px' } },
         success: (result) => {
           if (result.error) throw result.error;
           setTimeout(() => goto('/'), 600);
-          return { title: 'Account created!', description: 'Welcome to Zumito Modules.', styles: { border: '1px solid rgba(34,197,94,0.2)' } };
+          return { title: 'Account created!', description: 'Welcome to Zumito Modules.', styles: { border: '1px solid rgba(34,197,94,0.15)', borderRadius: '20px' } };
         },
-        error: { title: 'Registration failed', description: 'Please try again.', styles: { border: '1px solid rgba(239,68,68,0.2)' } },
+        error: { title: 'Registration failed', description: 'Please try again.', styles: { border: '1px solid rgba(239,68,68,0.15)', borderRadius: '20px' } },
       }
     ).finally(() => { loading = false; });
   }
