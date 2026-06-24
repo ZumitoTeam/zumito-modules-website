@@ -52,10 +52,28 @@
 		}
 	}
 
-	function onInputChange() { if (inputEl?.files?.length) { handleFiles(inputEl.files); inputEl.value = ''; } }
+	function onInputChange() {
+		if (inputEl?.files?.length) {
+			handleFiles(inputEl.files);
+			syncInput();
+		}
+	}
+
+	// Sync real input with selectedFiles so FormData submission includes them
+	function syncInput() {
+		if (!inputEl) return;
+		const dt = new DataTransfer();
+		for (const f of selectedFiles) dt.items.add(f.file);
+		inputEl.files = dt.files;
+	}
+
 	function addMore(e: Event) { e.stopPropagation(); inputEl?.click(); }
 
-	function removeNew(idx: number) { URL.revokeObjectURL(selectedFiles[idx].url); selectedFiles = selectedFiles.filter((_, i) => i !== idx); }
+	function removeNew(idx: number) {
+		URL.revokeObjectURL(selectedFiles[idx].url);
+		selectedFiles = selectedFiles.filter((_, i) => i !== idx);
+		syncInput();
+	}
 	function removeExisting(idx: number) { onRemoveExisting?.(idx); removedExisting = new Set([...removedExisting, idx]); }
 
 	function moveNewUp(idx: number) { if (idx <= 0) return; const items = [...selectedFiles]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; selectedFiles = items; }
@@ -65,7 +83,12 @@
 
 	function dropZoneDragOver(e: DragEvent) { e.preventDefault(); dragging = true; }
 	function dropZoneDragLeave() { dragging = false; }
-	function dropZoneDrop(e: DragEvent) { e.preventDefault(); dragging = false; if (!e.dataTransfer?.files.length) return; const dt = new DataTransfer(); for (let i = 0; i < e.dataTransfer.files.length; i++) dt.items.add(e.dataTransfer.files[i]); if (dt.files.length > 0) handleFiles(dt.files); }
+	function dropZoneDrop(e: DragEvent) {
+		e.preventDefault(); dragging = false;
+		if (!e.dataTransfer?.files.length) return;
+		handleFiles(e.dataTransfer.files);
+		syncInput();
+	}
 </script>
 
 <div class="relative space-y-3">
