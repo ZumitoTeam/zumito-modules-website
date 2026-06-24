@@ -51,6 +51,9 @@ export const actions: Actions = {
 		if (!locals.user) throw redirect(303, '/login');
 
 		const form = await request.formData();
+		const rawIcon = form.get('icon');
+		const rawScreenshots = form.getAll('screenshots');
+		console.log('EDIT FORM:', { name: form.get('name'), npm: form.get('npm'), icon: rawIcon instanceof File ? `File(${rawIcon.size}b)` : typeof rawIcon, screenshots: rawScreenshots.length + ' items', types: rawScreenshots.map(f => f instanceof File ? `File(${f.size}b)` : typeof f) });
 		const name = form.get('name') as string;
 		const description = form.get('description') as string;
 		const shortDescription = form.get('shortDescription') as string;
