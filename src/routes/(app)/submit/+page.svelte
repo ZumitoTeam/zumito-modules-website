@@ -97,7 +97,7 @@
 		</div>
 	{:else}
 		<!-- ═══════════ LOGGED IN — Submit Form ═══════════ -->
-		<Container class="py-16">
+		<Container class="py-10">
 			<h1 class="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">Submit a Module</h1>
 			<p class="mt-2 text-zinc-500 dark:text-zinc-400">Fill in the details below to publish your module to the marketplace. All fields marked with <span class="text-zumito-600">*</span> are required.</p>
 
