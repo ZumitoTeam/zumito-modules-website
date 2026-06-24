@@ -6,34 +6,28 @@
   let username = $state('');
   let email = $state('');
   let password = $state('');
-  let error = $state('');
   let loading = $state(false);
 
   async function handleSubmit(e: Event) {
     e.preventDefault();
-    error = '';
     loading = true;
 
-    try {
-      const result = await authClient.signUp.email({ email, password, name: username, username });
-      if (result.error) {
-        error = result.error.message ?? 'Registration failed';
-        sileo.error('Registration failed', { description: result.error.message });
-      } else {
-        sileo.success('Account created', { description: 'Welcome to Zumito Modules!' });
-        goto('/');
+    sileo.promise(
+      authClient.signUp.email({ email, password, name: username, username }),
+      {
+        loading: 'Creating account...',
+        success: (result) => {
+          if (result.error) throw result.error;
+          setTimeout(() => goto('/'), 600);
+          return 'Account created! Welcome to Zumito Modules.';
+        },
+        error: 'Registration failed. Please try again.',
       }
-    } finally {
-      loading = false;
-    }
+    ).finally(() => { loading = false; });
   }
 </script>
 
 <form onsubmit={handleSubmit} class="space-y-4">
-  {#if error}
-    <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-500/20 dark:bg-red-500/5 dark:text-red-400">{error}</div>
-  {/if}
-
   <div>
     <label for="username" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Username</label>
     <input id="username" type="text" bind:value={username} required class="mt-1 block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />

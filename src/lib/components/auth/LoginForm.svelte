@@ -5,34 +5,28 @@
 
   let email = $state('');
   let password = $state('');
-  let error = $state('');
   let loading = $state(false);
 
   async function handleSubmit(e: Event) {
     e.preventDefault();
-    error = '';
     loading = true;
 
-    try {
-      const result = await authClient.signIn.email({ email, password });
-      if (result.error) {
-        error = result.error.message ?? 'Login failed';
-        sileo.error('Login failed', { description: result.error.message });
-      } else {
-        sileo.success('Welcome back!', { description: 'You have been logged in.' });
-        goto('/');
+    sileo.promise(
+      authClient.signIn.email({ email, password }),
+      {
+        loading: 'Signing in...',
+        success: (result) => {
+          if (result.error) throw result.error;
+          setTimeout(() => goto('/'), 600);
+          return 'Welcome back!';
+        },
+        error: 'Login failed. Check your credentials.',
       }
-    } finally {
-      loading = false;
-    }
+    ).finally(() => { loading = false; });
   }
 </script>
 
 <form onsubmit={handleSubmit} class="space-y-4">
-  {#if error}
-    <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600 dark:border-red-500/20 dark:bg-red-500/5 dark:text-red-400">{error}</div>
-  {/if}
-
   <div>
     <label for="email" class="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Email</label>
     <input id="email" type="email" bind:value={email} required class="mt-1 block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />
