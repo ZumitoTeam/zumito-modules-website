@@ -8,8 +8,23 @@
 
 	let menuOpen = $state(false);
 
-	function toggleMenu() { menuOpen = !menuOpen; }
-	function closeMenu() { menuOpen = false; }
+	function openMenu() {
+		menuOpen = true;
+		history.pushState({ menu: 1 }, '');
+	}
+	function closeMenu() {
+		menuOpen = false;
+	}
+	function toggleMenu() {
+		if (menuOpen) closeMenu(); else openMenu();
+	}
+
+	// Mobile back button closes the menu
+	$effect(() => {
+		function onPopState() { menuOpen = false; }
+		window.addEventListener('popstate', onPopState);
+		return () => window.removeEventListener('popstate', onPopState);
+	});
 
 	async function handleLogout() {
 		closeMenu();
@@ -73,7 +88,7 @@
 	{#if menuOpen}
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div class="fixed inset-0 z-40 md:hidden" onclick={closeMenu} transition:fade={{ duration: 200 }}>
+		<div class="fixed inset-0 z-40 bg-black/50 md:hidden" onclick={closeMenu} transition:fade={{ duration: 200 }}>
 			<!-- svelte-ignore a11y_click_events_have_key_events -->
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div class="absolute inset-y-0 right-0 w-72 bg-white shadow-2xl dark:bg-zinc-950" onclick={(e: Event) => e.stopPropagation()} transition:fly={{ x: 280, duration: 300, easing: quartOut }}>
