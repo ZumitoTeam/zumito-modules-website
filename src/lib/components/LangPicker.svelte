@@ -20,8 +20,9 @@
 	async function switchTo(e: Event, locale: string) {
 		e.stopPropagation();
 		open = false;
+		document.cookie = `app-locale=${locale};path=/;max-age=${60 * 60 * 24 * 365};SameSite=Lax`;
 		await new Promise(r => setTimeout(r, 200));
-		await goto(`?lang=${locale}`, { replaceState: true, invalidateAll: true });
+		await goto($page.url.pathname + $page.url.search, { replaceState: true, invalidateAll: true });
 	}
 </script>
 
