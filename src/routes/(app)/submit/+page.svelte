@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
+	import Container from '$lib/components/layout/Container.svelte';
 
 	let { data, form }: { data: PageData; form?: any } = $props();
 
@@ -96,7 +97,7 @@
 		</div>
 	{:else}
 		<!-- ═══════════ LOGGED IN — Submit Form ═══════════ -->
-		<div class="mx-auto max-w-3xl">
+		<Container class="py-16">
 			<h1 class="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">Submit a Module</h1>
 			<p class="mt-2 text-zinc-500 dark:text-zinc-400">Fill in the details below to publish your module to the marketplace. All fields marked with <span class="text-zumito-600">*</span> are required.</p>
 
@@ -275,6 +276,6 @@ npm install @zumito-modules/my-module
 					</div>
 				</div>
 			</form>
-		</div>
+		</Container>
 	{/if}
 </div>
