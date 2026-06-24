@@ -6,8 +6,8 @@ const uploadsDir = join(process.cwd(), 'static', 'uploads');
 
 export const localAdapter: FileAdapter = {
 	async upload(key: string, buffer: Buffer): Promise<string> {
-		await mkdir(uploadsDir, { recursive: true });
 		const filePath = join(uploadsDir, key);
+		await mkdir(join(filePath, '..'), { recursive: true });
 		await writeFile(filePath, buffer);
 		return `/uploads/${key}`;
 	},

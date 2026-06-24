@@ -47,7 +47,7 @@
 			const file = files[i];
 			if (!file.type.startsWith('image/')) { error('Only images allowed', file.name); continue; }
 			if (file.size > maxSize) { error(`Max ${Math.round(maxSize / 1_000_000)}MB`, file.name); continue; }
-			if (allItems.length + uploadedUrls.length + 1 > maxFiles) { error(`Max ${maxFiles} files`, file.name); continue; }
+			if (allItems.length + 1 > maxFiles) { error(`Max ${maxFiles} files`, file.name); continue; }
 
 			const form = new FormData();
 			form.append('file', file);

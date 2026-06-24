@@ -1141,9 +1141,8 @@ msgstr "Capturas de pantalla"
 #~ msgid "Upload screenshots showing your module in action. PNG or JPG."
 #~ msgstr "Sube capturas de pantalla que muestren tu módulo en funcionamiento. PNG o JPG."
 
-#: src/routes/(app)/module/[slug]/edit/+page.server.ts
-msgid "Failed to upload images."
-msgstr "No se pudieron subir las imágenes."
+#~ msgid "Failed to upload images."
+#~ msgstr "No se pudieron subir las imágenes."
 
 #: src/routes/(app)/submit/+page.server.ts
 msgid "Failed to upload images. Please try again."
@@ -1195,9 +1194,7 @@ msgstr "Máx. {0}MB"
 msgid "Failed to update module."
 msgstr "Error al actualizar el módulo."
 
-#. 0: f.size
 #. 0: v.size
-#: src/routes/(app)/module/[slug]/edit/+page.server.ts
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 msgid "File({0}b)"
 msgstr "Archivo({0}b)"
