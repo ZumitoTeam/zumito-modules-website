@@ -6,12 +6,19 @@
 
 	let nameValue = $state('');
 	let slugValue = $state('');
+	let isPaid = $state(false);
 
 	function generateSlug() {
 		slugValue = nameValue
 			.toLowerCase()
 			.replace(/[^a-z0-9]+/g, '-')
 			.replace(/^-|-$/g, '');
+	}
+
+	function onSlugInput(e: Event) {
+		const input = e.target as HTMLInputElement;
+		input.value = input.value.replace(/\s+/g, '-').toLowerCase();
+		slugValue = input.value;
 	}
 
 	let descriptionValue = $state('');
@@ -121,7 +128,7 @@
 							URL Slug <span class="text-zumito-600">*</span>
 						</label>
 						<p class="mt-1 text-xs text-zinc-400">Auto-generated from name. Use lowercase letters and dashes.</p>
-						<input id="slug" name="slug" required placeholder="my-awesome-command-module" bind:value={slugValue}
+						<input id="slug" name="slug" required placeholder="my-awesome-command-module" value={slugValue} oninput={onSlugInput}
 							class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />
 					</div>
 				</div>
@@ -192,13 +199,25 @@ npm install @zumito-modules/my-module
 					</div>
 				</div>
 
-				<!-- Row: Price + Features -->
+				<!-- Row: Pricing + Features -->
 				<div class="grid gap-6 sm:grid-cols-2">
 					<div>
-						<label for="price" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Price (USD)</label>
-						<p class="mt-1 text-xs text-zinc-400">Set to 0 for free modules. Paid modules are not yet supported.</p>
-						<input id="price" name="price" type="number" min="0" step="0.01" value="0"
-							class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm tabular-nums text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" />
+						<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Pricing</label>
+						<p class="mt-1 text-xs text-zinc-400">Is this a free or paid module?</p>
+						<div class="mt-2 flex rounded-xl border border-zinc-300 bg-zinc-50 p-1 dark:border-zinc-800 dark:bg-zinc-900">
+							<button type="button" onclick={() => isPaid = false}
+								class="flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all {!isPaid ? 'bg-white text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}">Free</button>
+							<button type="button" onclick={() => isPaid = true}
+								class="flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all {isPaid ? 'bg-white text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}">Paid</button>
+						</div>
+						{#if isPaid}
+							<div class="mt-3">
+								<input id="price" name="price" type="number" min="0" step="0.01" placeholder="9.99"
+									class="block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm tabular-nums text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" />
+							</div>
+						{:else}
+							<input type="hidden" name="price" value="0" />
+						{/if}
 					</div>
 					<div>
 						<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Features</label>
@@ -211,7 +230,8 @@ npm install @zumito-modules/my-module
 								</label>
 							{/each}
 						</div>
-						<input name="features" placeholder="Or type a new feature name and press Enter..." class="mt-2 block w-full rounded-xl border border-dashed border-zinc-300 bg-zinc-50 px-4 py-2 text-xs text-zinc-500 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:placeholder:text-zinc-600" />
+						<input name="features" placeholder="Or type a new feature name and press Enter..." onkeydown={(e) => { if (e.key === 'Enter') e.preventDefault(); }}
+							class="mt-2 block w-full rounded-xl border border-dashed border-zinc-300 bg-zinc-50 px-4 py-2 text-xs text-zinc-500 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:placeholder:text-zinc-600" />
 					</div>
 				</div>
 
