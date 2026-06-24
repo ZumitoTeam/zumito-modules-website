@@ -119,9 +119,20 @@
 						</div>
 					</div>
 
-					<!-- TAB 2: Images (hidden when not active) -->
+					<!-- TAB 2: Images -->
 					<div class:hidden={activeTab !== 2}>
-						<div class="flex flex-col items-center gap-4 py-12 text-center"><div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-zumito-50 text-zumito-600 dark:bg-zumito-600/10"><svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21zM8.25 9.75a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" /></svg></div><h3 class="text-lg font-semibold text-zinc-500">Images coming soon</h3><p class="max-w-sm text-sm text-zinc-400">You'll be able to upload screenshots and an icon for your module after publishing.</p></div>
+						<div class="space-y-6">
+							<div>
+								<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Icon</label>
+								<p class="mt-1 text-xs text-zinc-400">A square image shown in module cards. PNG or JPG, max 1MB.</p>
+								<input type="file" name="icon" accept="image/png,image/jpeg" class="mt-2 block w-full text-sm text-zinc-500 file:mr-4 file:rounded-full file:border-0 file:bg-zumito-50 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-zumito-700 hover:file:bg-zumito-100 dark:text-zinc-400 dark:file:bg-zumito-600/10 dark:file:text-zumito-400" />
+							</div>
+							<div>
+								<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Screenshots</label>
+								<p class="mt-1 text-xs text-zinc-400">Upload screenshots showing your module in action. PNG or JPG.</p>
+								<input type="file" name="screenshots" accept="image/png,image/jpeg" multiple class="mt-2 block w-full text-sm text-zinc-500 file:mr-4 file:rounded-full file:border-0 file:bg-zumito-50 file:px-4 file:py-2 file:text-xs file:font-semibold file:text-zumito-700 hover:file:bg-zumito-100 dark:text-zinc-400 dark:file:bg-zumito-600/10 dark:file:text-zumito-400" />
+							</div>
+						</div>
 					</div>
 
 					<!-- TAB 3: FAQ (hidden when not active) -->

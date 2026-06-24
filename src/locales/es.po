@@ -1080,10 +1080,8 @@ msgstr "<0/>Hubo un problema"
 msgid "Full description in Markdown. Use the Load from npm button above to auto-fill from the package README."
 msgstr "Descripción completa en Markdown. Usa el botón Cargar desde npm de arriba para autocompletar desde el README del paquete."
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-#: src/routes/(app)/submit/+page.svelte
-msgid "Images coming soon"
-msgstr "Próximamente imágenes"
+#~ msgid "Images coming soon"
+#~ msgstr "Próximamente imágenes"
 
 #~ msgid "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
 #~ msgstr "Podrás subir capturas de pantalla y un icono para tu módulo. Por ahora, puedes añadirlos después de publicar a través de la página de Edición."
@@ -1125,7 +1123,25 @@ msgstr "Aún no hay FAQs. Haz clic en \"Agregar FAQ\" para comenzar."
 msgid "Server error"
 msgstr "Error del servidor"
 
+#~ msgid "You'll be able to upload screenshots and an icon for your module after publishing."
+#~ msgstr "Podrás subir capturas de pantalla y un icono para tu módulo después de publicarlo."
+
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
-msgid "You'll be able to upload screenshots and an icon for your module after publishing."
-msgstr "Podrás subir capturas de pantalla y un icono para tu módulo después de publicarlo."
+msgid "Icon"
+msgstr "Icono"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "A square image shown in module cards. PNG or JPG, max 1MB."
+msgstr "Una imagen cuadrada que se muestra en las tarjetas de módulos. PNG o JPG, máximo 1 MB."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Screenshots"
+msgstr "Capturas de pantalla"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Upload screenshots showing your module in action. PNG or JPG."
+msgstr "Sube capturas de pantalla que muestren tu módulo en funcionamiento. PNG o JPG."

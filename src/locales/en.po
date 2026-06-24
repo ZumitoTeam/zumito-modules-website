@@ -1080,10 +1080,8 @@ msgstr "<0/>There was a problem"
 msgid "Full description in Markdown. Use the Load from npm button above to auto-fill from the package README."
 msgstr "Full description in Markdown. Use the Load from npm button above to auto-fill from the package README."
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-#: src/routes/(app)/submit/+page.svelte
-msgid "Images coming soon"
-msgstr "Images coming soon"
+#~ msgid "Images coming soon"
+#~ msgstr "Images coming soon"
 
 #~ msgid "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
 #~ msgstr "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
@@ -1125,7 +1123,25 @@ msgstr "No FAQs yet. Click \"Add FAQ\" to get started."
 msgid "Server error"
 msgstr "Server error"
 
+#~ msgid "You'll be able to upload screenshots and an icon for your module after publishing."
+#~ msgstr "You'll be able to upload screenshots and an icon for your module after publishing."
+
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
-msgid "You'll be able to upload screenshots and an icon for your module after publishing."
-msgstr "You'll be able to upload screenshots and an icon for your module after publishing."
+msgid "Icon"
+msgstr "Icon"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "A square image shown in module cards. PNG or JPG, max 1MB."
+msgstr "A square image shown in module cards. PNG or JPG, max 1MB."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Screenshots"
+msgstr "Screenshots"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Upload screenshots showing your module in action. PNG or JPG."
+msgstr "Upload screenshots showing your module in action. PNG or JPG."

@@ -1,5 +1,7 @@
 import prisma from '$lib/server/prisma';
 import { redirect, fail, error } from '@sveltejs/kit';
+import { getFileAdapter } from '$lib/server/file-adapters/factory';
+import { randomBytes } from 'node:crypto';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params, locals }) => {
@@ -65,6 +67,32 @@ export const actions: Actions = {
 			.map((q, i) => ({ question: q.trim(), answer: (faqAnswers[i] || '').trim() }))
 			.filter(f => f.question && f.answer);
 
+		// File uploads
+		const adapter = getFileAdapter();
+		const iconFile = form.get('icon') as File | null;
+		const screenshotFiles = form.getAll('screenshots').filter((f): f is File => f instanceof File);
+		let iconUrl: string | undefined;
+		const imageRecords: { url: string; altText: string }[] = [];
+
+		try {
+			if (iconFile && iconFile.size > 0) {
+				const ext = iconFile.name.split('.').pop() || 'png';
+				const key = `icons/${randomBytes(8).toString('hex')}.${ext}`;
+				const buf = Buffer.from(await iconFile.arrayBuffer());
+				iconUrl = await adapter.upload(key, buf, iconFile.type);
+			}
+			for (const file of screenshotFiles) {
+				if (file.size === 0) continue;
+				const ext = file.name.split('.').pop() || 'png';
+				const key = `screenshots/${randomBytes(8).toString('hex')}.${ext}`;
+				const buf = Buffer.from(await file.arrayBuffer());
+				const url = await adapter.upload(key, buf, file.type);
+				imageRecords.push({ url, altText: '' });
+			}
+		} catch {
+			return fail(400, { error: 'Failed to upload images.' });
+		}
+
 		if (!name || !description || !npm) {
 			return fail(400, { error: 'Name, description, and npm package are required.' });
 		}
@@ -84,6 +112,8 @@ export const actions: Actions = {
 				npm,
 				sourceCode: sourceCode || null,
 				price,
+				...(iconUrl !== undefined ? { icon: iconUrl } : {}),
+				...(imageRecords.length > 0 ? { images: { create: imageRecords } } : {}),
 				features: {
 					set: [],
 					connect: await Promise.all(

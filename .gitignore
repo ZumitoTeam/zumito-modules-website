@@ -24,3 +24,7 @@ vite.config.ts.timestamp-*
 
 # Generated
 src/lib/generated
+
+# Uploads
+static/uploads/*
+!static/uploads/.gitkeep
