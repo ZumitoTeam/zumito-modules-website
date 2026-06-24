@@ -214,6 +214,7 @@ msgstr "Check your credentials"
 
 #: src/lib/components/auth/LoginForm.svelte
 #: src/lib/components/layout/Navbar.svelte
+#: src/lib/components/layout/Navbar.svelte
 #: src/routes/(auth)/login/+page.svelte
 msgid "Sign in"
 msgstr "Sign in"
@@ -228,18 +229,22 @@ msgid "<0>Zumito</0> Modules"
 msgstr "<0>Zumito</0> Modules"
 
 #: src/lib/components/layout/Navbar.svelte
+#: src/lib/components/layout/Navbar.svelte
 msgid "Browse"
 msgstr "Browse"
 
+#: src/lib/components/layout/Navbar.svelte
 #: src/lib/components/layout/Navbar.svelte
 msgid "Submit"
 msgstr "Submit"
 
 #: src/lib/components/layout/Navbar.svelte
+#: src/lib/components/layout/Navbar.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 msgid "Profile"
 msgstr "Profile"
 
+#: src/lib/components/layout/Navbar.svelte
 #: src/lib/components/layout/Navbar.svelte
 msgid "Logout"
 msgstr "Logout"
@@ -802,6 +807,7 @@ msgid "My Modules — Zumito Modules"
 msgstr "My Modules — Zumito Modules"
 
 #: src/lib/components/layout/Navbar.svelte
+#: src/lib/components/layout/Navbar.svelte
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "My Modules"
 msgstr "My Modules"
@@ -1144,9 +1150,8 @@ msgstr "Screenshots"
 #~ msgid "Failed to upload images."
 #~ msgstr "Failed to upload images."
 
-#: src/routes/(app)/submit/+page.server.ts
-msgid "Failed to upload images. Please try again."
-msgstr "Failed to upload images. Please try again."
+#~ msgid "Failed to upload images. Please try again."
+#~ msgstr "Failed to upload images. Please try again."
 
 #: src/lib/components/ui/ImagePicker.svelte
 msgid "Drag & drop or click to browse"
@@ -1207,3 +1212,11 @@ msgstr "Upload failed"
 #: src/lib/components/ui/ImagePicker.svelte
 msgid "Uploading..."
 msgstr "Uploading..."
+
+#: src/lib/components/layout/Navbar.svelte
+msgid "Close menu"
+msgstr "Close menu"
+
+#: src/lib/components/layout/Navbar.svelte
+msgid "Open menu"
+msgstr "Open menu"
