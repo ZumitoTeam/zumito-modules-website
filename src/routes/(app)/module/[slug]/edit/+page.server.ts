@@ -21,6 +21,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			features: { select: { name: true } },
 			dependencies: { select: { dependencyId: true } },
 			addonTargets: { select: { baseModuleId: true } },
+			faqs: { select: { question: true, answer: true } },
 		},
 	});
 
