@@ -81,7 +81,7 @@
 					</div>
 				</div>
 
-				<button type="submit" disabled={profileLoading} class="flex items-center gap-2 rounded-full bg-zumito-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zumito-700 active:scale-[0.98] disabled:opacity-70">
+				<button type="submit" disabled={profileLoading} class="flex items-center gap-2 rounded-full bg-zumito-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zumito-700 active:scale-[0.98] disabled:opacity-70 cursor-pointer">
 					{#if profileLoading}<svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>{/if}
 					{profileLoading ? 'Saving...' : 'Save Changes'}
 				</button>
@@ -107,7 +107,7 @@
 						class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" />
 				</div>
 
-				<button type="submit" disabled={passwordLoading} class="flex items-center gap-2 rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zinc-800 active:scale-[0.98] disabled:opacity-70 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
+				<button type="submit" disabled={passwordLoading} class="flex items-center gap-2 rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zinc-800 active:scale-[0.98] disabled:opacity-70 cursor-pointer dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
 					{#if passwordLoading}<svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>{/if}
 					{passwordLoading ? 'Updating...' : 'Update Password'}
 				</button>
