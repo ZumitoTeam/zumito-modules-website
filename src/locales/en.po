@@ -45,6 +45,7 @@ msgid "Modules"
 msgstr "Modules"
 
 #: src/routes/(app)/+page.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Installs"
 msgstr "Installs"
 
@@ -287,10 +288,12 @@ msgid "Try adjusting your search or filters."
 msgstr "Try adjusting your search or filters."
 
 #: src/lib/components/ui/Modal.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Escape"
 msgstr "Escape"
 
 #: src/lib/components/ui/Pagination.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Previous"
 msgstr "Previous"
 
@@ -300,6 +303,7 @@ msgid "Page {0} of {1}"
 msgstr "Page {0} of {1}"
 
 #: src/lib/components/ui/Pagination.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Next"
 msgstr "Next"
 
@@ -508,6 +512,7 @@ msgstr "Link to the GitHub repository or source code."
 msgid "Pricing"
 msgstr "Pricing"
 
+#: src/routes/(app)/module/[slug]/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Free"
 msgstr "Free"
@@ -783,6 +788,7 @@ msgstr "Ban"
 msgid "My Modules — Zumito Modules"
 msgstr "My Modules — Zumito Modules"
 
+#: src/lib/components/layout/Navbar.svelte
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "My Modules"
 msgstr "My Modules"
@@ -843,9 +849,8 @@ msgstr "Install with Zumito <0/>"
 msgid "Mark as Installed"
 msgstr "Mark as Installed"
 
-#: src/routes/(app)/module/[slug]/+page.svelte
-msgid "Gallery"
-msgstr "Gallery"
+#~ msgid "Gallery"
+#~ msgstr "Gallery"
 
 #: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Description"
@@ -876,13 +881,11 @@ msgstr "Post Comment"
 msgid "Required By"
 msgstr "Required By"
 
-#: src/routes/(app)/module/[slug]/+page.svelte
-msgid "Source Code"
-msgstr "Source Code"
+#~ msgid "Source Code"
+#~ msgstr "Source Code"
 
-#: src/routes/(app)/module/[slug]/+page.svelte
-msgid "View on GitHub <0/>"
-msgstr "View on GitHub <0/>"
+#~ msgid "View on GitHub <0/>"
+#~ msgstr "View on GitHub <0/>"
 
 #: src/routes/(app)/submit/+page.server.ts
 msgid "Name, slug, description, and npm package are required."
@@ -907,3 +910,35 @@ msgstr "New password must be at least 8 characters."
 #: src/routes/(app)/module/[slug]/edit/+page.server.ts
 msgid "Name, description, and npm package are required."
 msgstr "Name, description, and npm package are required."
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "ArrowRight"
+msgstr "ArrowRight"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "ArrowLeft"
+msgstr "ArrowLeft"
+
+#. 0: data.mod.name
+#. 0: data.mod.name
+#: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Discover {0} on Zumito Modules."
+msgstr "Discover {0} on Zumito Modules."
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Price"
+msgstr "Price"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "View Source Code <0/>"
+msgstr "View Source Code <0/>"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Close"
+msgstr "Close"
+
+#. 0: i + 1
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Image {0}"
+msgstr "Image {0}"
