@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import { scale } from 'svelte/transition';
 	import { expoOut } from 'svelte/easing';
 	import Icon from '@iconify/svelte';
@@ -20,9 +19,27 @@
 	async function switchTo(e: Event, locale: string) {
 		e.stopPropagation();
 		open = false;
-		document.cookie = `app-locale=${locale};path=/;max-age=${60 * 60 * 24 * 365};SameSite=Lax`;
 		await new Promise(r => setTimeout(r, 200));
-		await goto($page.url.pathname + $page.url.search, { replaceState: true, invalidateAll: true });
+
+		const form = document.createElement('form');
+		form.method = 'POST';
+		form.action = '/api/lang';
+		form.style.display = 'none';
+
+		const localeInput = document.createElement('input');
+		localeInput.type = 'hidden';
+		localeInput.name = 'locale';
+		localeInput.value = locale;
+		form.appendChild(localeInput);
+
+		const redirectInput = document.createElement('input');
+		redirectInput.type = 'hidden';
+		redirectInput.name = 'redirect';
+		redirectInput.value = $page.url.pathname + $page.url.search;
+		form.appendChild(redirectInput);
+
+		document.body.appendChild(form);
+		form.submit();
 	}
 </script>
 
