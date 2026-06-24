@@ -539,7 +539,6 @@ msgstr "Etiquetas existentes para categorizar tu módulo. Puedes añadir nuevas.
 #~ msgid "Or type a new feature name and press Enter..."
 #~ msgstr "O escribe un nombre de característica nueva y presiona Enter..."
 
-#: src/lib/components/ui/ImagePicker.svelte
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Enter"
