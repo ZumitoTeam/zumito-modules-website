@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { authClient } from 'better-auth/svelte';
+  import { authClient } from '$lib/auth-client';
   import { goto } from '$app/navigation';
   
   let username = $state('');

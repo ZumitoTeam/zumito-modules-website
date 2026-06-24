@@ -1,8 +1,5 @@
 <script lang="ts">
-  import { createAuthClient } from 'better-auth/svelte';
-  import type { auth } from '$lib/server/auth';
-  
-  export const authClient = createAuthClient();
+  import { authClient } from '$lib/auth-client';
 </script>
 
 {#snippet children()}
