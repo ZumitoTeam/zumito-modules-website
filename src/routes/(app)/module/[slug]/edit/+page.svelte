@@ -35,19 +35,8 @@
 		).finally(() => { loadingReadme = false; });
 	}
 
-	const onUpdate: SubmitFunction = ({ formData }) => {
+	const onUpdate: SubmitFunction = () => {
 		loading = true;
-		// Clear existing empty entries from the form, then re-add files
-		const entriesToRemove: string[] = [];
-		for (const [key, value] of formData.entries()) {
-			if ((key === 'icon' || key === 'screenshots') && (typeof value === 'string' || (value instanceof File && value.size === 0))) {
-				entriesToRemove.push(key);
-			}
-		}
-		for (const key of entriesToRemove) formData.delete(key);
-		for (const f of iconFiles) formData.append('icon', f);
-		for (const f of screenshotFiles) formData.append('screenshots', f);
-		console.log('FormData after:', { icon: formData.getAll('icon'), screenshots: formData.getAll('screenshots').map(v => v instanceof File ? `File(${v.size}b)` : typeof v) });
 
 		const { promise, resolve, reject } = Promise.withResolvers<void>();
 		sileo.promise(promise, {
@@ -95,8 +84,8 @@
 
 			<div class:hidden={activeTab !== 2}>
 				<div class="space-y-6">
-					<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." existingPreviews={data.mod.icon ? [data.mod.icon] : []} onFilesChange={(files: File[]) => iconFiles = files} />
-					<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple existingPreviews={data.mod.images?.map((i: any) => i.url) ?? []} onRemoveExisting={(idx: number) => {}} onFilesChange={(files: File[]) => screenshotFiles = files} />
+					<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." existingPreviews={data.mod.icon ? [data.mod.icon] : []} />
+					<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple existingPreviews={data.mod.images?.map((i: any) => i.url) ?? []} />
 				</div>
 			</div>
 
