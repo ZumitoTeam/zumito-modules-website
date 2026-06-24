@@ -101,7 +101,8 @@
 			<h1 class="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">Submit a Module</h1>
 			<p class="mt-2 text-zinc-500 dark:text-zinc-400">Fill in the details below to publish your module to the marketplace. All fields marked with <span class="text-zumito-600">*</span> are required.</p>
 
-			<form method="POST" use:enhance class="mt-10 space-y-8">
+			<section class="mt-8 rounded-2xl border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-950">
+				<form method="POST" use:enhance class="space-y-8">
 				{#if form?.error}
 					<div class="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-500/20 dark:bg-red-500/5 dark:text-red-400">
 						<div class="flex items-center gap-2 font-semibold">
@@ -276,6 +277,7 @@ npm install @zumito-modules/my-module
 					</div>
 				</div>
 			</form>
+			</section>
 		</Container>
 	{/if}
 </div>
