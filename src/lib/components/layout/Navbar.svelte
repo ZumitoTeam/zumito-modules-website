@@ -21,7 +21,9 @@
 
 	// Mobile back button closes the menu
 	$effect(() => {
-		function onPopState() { menuOpen = false; }
+		function onPopState() {
+			menuOpen = false;
+		}
 		window.addEventListener('popstate', onPopState);
 		return () => window.removeEventListener('popstate', onPopState);
 	});
@@ -92,8 +94,12 @@
 	<div class="fixed inset-0 z-[60] bg-black/50 md:hidden" onclick={closeMenu} transition:fade={{ duration: 200 }}>
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div class="absolute inset-y-0 right-0 w-72 bg-white shadow-2xl dark:bg-zinc-950" onclick={(e: Event) => e.stopPropagation()} transition:fly={{ x: 280, duration: 300, easing: quartOut }}>
+		<div class="absolute inset-y-0 right-0 w-full bg-white shadow-2xl dark:bg-zinc-950 sm:w-80" onclick={(e: Event) => e.stopPropagation()} transition:fly={{ x: 320, duration: 300, easing: quartOut }}>
 			<div class="flex flex-col px-6 py-20">
+				<button onclick={closeMenu} class="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
+					aria-label="Close menu">
+					<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
+				</button>
 				<a href="/modules" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
 					in:fly={{ y: 12, duration: 250, delay: 40, easing: quartOut }}>Browse</a>
 				<a href="/submit" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"

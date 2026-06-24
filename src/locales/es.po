@@ -1214,6 +1214,7 @@ msgid "Uploading..."
 msgstr "Subiendo..."
 
 #: src/lib/components/layout/Navbar.svelte
+#: src/lib/components/layout/Navbar.svelte
 msgid "Close menu"
 msgstr "Cerrar menú"
 
