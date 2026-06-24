@@ -225,6 +225,7 @@ msgid "© {0} <0>Zumito</0> Modules"
 msgstr "© {0} <0>Zumito</0> Módulos"
 
 #: src/lib/components/layout/Navbar.svelte
+#: src/lib/components/layout/Navbar.svelte
 msgid "<0>Zumito</0> Modules"
 msgstr "<0>Zumito</0> Módulos"
 
@@ -245,10 +246,10 @@ msgid "Profile"
 msgstr "Perfil"
 
 #: src/lib/components/layout/Navbar.svelte
-#: src/lib/components/layout/Navbar.svelte
 msgid "Logout"
 msgstr "Cerrar sesión"
 
+#: src/lib/components/layout/Navbar.svelte
 #: src/lib/components/layout/Navbar.svelte
 msgid "Register"
 msgstr "Registrarse"
@@ -1221,3 +1222,7 @@ msgstr "Cerrar menú"
 #: src/lib/components/layout/Navbar.svelte
 msgid "Open menu"
 msgstr "Abrir menú"
+
+#: src/lib/components/layout/Navbar.svelte
+msgid "<0/> Logout"
+msgstr "<0/> Cerrar sesión"
