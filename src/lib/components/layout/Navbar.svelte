@@ -83,35 +83,36 @@
 			</button>
 		</div>
 	</div>
+</nav>
 
-	<!-- Mobile menu overlay -->
-	{#if menuOpen}
+<!-- Mobile menu overlay (outside nav to escape backdrop-blur containing block) -->
+{#if menuOpen}
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div class="fixed inset-0 z-[60] bg-black/50 md:hidden" onclick={closeMenu} transition:fade={{ duration: 200 }}>
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div class="fixed inset-0 z-40 bg-black/50 md:hidden" onclick={closeMenu} transition:fade={{ duration: 200 }}>
-			<!-- svelte-ignore a11y_click_events_have_key_events -->
-			<!-- svelte-ignore a11y_no_static_element_interactions -->
-			<div class="absolute inset-y-0 right-0 w-72 bg-white shadow-2xl dark:bg-zinc-950" onclick={(e: Event) => e.stopPropagation()} transition:fly={{ x: 280, duration: 300, easing: quartOut }}>
-				<div class="flex flex-col px-6 py-20">
-					<a href="/modules" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-						in:fly={{ y: 12, duration: 250, delay: 40, easing: quartOut }}>Browse</a>
-					<a href="/submit" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-						in:fly={{ y: 12, duration: 250, delay: 80, easing: quartOut }}>Submit</a>
-					{#if $page.data.user}
-						<a href="/user/profile" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-							in:fly={{ y: 12, duration: 250, delay: 120, easing: quartOut }}>Profile</a>
-						<a href="/user/modules" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-							in:fly={{ y: 12, duration: 250, delay: 160, easing: quartOut }}>My Modules</a>
-						<div class="my-4 border-t border-zinc-200 dark:border-zinc-800" in:fly={{ y: 12, duration: 250, delay: 200, easing: quartOut }} />
-						<button onclick={handleLogout} class="py-3 text-left text-lg font-medium text-zinc-500 transition-colors hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-400"
-							in:fly={{ y: 12, duration: 250, delay: 240, easing: quartOut }}>Logout</button>
-					{:else}
-						<div class="my-4 border-t border-zinc-200 dark:border-zinc-800" in:fly={{ y: 12, duration: 250, delay: 120, easing: quartOut }} />
-						<a href="/login" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
-							in:fly={{ y: 12, duration: 250, delay: 160, easing: quartOut }}>Sign in</a>
-					{/if}
-				</div>
+		<div class="absolute inset-y-0 right-0 w-72 bg-white shadow-2xl dark:bg-zinc-950" onclick={(e: Event) => e.stopPropagation()} transition:fly={{ x: 280, duration: 300, easing: quartOut }}>
+			<div class="flex flex-col px-6 py-20">
+				<a href="/modules" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
+					in:fly={{ y: 12, duration: 250, delay: 40, easing: quartOut }}>Browse</a>
+				<a href="/submit" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
+					in:fly={{ y: 12, duration: 250, delay: 80, easing: quartOut }}>Submit</a>
+				{#if $page.data.user}
+					<a href="/user/profile" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
+						in:fly={{ y: 12, duration: 250, delay: 120, easing: quartOut }}>Profile</a>
+					<a href="/user/modules" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
+						in:fly={{ y: 12, duration: 250, delay: 160, easing: quartOut }}>My Modules</a>
+					<div class="my-4 border-t border-zinc-200 dark:border-zinc-800" in:fly={{ y: 12, duration: 250, delay: 200, easing: quartOut }} />
+					<button onclick={handleLogout} class="py-3 text-left text-lg font-medium text-zinc-500 transition-colors hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-400"
+						in:fly={{ y: 12, duration: 250, delay: 240, easing: quartOut }}>Logout</button>
+				{:else}
+					<div class="my-4 border-t border-zinc-200 dark:border-zinc-800" in:fly={{ y: 12, duration: 250, delay: 120, easing: quartOut }} />
+					<a href="/login" onclick={closeMenu} class="py-3 text-lg font-medium text-zinc-700 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100"
+						in:fly={{ y: 12, duration: 250, delay: 160, easing: quartOut }}>Sign in</a>
+				{/if}
 			</div>
 		</div>
-	{/if}
-</nav>
+	</div>
+{/if}
+
