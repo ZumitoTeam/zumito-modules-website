@@ -3,6 +3,7 @@
 	import { sileo } from 'svelte-sileo';
 	import type { PageData } from './$types';
 	import type { SubmitFunction } from '@sveltejs/kit';
+	import Container from '$lib/components/layout/Container.svelte';
 
 	let { data, form }: { data: PageData; form?: any } = $props();
 
@@ -42,7 +43,7 @@
 
 <svelte:head><title>Profile — Zumito Modules</title></svelte:head>
 
-<div class="mx-auto max-w-2xl px-4 py-16">
+<Container class="py-16">
 	<h1 class="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">Profile</h1>
 	<p class="mt-1 text-zinc-500">Manage your account settings and preferences.</p>
 
@@ -66,7 +67,7 @@
 					<div class="mt-2 flex items-center gap-4">
 						<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-400 overflow-hidden dark:border-zinc-800 dark:bg-zinc-900">
 							<img src={data.user.image ?? `https://api.dicebear.com/10.x/glyphs/svg?seed=${data.user.username ?? 'default'}`} alt="" class="h-full w-full rounded-xl object-cover" />
-						</div>
+</Container>
 						<input id="image" name="image" placeholder="https://..." value={data.user.image ?? ''}
 							class="flex-1 rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />
 					</div>

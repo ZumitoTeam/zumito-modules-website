@@ -114,19 +114,23 @@
 				<!-- Row: Name + Slug -->
 				<div class="grid gap-6 sm:grid-cols-2">
 					<div>
-						<label for="name" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-							Module Name <span class="text-zumito-600">*</span>
-						</label>
-						<p class="mt-1 text-xs text-zinc-400">The display name shown in the marketplace.</p>
+						<div class="min-h-[4rem]">
+							<label for="name" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+								Module Name <span class="text-zumito-600">*</span>
+							</label>
+							<p class="mt-1 text-xs leading-relaxed text-zinc-400">The display name shown in the marketplace.</p>
+						</div>
 						<input id="name" name="name" required placeholder="My Awesome Command Module"
 							bind:value={nameValue} oninput={generateSlug}
 							class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />
 					</div>
 					<div>
-						<label for="slug" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-							URL Slug <span class="text-zumito-600">*</span>
-						</label>
-						<p class="mt-1 text-xs text-zinc-400">Auto-generated from name. Use lowercase letters and dashes.</p>
+						<div class="min-h-[4rem]">
+							<label for="slug" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+								URL Slug <span class="text-zumito-600">*</span>
+							</label>
+							<p class="mt-1 text-xs leading-relaxed text-zinc-400">Auto-generated from name. Use lowercase letters and dashes.</p>
+						</div>
 						<input id="slug" name="slug" required placeholder="my-awesome-command-module" value={slugValue} oninput={onSlugInput}
 							class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />
 					</div>
@@ -183,16 +187,20 @@ npm install @zumito-modules/my-module
 				<!-- Row: NPM + Source -->
 				<div class="grid gap-6 sm:grid-cols-2">
 					<div>
-						<label for="npm" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-							NPM Package Name <span class="text-zumito-600">*</span>
-						</label>
-						<p class="mt-1 text-xs text-zinc-400">The exact name used in <code class="rounded bg-zinc-100 px-1 py-0.5 font-mono text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">npm publish</code>.</p>
+						<div class="min-h-[4rem]">
+							<label for="npm" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+								NPM Package Name <span class="text-zumito-600">*</span>
+							</label>
+							<p class="mt-1 text-xs leading-relaxed text-zinc-400">The exact name used in <code class="rounded bg-zinc-100 px-1 py-0.5 font-mono text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">npm publish</code>.</p>
+						</div>
 						<input id="npm" name="npm" required placeholder="@zumito-modules/music-queue"
 							class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />
 					</div>
 					<div>
-						<label for="sourceCode" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Source Code URL</label>
-						<p class="mt-1 text-xs text-zinc-400">Link to the GitHub repository or source code.</p>
+						<div class="min-h-[4rem]">
+							<label for="sourceCode" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Source Code URL</label>
+							<p class="mt-1 text-xs leading-relaxed text-zinc-400">Link to the GitHub repository or source code.</p>
+						</div>
 						<input id="sourceCode" name="sourceCode" placeholder="https://github.com/username/my-module"
 							class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />
 					</div>
@@ -201,7 +209,9 @@ npm install @zumito-modules/my-module
 				<!-- Row: Pricing + Features -->
 				<div class="grid gap-6 sm:grid-cols-2">
 					<div>
-						<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Pricing</label>
+						<div class="min-h-[4rem]">
+							<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Pricing</label>
+						</div>
 						<div class="mt-2 flex rounded-xl border border-zinc-300 bg-zinc-50 p-1 dark:border-zinc-800 dark:bg-zinc-900">
 							<button type="button" onclick={() => {}}
 								class="flex-1 rounded-lg px-4 py-2 text-sm font-medium text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-100">Free</button>
@@ -212,8 +222,10 @@ npm install @zumito-modules/my-module
 						<input type="hidden" name="price" value="0" />
 					</div>
 					<div>
-						<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Features</label>
-						<p class="mt-1 text-xs text-zinc-400">Existing tags to categorize your module. You can add new ones.</p>
+						<div class="min-h-[4rem]">
+							<label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Features</label>
+							<p class="mt-1 text-xs leading-relaxed text-zinc-400">Existing tags to categorize your module. You can add new ones.</p>
+						</div>
 						<div class="mt-2 flex flex-wrap gap-1.5">
 							{#each data.features as f}
 								<label class="cursor-pointer rounded-full border border-zinc-200 px-3 py-1.5 text-xs transition-all has-[:checked]:border-zumito-600 has-[:checked]:bg-zumito-50 has-[:checked]:text-zumito-700 dark:border-zinc-800 dark:has-[:checked]:border-zumito-600 dark:has-[:checked]:bg-zumito-600/10 dark:has-[:checked]:text-zumito-400">
