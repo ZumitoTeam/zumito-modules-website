@@ -11,8 +11,8 @@
 	let loading = $state(false);
 	let descriptionLocked = $state(false);
 	let loadingReadme = $state(false);
-	let descriptionValue = $state(data.mod.description ?? '');
-	let npmValue = $state(data.mod.npm ?? '');
+	let descriptionValue = $state(String(data.mod.description ?? ''));
+	let npmValue = $state(String(data.mod.npm ?? ''));
 
 	async function loadReadme() {
 		const pkg = npmValue;
@@ -51,7 +51,7 @@
 		return async ({ result }) => {
 			loading = false;
 			if (result.type === 'success') resolve();
-			else reject(new Error(result.data?.error));
+			else reject(new Error(result.data?.error || 'Update failed'));
 		};
 	};
 </script>

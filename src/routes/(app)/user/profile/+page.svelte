@@ -21,7 +21,7 @@
 		return async ({ result }) => {
 			profileLoading = false;
 			if (result.type === 'success') resolve();
-			else reject(new Error(result.data?.error));
+			else reject(new Error(result.data?.error || 'Update failed'));
 		};
 	};
 
@@ -36,7 +36,7 @@
 		return async ({ result }) => {
 			passwordLoading = false;
 			if (result.type === 'success') resolve();
-			else reject(new Error(result.data?.error));
+			else reject(new Error(result.data?.error || 'Update failed'));
 		};
 	};
 </script>

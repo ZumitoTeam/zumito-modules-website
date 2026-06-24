@@ -603,6 +603,9 @@ msgid "Your changes have been saved."
 msgstr "Tus cambios han sido guardados."
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/user/profile/+page.svelte
+#: src/routes/(app)/user/profile/+page.svelte
 #: src/routes/(app)/user/profile/+page.svelte
 msgid "Update failed"
 msgstr "Actualización fallida"
