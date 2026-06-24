@@ -1148,9 +1148,8 @@ msgstr "No se pudieron subir las imágenes."
 msgid "Failed to upload images. Please try again."
 msgstr "No se pudieron subir las imágenes. Inténtelo de nuevo."
 
-#: src/lib/components/ui/ImagePicker.svelte
-msgid "Drag & drop or click to browse"
-msgstr "Arrastra y suelta o haz clic para examinar"
+#~ msgid "Drag & drop or click to browse"
+#~ msgstr "Arrastra y suelta o haz clic para examinar"
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -1167,7 +1166,5 @@ msgstr "Una imagen cuadrada que se muestra en las tarjetas de módulo. PNG o JPG
 msgid "Upload screenshots showing your module in action."
 msgstr "Sube capturas de pantalla que muestren tu módulo en acción."
 
-#. 0: selectedFiles.length; 1: selectedFiles.length !== 1 ? 's' \\: ''
-#: src/lib/components/ui/ImagePicker.svelte
-msgid "{0} file{1} selected"
-msgstr "{0} archivo{1} seleccionado"
+#~ msgid "{0} file{1} selected"
+#~ msgstr "{0} archivo{1} seleccionado"
