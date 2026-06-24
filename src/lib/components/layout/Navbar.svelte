@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { authClient } from '$lib/auth-client';
-	import { goto, pushState } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import LangPicker from '$lib/components/LangPicker.svelte';
 	import Icon from '@iconify/svelte';
@@ -8,52 +8,25 @@
 	import { quartOut } from 'svelte/easing';
 
 	let menuOpen = $state(false);
-	let pushingState = $state(false);
 
-	function openMenu() {
-		menuOpen = true;
-		pushingState = true;
-		pushState($page.url.href, {});
+	function toggleMenu() {
+		menuOpen = !menuOpen;
 	}
 	function closeMenu() {
 		menuOpen = false;
-		pushingState = false;
 	}
-	function closeMenuWithHistory() {
-		menuOpen = false;
-		if (pushingState) {
-			pushingState = false;
-			history.back();
-		}
-	}
-	function toggleMenu() {
-		if (menuOpen) closeMenuWithHistory(); else openMenu();
-	}
-
-	// Mobile back button closes the menu
-	$effect(() => {
-		function onPopState() {
-			menuOpen = false;
-			pushingState = false;
-		}
-		window.addEventListener('popstate', onPopState);
-		return () => window.removeEventListener('popstate', onPopState);
-	});
 
 	async function handleLogout() {
-		closeMenu();
 		await authClient.signOut();
+		menuOpen = false;
 		goto('/login');
 	}
 
-	// Close menu on route change (no history manipulation)
 	$effect(() => {
-		$page.url.pathname; // track
+		$page.url.pathname;
 		menuOpen = false;
-		pushingState = false;
 	});
 
-	// Lock body scroll when menu open
 	$effect(() => {
 		if (menuOpen) {
 			document.body.style.overflow = 'hidden';
@@ -104,7 +77,7 @@
 {#if menuOpen}
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div class="fixed inset-0 z-[60] bg-black/50 md:hidden cursor-pointer" onclick={closeMenuWithHistory} transition:fade={{ duration: 200 }}>
+	<div class="fixed inset-0 z-[60] bg-black/50 md:hidden cursor-pointer" onclick={closeMenu} transition:fade={{ duration: 200 }}>
 		<!-- svelte-ignore a11y_click_events_have_key_events -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div class="absolute inset-y-0 right-0 w-full bg-white shadow-2xl dark:bg-zinc-950 sm:w-80" onclick={(e: Event) => e.stopPropagation()} transition:fly={{ x: 320, duration: 300, easing: quartOut }}>
@@ -114,7 +87,7 @@
 					<span class="text-sm font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">
 						<span class="text-zumito-600">Zumito</span> Modules
 					</span>
-					<button onclick={closeMenuWithHistory} class="flex h-10 w-10 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-zinc-100 cursor-pointer dark:hover:bg-zinc-800"
+					<button onclick={closeMenu} class="flex h-10 w-10 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-zinc-100 cursor-pointer dark:hover:bg-zinc-800"
 						aria-label="Close menu">
 						<Icon icon="tabler:x" class="h-6 w-6" />
 					</button>
