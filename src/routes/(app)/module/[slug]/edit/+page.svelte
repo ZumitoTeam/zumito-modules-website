@@ -12,9 +12,10 @@
 	let descriptionLocked = $state(false);
 	let loadingReadme = $state(false);
 	let descriptionValue = $state(data.mod.description ?? '');
+	let npmValue = $state(data.mod.npm ?? '');
 
 	async function loadReadme() {
-		const pkg = data.mod.npm;
+		const pkg = npmValue;
 		if (!pkg?.trim()) return;
 		loadingReadme = true;
 		sileo.promise(
@@ -126,8 +127,8 @@
 						</label>
 						<p class="mt-1 text-xs leading-relaxed text-zinc-400">The exact name used in <code class="rounded bg-zinc-100 px-1 py-0.5 font-mono text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">npm publish</code>.</p>
 					</div>
-					<input id="npm" name="npm" required value={data.mod.npm} class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" />
-					<button type="button" onclick={loadReadme} disabled={loadingReadme}
+					<input id="npm" name="npm" required bind:value={npmValue} class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" />
+					<button type="button" onclick={loadReadme} disabled={loadingReadme || !npmValue.trim()}
 						class="mt-2 flex items-center gap-1.5 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 transition-all hover:border-zumito-300 hover:text-zumito-600 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:border-zumito-600/40">
 						{#if loadingReadme}
 							<svg class="h-3.5 w-3.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
