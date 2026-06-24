@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import { Toaster } from 'svelte-sileo';
 	import type { LayoutData } from './$types';
 
 	let { data, children } = $props();
@@ -9,3 +10,4 @@
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
 
 {@render children()}
+<Toaster />

@@ -10,20 +10,6 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-  databaseHooks: {
-    user: {
-      create: {
-        before: async (user) => {
-          return {
-            data: {
-              ...user,
-              username: user.username ?? user.name.toLowerCase().replace(/\s+/g, ''),
-            },
-          };
-        },
-      },
-    },
-  },
   plugins: [
     admin(),
   ],
