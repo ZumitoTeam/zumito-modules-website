@@ -55,16 +55,7 @@
 	function onInputChange() {
 		if (inputEl?.files?.length) {
 			handleFiles(inputEl.files);
-			syncInput();
 		}
-	}
-
-	// Sync real input with selectedFiles so FormData submission includes them
-	function syncInput() {
-		if (!inputEl) return;
-		const dt = new DataTransfer();
-		for (const f of selectedFiles) dt.items.add(f.file);
-		inputEl.files = dt.files;
 	}
 
 	function addMore(e: Event) { e.stopPropagation(); inputEl?.click(); }
@@ -72,7 +63,13 @@
 	function removeNew(idx: number) {
 		URL.revokeObjectURL(selectedFiles[idx].url);
 		selectedFiles = selectedFiles.filter((_, i) => i !== idx);
-		syncInput();
+		if (selectedFiles.length > 0) {
+			const dt = new DataTransfer();
+			for (const f of selectedFiles) dt.items.add(f.file);
+			inputEl.files = dt.files;
+		} else {
+			inputEl.value = '';
+		}
 	}
 	function removeExisting(idx: number) { onRemoveExisting?.(idx); removedExisting = new Set([...removedExisting, idx]); }
 
@@ -86,8 +83,16 @@
 	function dropZoneDrop(e: DragEvent) {
 		e.preventDefault(); dragging = false;
 		if (!e.dataTransfer?.files.length) return;
-		handleFiles(e.dataTransfer.files);
-		syncInput();
+		const dt = new DataTransfer();
+		for (let i = 0; i < e.dataTransfer.files.length; i++) dt.items.add(e.dataTransfer.files[i]);
+		if (inputEl) {
+			// Merge existing + dropped files on the input
+			const merged = new DataTransfer();
+			for (const f of inputEl.files ?? []) merged.items.add(f);
+			for (const f of dt.files) merged.items.add(f);
+			inputEl.files = merged.files;
+		}
+		handleFiles(dt.files);
 	}
 </script>
 

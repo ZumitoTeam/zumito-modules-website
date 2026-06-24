@@ -1192,3 +1192,7 @@ msgstr "{0} of {1} file{2} selected"
 #: src/lib/components/ui/ImagePicker.svelte
 msgid "Max {0}MB"
 msgstr "Max {0}MB"
+
+#: src/routes/(app)/module/[slug]/edit/+page.server.ts
+msgid "Failed to update module."
+msgstr "Failed to update module."

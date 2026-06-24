@@ -135,7 +135,7 @@ export const actions: Actions = {
 				sourceCode: sourceCode || null,
 				price,
 				...(iconUrl !== undefined ? { icon: iconUrl } : {}),
-				images: { deleteMany: {}, create: finalImages.length > 0 ? finalImages : [] },
+				...(finalImages.length > 0 ? { images: { deleteMany: {}, create: finalImages } } : {}),
 				features: {
 					set: [],
 					connect: await Promise.all(
