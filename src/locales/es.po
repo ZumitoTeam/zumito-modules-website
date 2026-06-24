@@ -7,13 +7,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/lib/components/LangPicker.svelte
-msgid "EN"
-msgstr "Inglés"
+#~ msgid "EN"
+#~ msgstr "Inglés"
 
-#: src/lib/components/LangPicker.svelte
-msgid "ES"
-msgstr "Español"
+#~ msgid "ES"
+#~ msgstr "Español"
 
 #: src/routes/(app)/+page.svelte
 msgid "Zumito Modules — Discord Bot Marketplace"

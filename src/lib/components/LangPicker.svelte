@@ -5,6 +5,10 @@
 	import { goto, invalidateAll } from '$app/navigation';
 
 	let open = $state(false);
+	/* @wc-ignore */
+	const LABEL_EN = 'EN';
+	/* @wc-ignore */
+	const LABEL_ES = 'ES';
 
 	async function switchTo(locale: string) {
 		open = false;
@@ -25,14 +29,14 @@
 	{#if open}
 		<button onclick={() => switchTo('en')}
 			class="w-[38px] rounded-full py-1 text-center text-xs font-semibold transition-all {$page.data.locale !== 'es' ? 'bg-zumito-600 text-white' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
-			transition:scale={{ start: 0.85, duration: 200, easing: quintOut }}>EN</button>
+			transition:scale={{ start: 0.85, duration: 200, easing: quintOut }}>{LABEL_EN}</button>
 		<button onclick={() => switchTo('es')}
 			class="w-[38px] rounded-full py-1 text-center text-xs font-semibold transition-all {$page.data.locale === 'es' ? 'bg-zumito-600 text-white' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}"
-			transition:scale={{ start: 0.85, duration: 200, easing: quintOut }}>ES</button>
+			transition:scale={{ start: 0.85, duration: 200, easing: quintOut }}>{LABEL_ES}</button>
 	{:else}
 		<button onclick={toggle}
 			class="flex w-[56px] items-center justify-center gap-0.5 rounded-full py-1 text-xs font-semibold text-zinc-500 transition-all hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200">
-			{$page.data.locale === 'es' ? 'ES' : 'EN'}
+			{$page.data.locale === 'es' ? LABEL_ES : LABEL_EN}
 			<svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
 		</button>
 	{/if}
