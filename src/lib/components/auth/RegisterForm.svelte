@@ -15,13 +15,28 @@
     sileo.promise(
       authClient.signUp.email({ email, password, name: username, username }),
       {
-        loading: { title: 'Creating account...', description: 'Please wait' },
-        success: (result) => {
+        loading: {
+          title: 'Creating account...',
+          description: 'Please wait',
+          fill: '#fafafa',
+          styles: { title: 'text-zinc-900', description: 'text-zinc-500' }
+        },
+        success: (result: any) => {
           if (result.error) throw result.error;
           setTimeout(() => goto('/'), 600);
-          return { title: 'Account created!', description: 'Welcome to Zumito Modules' };
+          return {
+            title: 'Account created!',
+            description: 'Welcome to Zumito Modules',
+            fill: '#f0fdf4',
+            styles: { title: 'text-green-800', description: 'text-green-600' }
+          };
         },
-        error: { title: 'Registration failed', description: 'Please try again' },
+        error: {
+          title: 'Registration failed',
+          description: 'Please try again',
+          fill: '#fef2f2',
+          styles: { title: 'text-red-800', description: 'text-red-600' }
+        },
       }
     ).finally(() => { loading = false; });
   }
