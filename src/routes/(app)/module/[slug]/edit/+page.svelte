@@ -53,7 +53,7 @@
 
 	<Card variant="border" padding="lg" class="mt-8">
 		<Tabs tabs={['General', 'Description', 'Images', 'FAQ']} bind:active={activeTab} />
-		<form method="POST" use:enhance={onUpdate} class="mt-8 space-y-8">
+		<form method="POST" use:enhance={onUpdate} enctype="multipart/form-data" class="mt-8 space-y-8">
 			<div class:hidden={activeTab !== 0}>
 				<div class="grid gap-6 sm:grid-cols-2">
 					<div><div class="min-h-[4rem]"><label for="name" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Module Name <span class="text-zumito-600">*</span></label><p class="mt-1 text-xs leading-relaxed text-zinc-400">The display name shown in the marketplace.</p></div><input id="name" name="name" required value={data.mod.name} class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" /></div>

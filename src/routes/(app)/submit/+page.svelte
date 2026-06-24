@@ -78,7 +78,7 @@
 			<p class="mt-2 text-zinc-500 dark:text-zinc-400">Fill in the details below to publish your module to the marketplace. All fields marked with <span class="text-zumito-600">*</span> are required.</p>
 			<section class="mt-8 rounded-2xl border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-950">
 				<Tabs tabs={['General', 'Description', 'Images', 'FAQ']} bind:active={activeTab} />
-				<form method="POST" use:enhance class="mt-8 space-y-8">
+				<form method="POST" use:enhance enctype="multipart/form-data" class="mt-8 space-y-8">
 					{#if form?.error}
 						<div class="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-500/20 dark:bg-red-500/5 dark:text-red-400">
 							<div class="flex items-center gap-2 font-semibold"><svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>There was a problem</div>
