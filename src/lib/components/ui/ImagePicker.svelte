@@ -26,6 +26,8 @@
 	const pickerId = `picker-${name}`;
 	let inputEl: HTMLInputElement;
 	let dragging = $state(false);
+	let dragIndex = $state<number | null>(null);
+	let dropIndex = $state<number | null>(null);
 	let selectedFiles = $state<{ file: File; url: string }[]>([]);
 
 	onDestroy(() => {
@@ -41,10 +43,11 @@
 		}
 	}
 
-	function handleChange() {
-		if (inputEl.files) {
-			addFiles(inputEl.files);
-			inputEl.value = '';
+	function handleChange(e: Event) {
+		const input = e.target as HTMLInputElement;
+		if (input.files) {
+			addFiles(input.files);
+			input.value = '';
 		}
 	}
 
@@ -56,6 +59,27 @@
 	function remove(i: number) {
 		URL.revokeObjectURL(selectedFiles[i].url);
 		selectedFiles = selectedFiles.filter((_, idx) => idx !== i);
+	}
+
+	function handleDragStart(i: number) {
+		dragIndex = i;
+	}
+	function handleDragOverReorder(e: DragEvent, i: number) {
+		e.preventDefault();
+		if (dragIndex === null) return;
+		dropIndex = i;
+	}
+	function handleDropReorder() {
+		if (dragIndex === null || dropIndex === null || dragIndex === dropIndex) {
+			dragIndex = null; dropIndex = null;
+			return;
+		}
+		const items = [...selectedFiles];
+		const [moved] = items.splice(dragIndex, 1);
+		items.splice(dropIndex, 0, moved);
+		selectedFiles = items;
+		dragIndex = null;
+		dropIndex = null;
 	}
 
 	function handleDragOver(e: DragEvent) {
@@ -110,7 +134,16 @@
 			<div class="grid gap-3 {multiple ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-1'}" onclick={(e: Event) => e.stopPropagation()} onkeydown={() => {}}>
 				{#each allPreviews as url, i}
 					{@const isExisting = i < existingPreviews.length}
-					<div class="group/item relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800"
+					{@const isSelected = !isExisting}
+					<div
+						class="group/item relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 {dropIndex === i ? 'border-zumito-500' : ''}"
+						class:draggable={isSelected && multiple}
+						class:opacity-50={dragIndex === i}
+						draggable={isSelected && multiple}
+						ondragstart={() => handleDragStart(i - existingPreviews.length)}
+						ondragover={(e: DragEvent) => isSelected && multiple && handleDragOverReorder(e, i - existingPreviews.length)}
+						ondragend={handleDropReorder}
+						ondrop={handleDropReorder}
 						transition:scale={{ start: 0.8, duration: 250, easing: expoOut }}>
 						<img src={url} alt="" class="h-32 w-full object-cover" />
 						<button type="button" onclick={(e: Event) => { e.stopPropagation(); isExisting ? onremoveExisting?.(i) : remove(i - existingPreviews.length); }}
