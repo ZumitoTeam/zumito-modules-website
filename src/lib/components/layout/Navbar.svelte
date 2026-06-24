@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { authClient } from '$lib/auth-client';
-	import { goto } from '$app/navigation';
+	import { goto, pushState } from '$app/navigation';
 	import { page } from '$app/stores';
 	import LangPicker from '$lib/components/LangPicker.svelte';
 	import Icon from '@iconify/svelte';
@@ -13,7 +13,7 @@
 	function openMenu() {
 		menuOpen = true;
 		pushingState = true;
-		history.pushState({ menu: 1 }, '');
+		pushState($page.url.href, {});
 	}
 	function closeMenu() {
 		menuOpen = false;
