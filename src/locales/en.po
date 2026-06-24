@@ -1166,3 +1166,8 @@ msgstr "A square image shown in module cards. PNG or JPG."
 #: src/routes/(app)/submit/+page.svelte
 msgid "Upload screenshots showing your module in action."
 msgstr "Upload screenshots showing your module in action."
+
+#. 0: selectedFiles.length; 1: selectedFiles.length !== 1 ? 's' \\: ''
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "{0} file{1} selected"
+msgstr "{0} file{1} selected"
