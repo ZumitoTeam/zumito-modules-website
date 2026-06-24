@@ -73,20 +73,16 @@ msgid "View all →"
 msgstr "Ver todos →"
 
 #. 0: mod.author.username
-#. 0: data.mod.author.username
 #. 0: mod.author.username
 #: src/routes/(app)/+page.svelte
-#: src/routes/(app)/module/[slug]/+page.svelte
 #: src/routes/(app)/modules/+page.svelte
 msgid "by {0}"
 msgstr "por {0}"
 
 #. 0: mod._count.installs
-#. 0: data.mod._count.installs
 #. 0: mod._count.installs
 #. 0: mod._count.installs
 #: src/routes/(app)/+page.svelte
-#: src/routes/(app)/module/[slug]/+page.svelte
 #: src/routes/(app)/modules/+page.svelte
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "{0} installs"
@@ -537,7 +533,6 @@ msgstr "O escribe un nombre de característica nueva y presiona Enter..."
 msgid "Enter"
 msgstr "Enter"
 
-#: src/routes/(app)/module/[slug]/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Dependencies"
 msgstr "Dependencias"
@@ -832,18 +827,14 @@ msgstr "Precio (USD)"
 msgid "{0} — Zumito Modules"
 msgstr "{0} — Módulos de Zumito"
 
-#. 0: data.mod._count.comments
-#: src/routes/(app)/module/[slug]/+page.svelte
-msgid "{0} comments"
-msgstr "{0} comentarios"
+#~ msgid "{0} comments"
+#~ msgstr "{0} comentarios"
 
-#: src/routes/(app)/module/[slug]/+page.svelte
-msgid "<0/> Installed"
-msgstr "<0/> Instalado"
+#~ msgid "<0/> Installed"
+#~ msgstr "<0/> Instalado"
 
-#: src/routes/(app)/module/[slug]/+page.svelte
-msgid "Install with Zumito <0/>"
-msgstr "Instalar con Zumito <0/>"
+#~ msgid "Install with Zumito <0/>"
+#~ msgstr "Instalar con Zumito <0/>"
 
 #: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Mark as Installed"
@@ -861,6 +852,7 @@ msgid "Installation"
 msgstr "Instalación"
 
 #: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
 msgid "FAQ"
 msgstr "Preguntas frecuentes"
 
@@ -877,9 +869,8 @@ msgstr "Escribe un comentario..."
 msgid "Post Comment"
 msgstr "Publicar comentario"
 
-#: src/routes/(app)/module/[slug]/+page.svelte
-msgid "Required By"
-msgstr "Requerido por"
+#~ msgid "Required By"
+#~ msgstr "Requerido por"
 
 #~ msgid "Source Code"
 #~ msgstr "Código fuente"
@@ -930,9 +921,8 @@ msgstr "Descubre {0} en Zumito Modules."
 msgid "Price"
 msgstr "Precio"
 
-#: src/routes/(app)/module/[slug]/+page.svelte
-msgid "View Source Code <0/>"
-msgstr "Ver código fuente <0/>"
+#~ msgid "View Source Code <0/>"
+#~ msgstr "Ver código fuente <0/>"
 
 #: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Close"
@@ -942,3 +932,23 @@ msgstr "Cerrar"
 #: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Image {0}"
 msgstr "Imagen {0}"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Installed"
+msgstr "Instalado"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Install with Zumito"
+msgstr "Instalar con Zumito"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "<0/> Dependencies"
+msgstr "<0/> Dependencias"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Comments"
+msgstr "Comentarios"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "View Source Code"
+msgstr "Ver código fuente"
