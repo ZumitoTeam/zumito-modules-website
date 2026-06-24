@@ -30,20 +30,17 @@
 	let inputEl: HTMLInputElement;
 	let dragging = $state(false);
 	let selectedFiles = $state<{ file: File; url: string }[]>([]);
-	let existingOrder = $state([...existingPreviews]);
+	let existingOrder = $state(structuredClone(existingPreviews));
+	let removedExisting = $state<Set<number>>(new Set());
 	let errors = $state<{ name: string; reason: string }[]>([]);
 
-	onDestroy(() => {
-		selectedFiles.forEach(f => URL.revokeObjectURL(f.url));
-	});
+	onDestroy(() => { selectedFiles.forEach(f => URL.revokeObjectURL(f.url)); });
 
-	const allItems = $derived([...existingOrder.map((url, i) => ({ type: 'existing' as const, url, origIdx: i })), ...selectedFiles.map((f, i) => ({ type: 'new' as const, url: f.url, idx: i }))]);
+	const visibleExisting = $derived(existingOrder.filter((_, i) => !removedExisting.has(i)));
+	const allItems = $derived([...visibleExisting.map((url) => ({ type: 'existing' as const, url })), ...selectedFiles.map((f, i) => ({ type: 'new' as const, url: f.url, idx: i }))]);
 	const canAddMore = $derived(allItems.length < maxFiles);
 
-	function error(msg: string, name: string) {
-		errors = [...errors, { name, reason: msg }];
-		setTimeout(() => { errors = errors.filter(e => e.name !== name); }, 4000);
-	}
+	function error(msg: string, name: string) { errors = [...errors, { name, reason: msg }]; setTimeout(() => { errors = errors.filter(e => e.name !== name); }, 4000); }
 
 	function handleFiles(files: FileList) {
 		for (let i = 0; i < files.length; i++) {
@@ -55,29 +52,20 @@
 		}
 	}
 
-	function onInputChange() {
-		if (inputEl?.files?.length) { handleFiles(inputEl.files); inputEl.value = ''; }
-	}
-
+	function onInputChange() { if (inputEl?.files?.length) { handleFiles(inputEl.files); inputEl.value = ''; } }
 	function addMore(e: Event) { e.stopPropagation(); inputEl?.click(); }
 
 	function removeNew(idx: number) { URL.revokeObjectURL(selectedFiles[idx].url); selectedFiles = selectedFiles.filter((_, i) => i !== idx); }
-	function removeExisting(origIdx: number) { onRemoveExisting?.(origIdx); existingOrder = existingOrder.filter((_, i) => i !== origIdx); }
+	function removeExisting(idx: number) { onRemoveExisting?.(idx); removedExisting = new Set([...removedExisting, idx]); }
 
 	function moveNewUp(idx: number) { if (idx <= 0) return; const items = [...selectedFiles]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; selectedFiles = items; }
 	function moveNewDown(idx: number) { if (idx >= selectedFiles.length - 1) return; const items = [...selectedFiles]; [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; selectedFiles = items; }
-	function moveExistingUp(origIdx: number) { const arrIdx = existingOrder.indexOf(existingPreviews[origIdx]); if (arrIdx <= 0) return; const items = [...existingOrder]; [items[arrIdx - 1], items[arrIdx]] = [items[arrIdx], items[arrIdx - 1]]; existingOrder = items; }
-	function moveExistingDown(origIdx: number) { const arrIdx = existingOrder.indexOf(existingPreviews[origIdx]); if (arrIdx >= existingOrder.length - 1) return; const items = [...existingOrder]; [items[arrIdx], items[arrIdx + 1]] = [items[arrIdx + 1], items[arrIdx]]; existingOrder = items; }
+	function moveExistingUp(idx: number) { if (idx <= 0) return; const items = [...existingOrder]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; existingOrder = items; }
+	function moveExistingDown(idx: number) { if (idx >= existingOrder.length - 1) return; const items = [...existingOrder]; [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; existingOrder = items; }
 
 	function dropZoneDragOver(e: DragEvent) { e.preventDefault(); dragging = true; }
 	function dropZoneDragLeave() { dragging = false; }
-	function dropZoneDrop(e: DragEvent) {
-		e.preventDefault(); dragging = false;
-		if (!e.dataTransfer?.files.length) return;
-		const dt = new DataTransfer();
-		for (let i = 0; i < e.dataTransfer.files.length; i++) dt.items.add(e.dataTransfer.files[i]);
-		if (dt.files.length > 0) handleFiles(dt.files);
-	}
+	function dropZoneDrop(e: DragEvent) { e.preventDefault(); dragging = false; if (!e.dataTransfer?.files.length) return; const dt = new DataTransfer(); for (let i = 0; i < e.dataTransfer.files.length; i++) dt.items.add(e.dataTransfer.files[i]); if (dt.files.length > 0) handleFiles(dt.files); }
 </script>
 
 <div class="relative space-y-3">
@@ -86,7 +74,9 @@
 		bind:this={inputEl} onchange={onInputChange} />
 
 	{#each existingOrder as url, i}
-		<input type="hidden" name="existing_order" value={url} />
+		{#if !removedExisting.has(i)}
+			<input type="hidden" name="existing_order" value={url} />
+		{/if}
 	{/each}
 
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -100,22 +90,22 @@
 				{#each allItems as item, idx}
 					{@const isNew = item.type === 'new'}
 					{@const newIdx = isNew ? (item as { idx: number }).idx : -1}
-					{@const origIdx = !isNew ? (item as { origIdx: number }).origIdx : -1}
+					{@const existingIdx = !isNew ? existingOrder.indexOf(item.url) : -1}
 					{@const isFirst = idx === 0}
 					{@const isLast = idx === allItems.length - 1}
 					<div class="group/item relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800" transition:scale={{ start: 0.8, duration: 250, easing: expoOut }}>
 						<img src={item.url} alt="" class="h-32 w-full object-cover" />
-						<button type="button" onclick={(e: Event) => { e.stopPropagation(); isNew ? removeNew(newIdx) : removeExisting(origIdx); }}
+						<button type="button" onclick={(e: Event) => { e.stopPropagation(); isNew ? removeNew(newIdx) : removeExisting(existingIdx); }}
 							class="absolute right-2 top-2 flex h-6 w-6 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur transition-all group-hover/item:opacity-100 hover:bg-black/70">
 							<svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 18L18 6M6 6l12 12"/></svg>
 						</button>
 						{#if multiple}
 							<div class="absolute bottom-2 left-2 flex gap-1 opacity-0 transition-all group-hover/item:opacity-100">
-								<button type="button" onclick={(e: Event) => { e.stopPropagation(); isNew ? moveNewUp(newIdx) : moveExistingUp(origIdx); }} disabled={isFirst}
+								<button type="button" onclick={(e: Event) => { e.stopPropagation(); isNew ? moveNewUp(newIdx) : moveExistingUp(existingIdx); }} disabled={isFirst}
 									class="flex h-5 w-5 items-center justify-center rounded bg-black/50 text-white backdrop-blur hover:bg-black/70 disabled:opacity-30">
 									<svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M15 19l-7-7 7-7"/></svg>
 								</button>
-								<button type="button" onclick={(e: Event) => { e.stopPropagation(); isNew ? moveNewDown(newIdx) : moveExistingDown(origIdx); }} disabled={isLast}
+								<button type="button" onclick={(e: Event) => { e.stopPropagation(); isNew ? moveNewDown(newIdx) : moveExistingDown(existingIdx); }} disabled={isLast}
 									class="flex h-5 w-5 items-center justify-center rounded bg-black/50 text-white backdrop-blur hover:bg-black/70 disabled:opacity-30">
 									<svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>
 								</button>
