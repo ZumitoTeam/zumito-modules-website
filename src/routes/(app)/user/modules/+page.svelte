@@ -26,7 +26,7 @@
 					<div class="flex items-center gap-3 text-sm shrink-0">
 						<span class="text-zinc-400 dark:text-zinc-600">{mod._count.installs} installs</span>
 						{#if !mod.approved}
-							<span class="rounded-full border border-yellow-200 bg-yellow-50 px-2.5 py-0.5 text-xs font-medium text-yellow-700 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-400">Pending</span>
+							<span class="rounded-full border border-yellow-200 bg-yellow-50 px-2.5 py-0.5 text-xs font-medium text-yellow-700 dark:border-yellow-800 dark:bg-yellow-950 dark:text-yellow-400">Pending review</span>
 						{:else if !mod.published}
 							<span class="rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">Draft</span>
 						{:else}
