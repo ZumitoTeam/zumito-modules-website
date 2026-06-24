@@ -22,7 +22,7 @@
 		multiple = false,
 		accept = 'image/png,image/jpeg',
 		maxFiles = multiple ? 6 : 1,
-		maxSize = 1_000_000,
+		maxSize = 5_000_000,
 		existingPreviews = [],
 		onRemoveExisting,
 	}: Props = $props();
@@ -51,7 +51,7 @@
 		for (let i = 0; i < files.length; i++) {
 			const f = files[i];
 			if (!f.type.startsWith('image/')) { error('Only images allowed', f.name); continue; }
-			if (f.size > maxSize) { error('Max 1MB', f.name); continue; }
+			if (f.size > maxSize) { error(`Max ${Math.round(maxSize / 1_000_000)}MB`, f.name); continue; }
 			if (allItems.length + selectedFiles.length + 1 > maxFiles) { error(`Max ${maxFiles} files`, f.name); continue; }
 			selectedFiles = [...selectedFiles, { file: f, url: URL.createObjectURL(f) }];
 		}

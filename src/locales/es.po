@@ -539,6 +539,7 @@ msgstr "Etiquetas existentes para categorizar tu módulo. Puedes añadir nuevas.
 #~ msgid "Or type a new feature name and press Enter..."
 #~ msgstr "O escribe un nombre de característica nueva y presiona Enter..."
 
+#: src/lib/components/ui/ImagePicker.svelte
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Enter"
@@ -1148,8 +1149,9 @@ msgstr "No se pudieron subir las imágenes."
 msgid "Failed to upload images. Please try again."
 msgstr "No se pudieron subir las imágenes. Inténtelo de nuevo."
 
-#~ msgid "Drag & drop or click to browse"
-#~ msgstr "Arrastra y suelta o haz clic para examinar"
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "Drag & drop or click to browse"
+msgstr "Arrastra y suelta o haz clic para examinar"
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -1168,3 +1170,21 @@ msgstr "Sube capturas de pantalla que muestren tu módulo en acción."
 
 #~ msgid "{0} file{1} selected"
 #~ msgstr "{0} archivo{1} seleccionado"
+
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "Only images allowed"
+msgstr "Solo imágenes permitidas"
+
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "Max 1MB"
+msgstr "Máximo 1MB"
+
+#. 0: maxFiles
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "Max {0} files"
+msgstr "Máximo {0} archivos"
+
+#. 0: allItems.length; 1: maxFiles; 2: maxFiles !== 1 ? 's' \\: ''
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "{0} of {1} file{2} selected"
+msgstr "{0} de {1} archivo{2} seleccionado"
