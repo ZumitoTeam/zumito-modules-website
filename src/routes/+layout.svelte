@@ -7,7 +7,8 @@
 	let { data, children } = $props();
 </script>
 
+<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+
 <WuchaleProvider locale={data.locale} loaders={{ en: () => import('../../messages/en.json'), es: () => import('../../messages/es.json') }}>
-	<svelte:head><link rel="icon" href={favicon} /></svelte:head>
 	{@render children()}
 </WuchaleProvider>
