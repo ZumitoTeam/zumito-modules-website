@@ -14,13 +14,13 @@
     sileo.promise(
       authClient.signIn.email({ email, password }),
       {
-        loading: 'Signing in...',
+        loading: { title: 'Signing in...', description: 'Please wait' },
         success: (result) => {
           if (result.error) throw result.error;
           setTimeout(() => goto('/'), 600);
-          return 'Welcome back!';
+          return { title: 'Welcome back!', description: 'You have been logged in successfully.' };
         },
-        error: 'Login failed. Check your credentials.',
+        error: { title: 'Login failed', description: 'Check your credentials and try again.' },
       }
     ).finally(() => { loading = false; });
   }

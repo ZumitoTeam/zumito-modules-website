@@ -15,13 +15,13 @@
     sileo.promise(
       authClient.signUp.email({ email, password, name: username, username }),
       {
-        loading: 'Creating account...',
+        loading: { title: 'Creating account...', description: 'Please wait' },
         success: (result) => {
           if (result.error) throw result.error;
           setTimeout(() => goto('/'), 600);
-          return 'Account created! Welcome to Zumito Modules.';
+          return { title: 'Account created!', description: 'Welcome to Zumito Modules.' };
         },
-        error: 'Registration failed. Please try again.',
+        error: { title: 'Registration failed', description: 'Please try again.' },
       }
     ).finally(() => { loading = false; });
   }
