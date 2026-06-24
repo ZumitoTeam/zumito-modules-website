@@ -2,6 +2,7 @@
 	import { authClient } from '$lib/auth-client';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import LangPicker from '$lib/components/LangPicker.svelte';
 
 	async function handleLogout() {
 		await authClient.signOut();
@@ -25,6 +26,7 @@
 				<a href="/login" class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">Sign in</a>
 				<a href="/register" class="rounded-full bg-zumito-600 px-4 py-1.5 text-sm font-semibold text-white transition-all hover:bg-zumito-700 active:scale-[0.98]">Register</a>
 			{/if}
+			<LangPicker />
 		</div>
 	</div>
 </nav>
