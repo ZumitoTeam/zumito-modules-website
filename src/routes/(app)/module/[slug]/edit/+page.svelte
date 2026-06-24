@@ -11,8 +11,8 @@
 	let loading = $state(false);
 	let descriptionLocked = $state(false);
 	let loadingReadme = $state(false);
-	let descriptionValue = $state(String(data.mod.description ?? ''));
-	let npmValue = $state(String(data.mod.npm ?? ''));
+	let descriptionValue = structuredClone(data.mod.description ?? '') as string;
+	let npmValue = structuredClone(data.mod.npm ?? '') as string;
 
 	async function loadReadme() {
 		const pkg = npmValue;
@@ -50,7 +50,7 @@
 		});
 		return async ({ result }) => {
 			loading = false;
-			if (result.type === 'success') resolve();
+			if (result.type === 'success' || result.type === 'redirect') resolve();
 			else reject(new Error(result.data?.error || 'Update failed'));
 		};
 	};

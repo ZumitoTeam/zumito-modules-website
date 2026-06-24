@@ -20,7 +20,7 @@
 		});
 		return async ({ result }) => {
 			profileLoading = false;
-			if (result.type === 'success') resolve();
+			if (result.type === 'success' || result.type === 'redirect') resolve();
 			else reject(new Error(result.data?.error || 'Update failed'));
 		};
 	};
@@ -35,7 +35,7 @@
 		});
 		return async ({ result }) => {
 			passwordLoading = false;
-			if (result.type === 'success') resolve();
+			if (result.type === 'success' || result.type === 'redirect') resolve();
 			else reject(new Error(result.data?.error || 'Update failed'));
 		};
 	};
