@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
+	import Container from '$lib/components/layout/Container.svelte';
 	let { data, form }: { data: PageData; form?: any } = $props();
 </script>
 
 <svelte:head><title>Edit {data.mod.name} — Zumito Modules</title></svelte:head>
 
-<div class="mx-auto max-w-2xl px-4 py-16">
+<Container class="py-12">
 	<h1 class="text-3xl font-extrabold text-zinc-900 dark:text-zinc-100">Edit: {data.mod.name}</h1>
 
 	<form method="POST" use:enhance class="mt-8 space-y-5">
@@ -51,4 +52,4 @@
 
 		<button type="submit" class="rounded-full bg-zumito-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zumito-700 active:scale-[0.98]">Save Changes</button>
 	</form>
-</div>
+</Container>

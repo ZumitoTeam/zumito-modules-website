@@ -11,7 +11,7 @@
 	<title>{data.mod.name} — Zumito Modules</title>
 </svelte:head>
 
-<div class="mx-auto max-w-6xl px-4 py-16">
+<div class="mx-auto max-w-6xl px-4 py-12">
 	<!-- Header -->
 	<div class="flex flex-col gap-6 sm:flex-row sm:items-start">
 		<div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl border border-zinc-200 bg-zinc-50 text-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-500">

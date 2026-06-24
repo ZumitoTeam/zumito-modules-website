@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import Container from '$lib/components/layout/Container.svelte';
 	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head><title>My Modules — Zumito Modules</title></svelte:head>
 
-<div class="mx-auto max-w-4xl px-4 py-16">
+<Container class="py-12">
 	<h1 class="text-3xl font-extrabold text-zinc-900 dark:text-zinc-100">My Modules</h1>
 
 	<div class="mt-8 space-y-4">
@@ -37,4 +38,4 @@
 			<p class="text-zinc-500">You haven&apos;t submitted any modules yet.</p>
 		{/each}
 	</div>
-</div>
+</Container>

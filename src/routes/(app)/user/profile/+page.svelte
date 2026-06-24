@@ -43,7 +43,7 @@
 
 <svelte:head><title>Profile — Zumito Modules</title></svelte:head>
 
-<Container class="py-10">
+<Container class="py-12">
 	<h1 class="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">Profile</h1>
 	<p class="mt-1 text-zinc-500">Manage your account settings and preferences.</p>
 

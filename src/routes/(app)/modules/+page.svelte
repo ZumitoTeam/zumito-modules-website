@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Pagination from '$lib/components/ui/Pagination.svelte';
+	import Container from '$lib/components/layout/Container.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -9,7 +10,7 @@
 	<title>Browse Modules — Zumito Modules</title>
 </svelte:head>
 
-<div class="mx-auto max-w-6xl px-4 py-16">
+<Container class="max-w-6xl py-12">
 	<h1 class="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">All Modules</h1>
 
 	<form method="GET" class="mt-8 space-y-4">
@@ -80,4 +81,4 @@
 	<div class="mt-8">
 		<Pagination currentPage={data.page} totalPages={data.totalPages} baseUrl="/modules?search={data.search}&sort={data.sort}&feature={data.selectedFeature}" />
 	</div>
-</div>
+</Container>

@@ -29,7 +29,7 @@
 	<title>Submit Module — Zumito Modules</title>
 </svelte:head>
 
-<div class="mx-auto max-w-6xl px-4 py-16">
+<div class="mx-auto max-w-6xl px-4 py-12">
 	{#if !data.user}
 		<!-- ═══════════ NOT LOGGED IN — Bento Landing ═══════════ -->
 		<div class="text-center">
@@ -97,7 +97,7 @@
 		</div>
 	{:else}
 		<!-- ═══════════ LOGGED IN — Submit Form ═══════════ -->
-		<Container class="py-10">
+		<Container class="py-12">
 			<h1 class="text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-100">Submit a Module</h1>
 			<p class="mt-2 text-zinc-500 dark:text-zinc-400">Fill in the details below to publish your module to the marketplace. All fields marked with <span class="text-zumito-600">*</span> are required.</p>
 
