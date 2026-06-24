@@ -1058,9 +1058,8 @@ msgstr "Cargado desde el README de npm"
 msgid "Unlock to edit"
 msgstr "Desbloquear para editar"
 
-#: src/routes/(app)/submit/+page.svelte
-msgid "<0/> Load from npm"
-msgstr "<0/> Cargar desde npm"
+#~ msgid "<0/> Load from npm"
+#~ msgstr "<0/> Cargar desde npm"
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -1086,10 +1085,8 @@ msgstr "Descripción completa en Markdown. Usa el botón Cargar desde npm de arr
 msgid "Images coming soon"
 msgstr "Próximamente imágenes"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-#: src/routes/(app)/submit/+page.svelte
-msgid "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
-msgstr "Podrás subir capturas de pantalla y un icono para tu módulo. Por ahora, puedes añadirlos después de publicar a través de la página de Edición."
+#~ msgid "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
+#~ msgstr "Podrás subir capturas de pantalla y un icono para tu módulo. Por ahora, puedes añadirlos después de publicar a través de la página de Edición."
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -1116,6 +1113,7 @@ msgid "No FAQs added yet. Click \"Add FAQ\" to get started."
 msgstr "Aún no se han añadido preguntas frecuentes. Haz clic en \"Añadir FAQ\" para comenzar."
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
 msgid "<0/>Load from npm"
 msgstr "<0/>Cargar desde npm"
 
@@ -1126,3 +1124,8 @@ msgstr "Aún no hay FAQs. Haz clic en \"Agregar FAQ\" para comenzar."
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 msgid "Server error"
 msgstr "Error del servidor"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "You'll be able to upload screenshots and an icon for your module after publishing."
+msgstr "Podrás subir capturas de pantalla y un icono para tu módulo después de publicarlo."

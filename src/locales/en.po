@@ -1058,9 +1058,8 @@ msgstr "Loaded from npm README"
 msgid "Unlock to edit"
 msgstr "Unlock to edit"
 
-#: src/routes/(app)/submit/+page.svelte
-msgid "<0/> Load from npm"
-msgstr "<0/> Load from npm"
+#~ msgid "<0/> Load from npm"
+#~ msgstr "<0/> Load from npm"
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -1086,10 +1085,8 @@ msgstr "Full description in Markdown. Use the Load from npm button above to auto
 msgid "Images coming soon"
 msgstr "Images coming soon"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-#: src/routes/(app)/submit/+page.svelte
-msgid "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
-msgstr "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
+#~ msgid "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
+#~ msgstr "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -1116,6 +1113,7 @@ msgid "No FAQs added yet. Click \"Add FAQ\" to get started."
 msgstr "No FAQs added yet. Click \"Add FAQ\" to get started."
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
 msgid "<0/>Load from npm"
 msgstr "<0/>Load from npm"
 
@@ -1126,3 +1124,8 @@ msgstr "No FAQs yet. Click \"Add FAQ\" to get started."
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 msgid "Server error"
 msgstr "Server error"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "You'll be able to upload screenshots and an icon for your module after publishing."
+msgstr "You'll be able to upload screenshots and an icon for your module after publishing."
