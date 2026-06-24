@@ -13,6 +13,7 @@
 	let loadingReadme = $state(false);
 	let descriptionValue = structuredClone(data.mod.description ?? '') as string;
 	let npmValue = structuredClone(data.mod.npm ?? '') as string;
+	let sourceCodeValue = structuredClone(data.mod.sourceCode ?? '') as string;
 
 	async function loadReadme() {
 		const pkg = npmValue;
@@ -33,6 +34,7 @@
 				success: (d: any) => {
 					descriptionValue = d.readme;
 					descriptionLocked = true;
+					if (d.repository) sourceCodeValue = d.repository;
 					return { title: 'README loaded', description: `${pkg.trim()} description updated.`, fill: '#f0fdf4', styles: { title: 'text-green-800', description: 'text-green-600' } };
 				},
 				error: { title: 'Could not load README', description: 'Package not found or has no README.', fill: '#fef2f2', styles: { title: 'text-red-800', description: 'text-red-600' } },
@@ -143,7 +145,7 @@
 						<label for="sourceCode" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Source Code URL</label>
 						<p class="mt-1 text-xs leading-relaxed text-zinc-400">Link to the GitHub repository or source code.</p>
 					</div>
-					<input id="sourceCode" name="sourceCode" value={data.mod.sourceCode ?? ''} placeholder="https://github.com/username/my-module" class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />
+					<input id="sourceCode" name="sourceCode" bind:value={sourceCodeValue} placeholder="https://github.com/username/my-module" class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />
 				</div>
 			</div>
 
