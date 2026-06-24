@@ -1196,3 +1196,8 @@ msgstr "Max {0}MB"
 #: src/routes/(app)/module/[slug]/edit/+page.server.ts
 msgid "Failed to update module."
 msgstr "Failed to update module."
+
+#. 0: f.size
+#: src/routes/(app)/module/[slug]/edit/+page.server.ts
+msgid "File({0}b)"
+msgstr "File({0}b)"

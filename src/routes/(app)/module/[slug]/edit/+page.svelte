@@ -14,6 +14,8 @@
 	let descriptionLocked = $state(false);
 	let loadingReadme = $state(false);
 	let descriptionValue = structuredClone(data.mod.description ?? '') as string;
+	let iconFiles = $state<File[]>([]);
+	let screenshotFiles = $state<File[]>([]);
 	let npmValue = structuredClone(data.mod.npm ?? '') as string;
 	let sourceCodeValue = structuredClone(data.mod.sourceCode ?? '') as string;
 	let activeTab = $state(0);
@@ -33,8 +35,12 @@
 		).finally(() => { loadingReadme = false; });
 	}
 
-	const onUpdate: SubmitFunction = () => {
+	const onUpdate: SubmitFunction = ({ formData }) => {
 		loading = true;
+		// Manually append files since DataTransfer on input doesn't persist in all browsers
+		for (const f of iconFiles) formData.append('icon', f);
+		for (const f of screenshotFiles) formData.append('screenshots', f);
+
 		const { promise, resolve, reject } = Promise.withResolvers<void>();
 		sileo.promise(promise, {
 			loading: { title: 'Saving...', description: 'Updating your module', fill: '#fafafa', styles: { title: 'text-zinc-900', description: 'text-zinc-500' } },
@@ -81,8 +87,8 @@
 
 			<div class:hidden={activeTab !== 2}>
 				<div class="space-y-6">
-					<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." existingPreviews={data.mod.icon ? [data.mod.icon] : []} />
-					<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple existingPreviews={data.mod.images?.map((i: any) => i.url) ?? []} onRemoveExisting={(idx: number) => { /* handled server-side via existing_order */ }} />
+					<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." existingPreviews={data.mod.icon ? [data.mod.icon] : []} onFilesChange={(files: File[]) => iconFiles = files} />
+					<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple existingPreviews={data.mod.images?.map((i: any) => i.url) ?? []} onRemoveExisting={(idx: number) => {}} onFilesChange={(files: File[]) => screenshotFiles = files} />
 				</div>
 			</div>
 

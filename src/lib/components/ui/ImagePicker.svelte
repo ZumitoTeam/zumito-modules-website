@@ -13,6 +13,7 @@
 		maxSize?: number;
 		existingPreviews?: string[];
 		onRemoveExisting?: (index: number) => void;
+		onFilesChange?: (files: File[]) => void;  // parent callback
 	}
 
 	let {
@@ -25,6 +26,7 @@
 		maxSize = 5_000_000,
 		existingPreviews = [],
 		onRemoveExisting,
+		onFilesChange,
 	}: Props = $props();
 
 	let inputEl: HTMLInputElement;
@@ -50,6 +52,14 @@
 			if (allItems.length + 1 > maxFiles) { error(`Max ${maxFiles} files`, f.name); continue; }
 			selectedFiles = [...selectedFiles, { file: f, url: URL.createObjectURL(f) }];
 		}
+		notifyParent();
+	}
+
+	function notifyParent() {
+		if (onFilesChange) {
+			const files = selectedFiles.map(f => f.file);
+			onFilesChange(files);
+		}
 	}
 
 	function onInputChange() {
@@ -70,6 +80,7 @@
 		} else {
 			inputEl.value = '';
 		}
+		notifyParent();
 	}
 	function removeExisting(idx: number) { onRemoveExisting?.(idx); removedExisting = new Set([...removedExisting, idx]); }
 
