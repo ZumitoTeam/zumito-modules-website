@@ -539,6 +539,7 @@ msgstr "Existing tags to categorize your module. You can add new ones."
 #~ msgid "Or type a new feature name and press Enter..."
 #~ msgstr "Or type a new feature name and press Enter..."
 
+#: src/lib/components/ui/ImagePicker.svelte
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Enter"
@@ -1148,8 +1149,9 @@ msgstr "Failed to upload images."
 msgid "Failed to upload images. Please try again."
 msgstr "Failed to upload images. Please try again."
 
-#~ msgid "Drag & drop or click to browse"
-#~ msgstr "Drag & drop or click to browse"
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "Drag & drop or click to browse"
+msgstr "Drag & drop or click to browse"
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -1196,6 +1198,8 @@ msgid "Failed to update module."
 msgstr "Failed to update module."
 
 #. 0: f.size
+#. 0: v.size
 #: src/routes/(app)/module/[slug]/edit/+page.server.ts
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
 msgid "File({0}b)"
 msgstr "File({0}b)"
