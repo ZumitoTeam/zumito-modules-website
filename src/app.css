@@ -18,4 +18,10 @@
   top: 4rem !important;
 }
 
+[data-sileo-toast] {
+  outline: 1px solid rgba(148, 163, 184, 0.12);
+  outline-offset: -1px;
+  border-radius: inherit;
+}
+
 
