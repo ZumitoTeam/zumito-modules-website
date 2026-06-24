@@ -64,12 +64,8 @@
 					<label for="image" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Avatar URL</label>
 					<p class="mt-1 text-xs text-zinc-400">Link to an image for your profile avatar.</p>
 					<div class="mt-2 flex items-center gap-4">
-						<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-400 dark:border-zinc-800 dark:bg-zinc-900">
-							{#if data.user.image}
-								<img src={data.user.image} alt="" class="h-full w-full rounded-xl object-cover" />
-							{:else}
-								<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-							{/if}
+						<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-400 overflow-hidden dark:border-zinc-800 dark:bg-zinc-900">
+							<img src={data.user.image ?? `https://api.dicebear.com/10.x/glyphs/svg?seed=${data.user.username ?? 'default'}`} alt="" class="h-full w-full rounded-xl object-cover" />
 						</div>
 						<input id="image" name="image" placeholder="https://..." value={data.user.image ?? ''}
 							class="flex-1 rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" />

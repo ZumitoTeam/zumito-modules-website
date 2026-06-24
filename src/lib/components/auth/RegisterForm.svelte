@@ -13,7 +13,7 @@
     loading = true;
 
     sileo.promise(
-      authClient.signUp.email({ email, password, name: username, username }),
+      authClient.signUp.email({ email, password, name: username, username, image: `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(username)}` }),
       {
         loading: {
           title: 'Creating account...',
