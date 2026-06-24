@@ -13,8 +13,3 @@
   --color-zumito-900: #881337;
 }
 
-[data-sileo-viewport][data-position="top-center"] {
-  top: 4rem !important;
-}
-
-
