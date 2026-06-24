@@ -78,11 +78,16 @@
 	}
 
 	// OS drag-drop
-	function dropZoneDragOver(e: DragEvent) { e.preventDefault(); dragging = true; }
+	function dropZoneDragOver(e: DragEvent) {
+		e.preventDefault();
+		if (dragSrcKey !== null) return;
+		dragging = true;
+	}
 	function dropZoneDragLeave() { dragging = false; }
 	function dropZoneDrop(e: DragEvent) {
 		e.preventDefault();
 		dragging = false;
+		if (dragSrcKey !== null) return; // internal reorder, handled by tile handlers
 		if (!e.dataTransfer?.files.length) return;
 		const dt = new DataTransfer();
 		for (let i = 0; i < e.dataTransfer.files.length; i++) dt.items.add(e.dataTransfer.files[i]);
@@ -176,7 +181,11 @@
 		onkeydown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') inputEl?.click(); }}
 	>
 		{#if allItems.length > 0}
-			<div class="grid gap-3 {multiple ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-1'}" onclick={(e: Event) => e.stopPropagation()} onkeydown={() => {}}>
+			<div class="grid gap-3 {multiple ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-1'}"
+			 onclick={(e: Event) => e.stopPropagation()}
+			 onkeydown={() => {}}
+			 ondragover={(e: DragEvent) => e.preventDefault()}
+			 ondrop={() => isNew ? dragEndNew() : dragEndExisting()}> <!-- fallback drop -->
 				{#each allItems as item, idx}
 					{@const isNew = item.type === 'new'}
 					{@const newIdx = isNew ? (item as { idx: number }).idx : -1}
