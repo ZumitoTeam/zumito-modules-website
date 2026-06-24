@@ -3,6 +3,7 @@
 	import { Toaster } from 'svelte-sileo';
 	import { browser } from '$app/environment';
 	import { loadLocale } from 'wuchale/load-utils';
+	import { onNavigate } from '$app/navigation';
 	import '../locales/main.loader.svelte.js';
 	import type { LayoutData } from './$types';
 
@@ -10,6 +11,16 @@
 
 	$effect(() => {
 		if (browser) loadLocale(data.locale);
+	});
+
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
 	});
 </script>
 

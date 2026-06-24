@@ -13,6 +13,21 @@
   --color-zumito-900: #881337;
 }
 
+/* Page transitions via View Transitions API */
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+::view-transition-old(root) {
+  animation: fade-out 0.15s ease-out;
+}
+::view-transition-new(root) {
+  animation: fade-in 0.2s ease-out;
+}
+
 /* Sileo: offset below navbar */
 section:where([data-sileo-viewport]) {
   top: 3.75rem !important;
