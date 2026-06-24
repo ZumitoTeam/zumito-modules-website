@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import NumberFlow from '@number-flow/svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -51,19 +52,19 @@
 
 			<div class="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 md:grid-cols-4">
 				<article class="bg-zinc-50 p-8 dark:bg-zinc-950">
-					<div class="text-4xl font-extrabold tabular-nums text-zumito-600">{fmt(data.stats.modules)}</div>
+					<div class="text-4xl font-extrabold tabular-nums text-zumito-600"><NumberFlow value={data.stats.modules} /></div>
 					<div class="mt-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">Modules</div>
 				</article>
 				<article class="bg-zinc-50 p-8 dark:bg-zinc-950">
-					<div class="text-4xl font-extrabold tabular-nums text-zinc-900 dark:text-zinc-100">{fmt(data.stats.installs)}</div>
+					<div class="text-4xl font-extrabold tabular-nums text-zinc-900 dark:text-zinc-100"><NumberFlow value={data.stats.installs} /></div>
 					<div class="mt-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">Installs</div>
 				</article>
 				<article class="bg-zinc-50 p-8 dark:bg-zinc-950">
-					<div class="text-4xl font-extrabold tabular-nums text-zinc-900 dark:text-zinc-100">{fmt(data.stats.developers)}</div>
+					<div class="text-4xl font-extrabold tabular-nums text-zinc-900 dark:text-zinc-100"><NumberFlow value={data.stats.developers} /></div>
 					<div class="mt-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">Creators</div>
 				</article>
 				<article class="bg-zinc-50 p-8 dark:bg-zinc-950">
-					<div class="text-4xl font-extrabold tabular-nums text-zinc-900 dark:text-zinc-100">{fmt(data.stats.features)}</div>
+					<div class="text-4xl font-extrabold tabular-nums text-zinc-900 dark:text-zinc-100"><NumberFlow value={data.stats.features} /></div>
 					<div class="mt-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">Features</div>
 				</article>
 			</div>

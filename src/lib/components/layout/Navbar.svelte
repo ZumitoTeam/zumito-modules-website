@@ -17,8 +17,8 @@
 
 		<div class="flex items-center gap-6">
 			<a href="/modules" class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">Browse</a>
+			<a href="/submit" class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">Submit</a>
 			{#if $page.data.user}
-				<a href="/submit" class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">Submit</a>
 				<a href="/user/profile" class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">Profile</a>
 				<button onclick={handleLogout} class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">Logout</button>
 			{:else}
