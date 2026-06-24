@@ -1,8 +1,41 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { sileo } from 'svelte-sileo';
 	import type { PageData } from './$types';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 	let { data, form }: { data: PageData; form?: any } = $props();
+
+	let profileLoading = $state(false);
+	let passwordLoading = $state(false);
+
+	const onProfileUpdate: SubmitFunction = () => {
+		profileLoading = true;
+		const toastId = sileo.loading({ title: 'Saving...', description: 'Updating your profile', fill: '#fafafa', styles: { title: 'text-zinc-900', description: 'text-zinc-500' } });
+		return async ({ result }) => {
+			profileLoading = false;
+			sileo.dismiss(toastId);
+			if (result.type === 'success') {
+				sileo.success({ title: 'Profile updated', description: 'Your changes have been saved.', fill: '#f0fdf4', styles: { title: 'text-green-800', description: 'text-green-600' } });
+			} else if (result.type === 'failure') {
+				sileo.error({ title: 'Update failed', description: result.data?.error || 'Please try again.', fill: '#fef2f2', styles: { title: 'text-red-800', description: 'text-red-600' } });
+			}
+		};
+	};
+
+	const onPasswordChange: SubmitFunction = () => {
+		passwordLoading = true;
+		const toastId = sileo.loading({ title: 'Changing password...', description: 'Please wait', fill: '#fafafa', styles: { title: 'text-zinc-900', description: 'text-zinc-500' } });
+		return async ({ result }) => {
+			passwordLoading = false;
+			sileo.dismiss(toastId);
+			if (result.type === 'success') {
+				sileo.success({ title: 'Password changed', description: 'Your password has been updated.', fill: '#f0fdf4', styles: { title: 'text-green-800', description: 'text-green-600' } });
+			} else if (result.type === 'failure') {
+				sileo.error({ title: 'Change failed', description: result.data?.error || 'Current password is incorrect.', fill: '#fef2f2', styles: { title: 'text-red-800', description: 'text-red-600' } });
+			}
+		};
+	};
 </script>
 
 <svelte:head><title>Profile — Zumito Modules</title></svelte:head>
@@ -17,17 +50,10 @@
 			<h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Public Profile</h2>
 			<p class="mt-1 text-sm text-zinc-500">This information appears on your published modules.</p>
 
-			<form method="POST" action="?/updateProfile" use:enhance class="mt-6 space-y-5">
-				{#if form?.success}
-					<div class="rounded-xl border border-green-200 bg-green-50 p-3 text-sm text-green-700 dark:border-green-500/20 dark:bg-green-500/5 dark:text-green-400">Profile updated successfully.</div>
-				{/if}
-				{#if form?.error}
-					<div class="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-500/20 dark:bg-red-500/5 dark:text-red-400">{form.error}</div>
-				{/if}
-
+			<form method="POST" action="?/updateProfile" use:enhance={onProfileUpdate} class="mt-6 space-y-5">
 				<div>
 					<label for="username" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Username</label>
-					<p class="mt-1 text-xs text-zinc-400">Your unique handle. Letters, numbers, and underscores only.</p>
+					<p class="mt-1 text-xs text-zinc-400">Your unique handle. Letters, numbers, and underscores.</p>
 					<input id="username" name="username" required minlength={3} value={data.user.username ?? ''}
 						class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" />
 				</div>
@@ -56,7 +82,10 @@
 					</div>
 				</div>
 
-				<button type="submit" class="rounded-full bg-zumito-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zumito-700 active:scale-[0.98]">Save Changes</button>
+				<button type="submit" disabled={profileLoading} class="flex items-center gap-2 rounded-full bg-zumito-600 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zumito-700 active:scale-[0.98] disabled:opacity-70">
+					{#if profileLoading}<svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>{/if}
+					{profileLoading ? 'Saving...' : 'Save Changes'}
+				</button>
 			</form>
 		</section>
 
@@ -65,11 +94,7 @@
 			<h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Change Password</h2>
 			<p class="mt-1 text-sm text-zinc-500">Use a strong password you don&apos;t use elsewhere.</p>
 
-			<form method="POST" action="?/changePassword" use:enhance class="mt-6 space-y-5">
-				{#if form?.passwordChanged}
-					<div class="rounded-xl border border-green-200 bg-green-50 p-3 text-sm text-green-700 dark:border-green-500/20 dark:bg-green-500/5 dark:text-green-400">Password changed successfully.</div>
-				{/if}
-
+			<form method="POST" action="?/changePassword" use:enhance={onPasswordChange} class="mt-6 space-y-5">
 				<div>
 					<label for="currentPassword" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Current Password</label>
 					<input id="currentPassword" name="currentPassword" type="password" required
@@ -83,22 +108,19 @@
 						class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" />
 				</div>
 
-				<button type="submit" class="rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zinc-800 active:scale-[0.98] dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">Update Password</button>
+				<button type="submit" disabled={passwordLoading} class="flex items-center gap-2 rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-zinc-800 active:scale-[0.98] disabled:opacity-70 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
+					{#if passwordLoading}<svg class="h-4 w-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>{/if}
+					{passwordLoading ? 'Updating...' : 'Update Password'}
+				</button>
 			</form>
 		</section>
 
-		<!-- Account info card -->
+		<!-- Account info -->
 		<section class="rounded-2xl border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-950">
 			<h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Account</h2>
 			<div class="mt-4 space-y-3 text-sm text-zinc-500">
-				<div class="flex justify-between">
-					<span>Member since</span>
-					<span class="font-medium text-zinc-700 dark:text-zinc-300">{new Date(data.user.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-				</div>
-				<div class="flex justify-between">
-					<span>Published modules</span>
-					<span class="font-medium text-zinc-700 dark:text-zinc-300">{data.user._count.modules}</span>
-				</div>
+				<div class="flex justify-between"><span>Member since</span><span class="font-medium text-zinc-700 dark:text-zinc-300">{new Date(data.user.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span></div>
+				<div class="flex justify-between"><span>Published modules</span><span class="font-medium text-zinc-700 dark:text-zinc-300">{data.user._count.modules}</span></div>
 			</div>
 		</section>
 	</div>
