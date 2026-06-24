@@ -1,0 +1,199 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ═══ Better Auth tables ═══
+
+model User {
+  id            String    @id @default(cuid()) @map("_id")
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  username      String    @unique
+
+  // Admin plugin fields
+  role          String    @default("user")
+  banned        Boolean   @default(false)
+  banReason     String?   @map("ban_reason")
+  banExpires    DateTime? @map("ban_expires")
+
+  sessions      Session[]
+  accounts      Account[]
+  modules       Module[]
+  comments      Comment[]
+  installs      ModuleInstall[]
+
+  @@map("user")
+}
+
+model Session {
+  id             String    @id @default(cuid()) @map("_id")
+  userId         String    @map("user_id")
+  expiresAt      DateTime  @map("expires_at")
+  token          String    @unique
+  ipAddress      String?   @map("ip_address")
+  userAgent      String?   @map("user_agent")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+  impersonatedBy String?   @map("impersonated_by")
+
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(cuid()) @map("_id")
+  userId                String    @map("user_id")
+  accountId             String    @map("account_id")
+  providerId            String    @map("provider_id")
+  accessToken           String?   @map("access_token")
+  refreshToken          String?   @map("refresh_token")
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at")
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at")
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now()) @map("created_at")
+  updatedAt             DateTime  @updatedAt @map("updated_at")
+
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @default(cuid()) @map("_id")
+  identifier String
+  value      String
+  expiresAt  DateTime @map("expires_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("verification")
+}
+
+// ═══ App tables ═══
+
+model Module {
+  id               String         @id @default(cuid()) @map("_id")
+  slug             String         @unique
+  name             String
+  description      String         @db.Text
+  shortDescription String?        @db.Text @map("short_description")
+  instructions     String         @db.Text
+  price            Decimal        @default(0)
+  npm              String
+  sourceCode       String?        @map("source_code")
+  published        Boolean        @default(false)
+  approved         Boolean        @default(false)
+  icon             String         @default("")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+
+  author           User           @relation(fields: [authorId], references: [id])
+  authorId         String         @map("author_id")
+
+  comments         Comment[]
+  faqs             ModuleFAQ[]
+  installs         ModuleInstall[]
+  images           ModuleImage[]
+  features         ModuleFeature[] @relation("ModuleFeatures")
+  dependencies     ModuleDependency[] @relation("ModuleDependenciesModule")
+  requiredBy       ModuleDependency[] @relation("ModuleDependenciesDependency")
+  addonTargets     ModuleAddon[]      @relation("ModuleAddonAddon")
+  addons           ModuleAddon[]      @relation("ModuleAddonBase")
+
+  @@index([published, approved])
+  @@index([createdAt])
+  @@map("module")
+}
+
+model Comment {
+  id        String   @id @default(cuid()) @map("_id")
+  content   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String   @map("author_id")
+  module    Module   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  moduleId  String   @map("module_id")
+
+  @@map("comment")
+}
+
+model ModuleFAQ {
+  id        String   @id @default(cuid()) @map("_id")
+  question  String
+  answer    String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  module    Module   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  moduleId  String   @map("module_id")
+
+  @@map("module_faq")
+}
+
+model ModuleInstall {
+  id        String   @id @default(cuid()) @map("_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @map("user_id")
+  module    Module   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  moduleId  String   @map("module_id")
+
+  @@unique([userId, moduleId])
+  @@map("module_install")
+}
+
+model ModuleImage {
+  id       String  @id @default(cuid()) @map("_id")
+  url      String
+  altText  String? @map("alt_text")
+
+  module   Module  @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  moduleId String  @map("module_id")
+
+  @@map("module_image")
+}
+
+model ModuleFeature {
+  id      String  @id @default(cuid()) @map("_id")
+  name    String  @unique
+  emoji   String  @default("🔧")
+
+  modules Module[] @relation("ModuleFeatures")
+
+  @@map("module_feature")
+}
+
+model ModuleDependency {
+  moduleId     String @map("module_id")
+  dependencyId String @map("dependency_id")
+
+  module     Module @relation("ModuleDependenciesModule", fields: [moduleId], references: [id], onDelete: Cascade)
+  dependency Module @relation("ModuleDependenciesDependency", fields: [dependencyId], references: [id], onDelete: Cascade)
+
+  @@id([moduleId, dependencyId])
+  @@map("module_dependency")
+}
+
+model ModuleAddon {
+  addonModuleId String @map("addon_module_id")
+  baseModuleId  String @map("base_module_id")
+
+  addonModule Module @relation("ModuleAddonAddon", fields: [addonModuleId], references: [id], onDelete: Cascade)
+  baseModule  Module @relation("ModuleAddonBase", fields: [baseModuleId], references: [id], onDelete: Cascade)
+
+  @@id([addonModuleId, baseModuleId])
+  @@map("module_addon")
+}

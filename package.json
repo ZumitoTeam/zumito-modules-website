@@ -1,0 +1,43 @@
+{
+	"name": "zumito-modules-website",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-node": "^5.5.4",
+		"@sveltejs/kit": "^2.63.0",
+		"@sveltejs/vite-plugin-svelte": "^7.1.2",
+		"@tailwindcss/vite": "^4.3.0",
+		"svelte": "^5.56.1",
+		"svelte-check": "^4.6.0",
+		"tailwindcss": "^4.3.0",
+		"typescript": "^6.0.3",
+		"vite": "^8.0.16"
+	},
+	"dependencies": {
+		"@formkit/auto-animate": "^0.9.0",
+		"@iconify/svelte": "^5.2.2",
+		"@milkdown/crepe": "^7.21.2",
+		"@milkdown/kit": "^7.21.2",
+		"@number-flow/svelte": "^0.4.0",
+		"@prisma/adapter-pg": "^7.8.0",
+		"@prisma/client": "^7.8.0",
+		"better-auth": "^1.6.20",
+		"dotenv": "^17.4.2",
+		"marked": "^18.0.5",
+		"minio": "^8.0.7",
+		"number-flow": "^0.6.0",
+		"prisma": "^7.8.0",
+		"svelte-sileo": "^1.1.0",
+		"web-haptics": "^0.0.6",
+		"wuchale": "^0.24.2"
+	}
+}
