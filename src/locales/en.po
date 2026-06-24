@@ -1158,12 +1158,10 @@ msgstr "Drag & drop or click to browse"
 msgid "Module Icon"
 msgstr "Module Icon"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "A square image shown in module cards. PNG or JPG."
 msgstr "A square image shown in module cards. PNG or JPG."
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Upload screenshots showing your module in action."
 msgstr "Upload screenshots showing your module in action."
@@ -1203,3 +1201,12 @@ msgstr "Failed to update module."
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 msgid "File({0}b)"
 msgstr "File({0}b)"
+
+#: src/lib/components/ui/ImagePicker.svelte
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "Upload failed"
+msgstr "Upload failed"
+
+#: src/lib/components/ui/ImagePicker.svelte
+msgid "Uploading..."
+msgstr "Uploading..."

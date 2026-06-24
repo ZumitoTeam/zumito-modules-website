@@ -1,19 +1,17 @@
 <script lang="ts">
 	import { scale } from 'svelte/transition';
 	import { expoOut } from 'svelte/easing';
-	import { onDestroy } from 'svelte';
+	import { sileo } from 'svelte-sileo';
 
 	interface Props {
 		name: string;
 		label: string;
 		description?: string;
 		multiple?: boolean;
-		accept?: string;
 		maxFiles?: number;
 		maxSize?: number;
 		existingPreviews?: string[];
-		onRemoveExisting?: (index: number) => void;
-		onFilesChange?: (files: File[]) => void;  // parent callback
+		moduleSlug?: string; // for edit mode (auto-associate with module)
 	}
 
 	let {
@@ -21,98 +19,92 @@
 		label: pickerLabel,
 		description,
 		multiple = false,
-		accept = 'image/png,image/jpeg',
 		maxFiles = multiple ? 6 : 1,
 		maxSize = 5_000_000,
 		existingPreviews = [],
-		onRemoveExisting,
-		onFilesChange,
+		moduleSlug,
 	}: Props = $props();
 
 	let inputEl: HTMLInputElement;
 	let dragging = $state(false);
-	let selectedFiles = $state<{ file: File; url: string }[]>([]);
+	let uploading = $state(false);
+	let uploadedUrls = $state<string[]>([]);
 	let existingOrder = $state(structuredClone(existingPreviews));
 	let removedExisting = $state<Set<number>>(new Set());
 	let errors = $state<{ name: string; reason: string }[]>([]);
 
-	onDestroy(() => { selectedFiles.forEach(f => URL.revokeObjectURL(f.url)); });
-
 	const visibleExisting = $derived(existingOrder.filter((_, i) => !removedExisting.has(i)));
-	const allItems = $derived([...visibleExisting.map((url) => ({ type: 'existing' as const, url })), ...selectedFiles.map((f, i) => ({ type: 'new' as const, url: f.url, idx: i }))]);
+	const allItems = $derived([...visibleExisting.map((url) => ({ type: 'existing' as const, url })), ...uploadedUrls.map((url, i) => ({ type: 'new' as const, url, idx: i }))]);
 	const canAddMore = $derived(allItems.length < maxFiles);
 
 	function error(msg: string, name: string) { errors = [...errors, { name, reason: msg }]; setTimeout(() => { errors = errors.filter(e => e.name !== name); }, 4000); }
 
-	function handleFiles(files: FileList) {
+	async function uploadFiles(files: FileList) {
+		uploading = true;
+		const uploadEndpoint = moduleSlug ? `/api/modules/${moduleSlug}/images` : '/api/upload';
+
 		for (let i = 0; i < files.length; i++) {
-			const f = files[i];
-			if (!f.type.startsWith('image/')) { error('Only images allowed', f.name); continue; }
-			if (f.size > maxSize) { error(`Max ${Math.round(maxSize / 1_000_000)}MB`, f.name); continue; }
-			if (allItems.length + 1 > maxFiles) { error(`Max ${maxFiles} files`, f.name); continue; }
-			selectedFiles = [...selectedFiles, { file: f, url: URL.createObjectURL(f) }];
+			const file = files[i];
+			if (!file.type.startsWith('image/')) { error('Only images allowed', file.name); continue; }
+			if (file.size > maxSize) { error(`Max ${Math.round(maxSize / 1_000_000)}MB`, file.name); continue; }
+			if (allItems.length + uploadedUrls.length + 1 > maxFiles) { error(`Max ${maxFiles} files`, file.name); continue; }
+
+			const form = new FormData();
+			form.append('file', file);
+			if (moduleSlug) form.append('action', 'upload');
+
+			try {
+				const res = await fetch(uploadEndpoint, { method: 'POST', body: form });
+				const data = await res.json();
+				if (data.ok) {
+					uploadedUrls = [...uploadedUrls, data.url];
+				} else {
+					error(data.error || 'Upload failed', file.name);
+				}
+			} catch {
+				error('Upload failed', file.name);
+			}
 		}
-		notifyParent();
+		uploading = false;
 	}
 
-	function notifyParent() {
-		if (onFilesChange) {
-			const files = selectedFiles.map(f => f.file);
-			console.log('ImagePicker notifyParent', { count: files.length, sizes: files.map(f => f.size) });
-			onFilesChange(files);
-		}
-	}
-
-	function onInputChange() {
-		if (inputEl?.files?.length) {
-			handleFiles(inputEl.files);
-		}
-	}
+	function onInputChange() { if (inputEl?.files?.length) uploadFiles(inputEl.files); }
 
 	function addMore(e: Event) { e.stopPropagation(); inputEl?.click(); }
 
-	function removeNew(idx: number) {
-		URL.revokeObjectURL(selectedFiles[idx].url);
-		selectedFiles = selectedFiles.filter((_, i) => i !== idx);
-		if (selectedFiles.length > 0) {
-			const dt = new DataTransfer();
-			for (const f of selectedFiles) dt.items.add(f.file);
-			inputEl.files = dt.files;
-		} else {
-			inputEl.value = '';
-		}
-		notifyParent();
+	async function removeExisting(idx: number) {
+		if (!moduleSlug) { removedExisting = new Set([...removedExisting, idx]); return; }
+		const url = existingOrder[idx];
+		const form = new FormData();
+		form.append('action', 'delete');
+		form.append('url', url);
+		const res = await fetch(`/api/modules/${moduleSlug}/images`, { method: 'POST', body: form });
+		const data = await res.json();
+		if (data.ok) removedExisting = new Set([...removedExisting, idx]);
 	}
-	function removeExisting(idx: number) { onRemoveExisting?.(idx); removedExisting = new Set([...removedExisting, idx]); }
 
-	function moveNewUp(idx: number) { if (idx <= 0) return; const items = [...selectedFiles]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; selectedFiles = items; }
-	function moveNewDown(idx: number) { if (idx >= selectedFiles.length - 1) return; const items = [...selectedFiles]; [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; selectedFiles = items; }
+	function removeNew(idx: number) { uploadedUrls = uploadedUrls.filter((_, i) => i !== idx); }
+
+	function moveNewUp(idx: number) { if (idx <= 0) return; const items = [...uploadedUrls]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; uploadedUrls = items; }
+	function moveNewDown(idx: number) { if (idx >= uploadedUrls.length - 1) return; const items = [...uploadedUrls]; [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; uploadedUrls = items; }
 	function moveExistingUp(idx: number) { if (idx <= 0) return; const items = [...existingOrder]; [items[idx - 1], items[idx]] = [items[idx], items[idx - 1]]; existingOrder = items; }
 	function moveExistingDown(idx: number) { if (idx >= existingOrder.length - 1) return; const items = [...existingOrder]; [items[idx], items[idx + 1]] = [items[idx + 1], items[idx]]; existingOrder = items; }
 
 	function dropZoneDragOver(e: DragEvent) { e.preventDefault(); dragging = true; }
 	function dropZoneDragLeave() { dragging = false; }
-	function dropZoneDrop(e: DragEvent) {
-		e.preventDefault(); dragging = false;
-		if (!e.dataTransfer?.files.length) return;
-		const dt = new DataTransfer();
-		for (let i = 0; i < e.dataTransfer.files.length; i++) dt.items.add(e.dataTransfer.files[i]);
-		if (inputEl) {
-			// Merge existing + dropped files on the input
-			const merged = new DataTransfer();
-			for (const f of inputEl.files ?? []) merged.items.add(f);
-			for (const f of dt.files) merged.items.add(f);
-			inputEl.files = merged.files;
-		}
-		handleFiles(dt.files);
-	}
+	async function dropZoneDrop(e: DragEvent) { e.preventDefault(); dragging = false; if (e.dataTransfer?.files.length) await uploadFiles(e.dataTransfer.files); }
 </script>
 
 <div class="relative space-y-3">
-	<input type="file" {name} {accept} {multiple}
+	<!-- File input overlay or off-screen -->
+	<input type="file" accept="image/png,image/jpeg" {multiple} data-name={name}
 		class={allItems.length === 0 ? 'absolute inset-0 z-10 cursor-pointer opacity-0' : 'absolute left-[-9999px] top-0 h-px w-px opacity-0'}
 		bind:this={inputEl} onchange={onInputChange} />
 
+	<!-- Hidden inputs with uploaded URLs (for form submission) -->
+	{#each uploadedUrls as url}
+		<input type="hidden" {name} value={url} />
+	{/each}
 	{#each existingOrder as url, i}
 		{#if !removedExisting.has(i)}
 			<input type="hidden" name="existing_order" value={url} />
@@ -125,7 +117,13 @@
 		ondragover={dropZoneDragOver} ondragleave={dropZoneDragLeave} ondrop={dropZoneDrop}
 		role="button" tabindex={0}
 		onkeydown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') inputEl?.click(); }}>
-		{#if allItems.length > 0}
+
+		{#if uploading}
+			<div class="flex flex-col items-center gap-3 py-4">
+				<svg class="h-8 w-8 animate-spin text-zumito-600" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+				<p class="text-sm text-zinc-500">Uploading...</p>
+			</div>
+		{:else if allItems.length > 0}
 			<div class="grid gap-3 {multiple ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-1'}" onclick={(e: Event) => e.stopPropagation()} onkeydown={() => {}}>
 				{#each allItems as item, idx}
 					{@const isNew = item.type === 'new'}
@@ -182,7 +180,7 @@
 			<span class="truncate">{err.name}</span><span>&mdash; {err.reason}</span>
 		</div>
 	{/each}
-	{#if selectedFiles.length > 0}
+	{#if uploadedUrls.length > 0}
 		<p class="text-xs text-zinc-500">{allItems.length} of {maxFiles} file{maxFiles !== 1 ? 's' : ''} selected</p>
 	{/if}
 </div>

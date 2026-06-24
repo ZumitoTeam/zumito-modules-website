@@ -95,8 +95,8 @@
 
 			<div class:hidden={activeTab !== 2}>
 				<div class="space-y-6">
-					<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." existingPreviews={data.mod.icon ? [data.mod.icon] : []} onFilesChange={(files: File[]) => iconFiles = files} />
-					<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple existingPreviews={data.mod.images?.map((i: any) => i.url) ?? []} onRemoveExisting={(idx: number) => {}} onFilesChange={(files: File[]) => screenshotFiles = files} />
+					<ImagePicker name="icon" label="Module Icon" moduleSlug={data.mod.slug} existingPreviews={data.mod.icon ? [data.mod.icon] : []} />
+					<ImagePicker name="screenshots" label="Screenshots" moduleSlug={data.mod.slug} multiple existingPreviews={data.mod.images?.map((i: any) => i.url) ?? []} />
 				</div>
 			</div>
 
