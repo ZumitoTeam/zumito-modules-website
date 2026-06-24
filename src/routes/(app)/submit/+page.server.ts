@@ -31,6 +31,11 @@ export const actions: Actions = {
 			.filter(Boolean);
 		const dependencyIds = form.getAll('dependencies') as string[];
 		const addonIds = form.getAll('addons') as string[];
+		const faqQuestions = form.getAll('faq_question') as string[];
+		const faqAnswers = form.getAll('faq_answer') as string[];
+		const faqs = faqQuestions
+			.map((q, i) => ({ question: q.trim(), answer: (faqAnswers[i] || '').trim() }))
+			.filter(f => f.question && f.answer);
 
 		if (!name || !slug || !description || !npm) {
 			return fail(400, { error: 'Name, slug, description, and npm package are required.' });
@@ -64,6 +69,9 @@ export const actions: Actions = {
 					: undefined,
 				addonTargets: addonIds.length > 0
 					? { create: addonIds.map(id => ({ baseModuleId: id })) }
+					: undefined,
+				faqs: faqs.length > 0
+					? { create: faqs }
 					: undefined,
 			},
 		});

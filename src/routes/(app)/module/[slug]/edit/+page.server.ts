@@ -58,9 +58,19 @@ export const actions: Actions = {
 			.filter(Boolean);
 		const dependencyIds = form.getAll('dependencies') as string[];
 		const addonIds = form.getAll('addons') as string[];
+		const faqQuestions = form.getAll('faq_question') as string[];
+		const faqAnswers = form.getAll('faq_answer') as string[];
+		const faqs = faqQuestions
+			.map((q, i) => ({ question: q.trim(), answer: (faqAnswers[i] || '').trim() }))
+			.filter(f => f.question && f.answer);
 
 		if (!name || !description || !npm) {
 			return fail(400, { error: 'Name, description, and npm package are required.' });
+		}
+
+		const existing = await prisma.module.findUnique({ where: { slug: params.slug } });
+		if (!existing || existing.authorId !== locals.user.id) {
+			throw redirect(303, `/module/${params.slug}`);
 		}
 
 		await prisma.module.update({
@@ -85,6 +95,7 @@ export const actions: Actions = {
 				},
 				dependencies: { deleteMany: {}, create: dependencyIds.map(id => ({ dependencyId: id })) },
 				addonTargets: { deleteMany: {}, create: addonIds.map(id => ({ baseModuleId: id })) },
+				faqs: { deleteMany: {}, create: faqs },
 			},
 		});
 

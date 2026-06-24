@@ -428,9 +428,8 @@ msgstr "<0/> Edit listing anytime"
 msgid "Fill in the details below to publish your module to the marketplace. All fields marked with <0/> are required."
 msgstr "Fill in the details below to publish your module to the marketplace. All fields marked with <0/> are required."
 
-#: src/routes/(app)/submit/+page.svelte
-msgid "<0/> There was a problem with your submission"
-msgstr "<0/> There was a problem with your submission"
+#~ msgid "<0/> There was a problem with your submission"
+#~ msgstr "<0/> There was a problem with your submission"
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -474,10 +473,8 @@ msgstr "Adds a powerful music queue system with Spotify and YouTube support"
 msgid "Description <0/>"
 msgstr "Description <0/>"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-#: src/routes/(app)/submit/+page.svelte
-msgid "Full description in Markdown. Explain what the module does, its features, and how to use it."
-msgstr "Full description in Markdown. Explain what the module does, its features, and how to use it."
+#~ msgid "Full description in Markdown. Explain what the module does, its features, and how to use it."
+#~ msgstr "Full description in Markdown. Explain what the module does, its features, and how to use it."
 
 #. 0: descriptionValue.length
 #: src/routes/(app)/submit/+page.svelte
@@ -489,7 +486,6 @@ msgstr "{0} characters"
 msgid "Installation Instructions"
 msgstr "Installation Instructions"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Step-by-step guide in Markdown. Include npm install command, setup steps, and configuration."
 msgstr "Step-by-step guide in Markdown. Include npm install command, setup steps, and configuration."
@@ -540,9 +536,8 @@ msgstr "Paid modules will be available soon. All modules are free for now."
 msgid "Existing tags to categorize your module. You can add new ones."
 msgstr "Existing tags to categorize your module. You can add new ones."
 
-#: src/routes/(app)/submit/+page.svelte
-msgid "Or type a new feature name and press Enter..."
-msgstr "Or type a new feature name and press Enter..."
+#~ msgid "Or type a new feature name and press Enter..."
+#~ msgstr "Or type a new feature name and press Enter..."
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -567,13 +562,11 @@ msgstr "Publish Module"
 msgid "Your module will be reviewed before appearing in the marketplace."
 msgstr "Your module will be reviewed before appearing in the marketplace."
 
-#: src/routes/(app)/submit/+page.svelte
-msgid "More options coming soon"
-msgstr "More options coming soon"
+#~ msgid "More options coming soon"
+#~ msgstr "More options coming soon"
 
-#: src/routes/(app)/submit/+page.svelte
-msgid "You'll be able to add screenshots, an icon, FAQ entries, and manage module dependencies after publishing. For now, submit the basics and edit later."
-msgstr "You'll be able to add screenshots, an icon, FAQ entries, and manage module dependencies after publishing. For now, submit the basics and edit later."
+#~ msgid "You'll be able to add screenshots, an icon, FAQ entries, and manage module dependencies after publishing. For now, submit the basics and edit later."
+#~ msgstr "You'll be able to add screenshots, an icon, FAQ entries, and manage module dependencies after publishing. For now, submit the basics and edit later."
 
 #: src/routes/(auth)/login/+page.svelte
 msgid "Welcome back to <0>Zumito</0> Modules"
@@ -864,6 +857,8 @@ msgstr "{0} — Zumito Modules"
 #~ msgstr "Gallery"
 
 #: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
 msgid "Description"
 msgstr "Description"
 
@@ -1006,8 +1001,9 @@ msgstr "Cannot be changed after creation."
 #~ msgid "Full description in Markdown. Explain features and usage."
 #~ msgstr "Full description in Markdown. Explain features and usage."
 
-#~ msgid "Step-by-step guide in Markdown. Include npm install command."
-#~ msgstr "Step-by-step guide in Markdown. Include npm install command."
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Step-by-step guide in Markdown. Include npm install command."
+msgstr "Step-by-step guide in Markdown. Include npm install command."
 
 #~ msgid "Link to the GitHub repository."
 #~ msgstr "Link to the GitHub repository."
@@ -1021,6 +1017,7 @@ msgid "URL Slug"
 msgstr "URL Slug"
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
 msgid "Or type a new feature and press Enter..."
 msgstr "Or type a new feature and press Enter..."
 
@@ -1061,7 +1058,67 @@ msgstr "Loaded from npm README"
 msgid "Unlock to edit"
 msgstr "Unlock to edit"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "<0/> Load from npm"
 msgstr "<0/> Load from npm"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "General"
+msgstr "General"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Images"
+msgstr "Images"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/>There was a problem"
+msgstr "<0/>There was a problem"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Full description in Markdown. Use the Load from npm button above to auto-fill from the package README."
+msgstr "Full description in Markdown. Use the Load from npm button above to auto-fill from the package README."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Images coming soon"
+msgstr "Images coming soon"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
+msgstr "You'll be able to upload screenshots and an icon for your module. For now, you can add them after publishing via the Edit page."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Frequently Asked Questions"
+msgstr "Frequently Asked Questions"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Add FAQ"
+msgstr "<0/> Add FAQ"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Question"
+msgstr "Question"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Answer (Markdown supported)"
+msgstr "Answer (Markdown supported)"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "No FAQs added yet. Click \"Add FAQ\" to get started."
+msgstr "No FAQs added yet. Click \"Add FAQ\" to get started."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "<0/>Load from npm"
+msgstr "<0/>Load from npm"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "No FAQs yet. Click \"Add FAQ\" to get started."
+msgstr "No FAQs yet. Click \"Add FAQ\" to get started."
