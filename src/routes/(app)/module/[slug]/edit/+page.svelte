@@ -81,8 +81,8 @@
 
 			<div class:hidden={activeTab !== 2}>
 				<div class="space-y-6">
-					<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." />
-					<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple />
+					<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." existingPreviews={data.mod.icon ? [data.mod.icon] : []} />
+					<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple existingPreviews={data.mod.images?.map((i: any) => i.url) ?? []} onRemoveExisting={(idx: number) => { /* handled server-side via existing_order */ }} />
 				</div>
 			</div>
 

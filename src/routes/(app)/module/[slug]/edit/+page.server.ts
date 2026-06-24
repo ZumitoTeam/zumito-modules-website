@@ -24,6 +24,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			dependencies: { select: { dependencyId: true } },
 			addonTargets: { select: { baseModuleId: true } },
 			faqs: { select: { question: true, answer: true } },
+			icon: true,
+			images: { select: { url: true, altText: true } },
 		},
 	});
 
@@ -93,6 +95,24 @@ export const actions: Actions = {
 			return fail(400, { error: 'Failed to upload images.' });
 		}
 
+		// Handle existing images reorder/delete
+		const existingOrder = form.getAll('existing_order') as string[];
+		const existing = await prisma.module.findUnique({ where: { slug: params.slug }, select: { images: true } });
+		const originalUrls = existing?.images.map(i => i.url) ?? [];
+		const deletedUrls = originalUrls.filter(url => !existingOrder.includes(url));
+
+		// Delete removed images from storage
+		for (const url of deletedUrls) {
+			const key = url.replace('/uploads/', '');
+			adapter.delete(key).catch(() => {});
+		}
+
+		// Prepare final image order: existing (reordered) + new uploads
+		const finalImages = [
+			...existingOrder.map((url, i) => ({ url, altText: originalUrls.includes(url) ? (existing?.images.find(im => im.url === url)?.altText ?? '') : '' })),
+			...imageRecords,
+		];
+
 		if (!name || !description || !npm) {
 			return fail(400, { error: 'Name, description, and npm package are required.' });
 		}
@@ -113,7 +133,7 @@ export const actions: Actions = {
 				sourceCode: sourceCode || null,
 				price,
 				...(iconUrl !== undefined ? { icon: iconUrl } : {}),
-				...(imageRecords.length > 0 ? { images: { create: imageRecords } } : {}),
+				images: { deleteMany: {}, create: finalImages },
 				features: {
 					set: [],
 					connect: await Promise.all(
