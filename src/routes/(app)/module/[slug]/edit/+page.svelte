@@ -37,7 +37,7 @@
 
 	const onUpdate: SubmitFunction = ({ formData }) => {
 		loading = true;
-		// Manually append files since DataTransfer on input doesn't persist in all browsers
+		console.log('onUpdate - screenshotFiles:', screenshotFiles.length, screenshotFiles.map(f => f.size));
 		for (const f of iconFiles) formData.append('icon', f);
 		for (const f of screenshotFiles) formData.append('screenshots', f);
 

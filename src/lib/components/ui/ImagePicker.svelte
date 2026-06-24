@@ -58,6 +58,7 @@
 	function notifyParent() {
 		if (onFilesChange) {
 			const files = selectedFiles.map(f => f.file);
+			console.log('ImagePicker notifyParent', { count: files.length, sizes: files.map(f => f.size) });
 			onFilesChange(files);
 		}
 	}
