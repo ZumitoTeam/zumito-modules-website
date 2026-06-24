@@ -1,0 +1,886 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"Source-Language: en\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/lib/components/LangPicker.svelte
+msgid "EN"
+msgstr "EN"
+
+#: src/lib/components/LangPicker.svelte
+msgid "ES"
+msgstr "ES"
+
+#: src/routes/(app)/+page.svelte
+msgid "Zumito Modules — Discord Bot Marketplace"
+msgstr "Zumito Modules — Discord Bot Marketplace"
+
+#: src/routes/(app)/+page.svelte
+msgid "Discord bot modules for the <0>Zumito</0> Framework"
+msgstr "Discord bot modules for the <0>Zumito</0> Framework"
+
+#: src/routes/(app)/+page.svelte
+msgid "Discover commands, events, and automations crafted by the community. Install them directly from the IDE."
+msgstr "Discover commands, events, and automations crafted by the community. Install them directly from the IDE."
+
+#: src/routes/(app)/+page.svelte
+msgid "Browse Modules <0/>"
+msgstr "Browse Modules <0/>"
+
+#: src/routes/(app)/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Submit a Module"
+msgstr "Submit a Module"
+
+#: src/routes/(app)/+page.svelte
+msgid "By the numbers"
+msgstr "By the numbers"
+
+#: src/routes/(app)/+page.svelte
+#: src/routes/admin/+layout.svelte
+#: src/routes/admin/modules/+page.svelte
+msgid "Modules"
+msgstr "Modules"
+
+#: src/routes/(app)/+page.svelte
+msgid "Installs"
+msgstr "Installs"
+
+#: src/routes/(app)/+page.svelte
+msgid "Creators"
+msgstr "Creators"
+
+#: src/routes/(app)/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+#: src/routes/admin/+layout.svelte
+#: src/routes/admin/features/+page.svelte
+msgid "Features"
+msgstr "Features"
+
+#: src/routes/(app)/+page.svelte
+msgid "Find modules by <0>capability</0>"
+msgstr "Find modules by <0>capability</0>"
+
+#: src/routes/(app)/+page.svelte
+msgid "Most installed modules"
+msgstr "Most installed modules"
+
+#: src/routes/(app)/+page.svelte
+msgid "View all →"
+msgstr "View all →"
+
+#. 0: mod.author.username
+#. 0: data.mod.author.username
+#. 0: mod.author.username
+#: src/routes/(app)/+page.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/modules/+page.svelte
+msgid "by {0}"
+msgstr "by {0}"
+
+#. 0: mod._count.installs
+#. 0: data.mod._count.installs
+#. 0: mod._count.installs
+#. 0: mod._count.installs
+#: src/routes/(app)/+page.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/modules/+page.svelte
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "{0} installs"
+msgstr "{0} installs"
+
+#: src/routes/(app)/+page.svelte
+msgid "No modules yet"
+msgstr "No modules yet"
+
+#: src/routes/(app)/+page.svelte
+msgid "Be the first to share a module with the community."
+msgstr "Be the first to share a module with the community."
+
+#: src/routes/(app)/+page.svelte
+msgid "Ready to share your work?"
+msgstr "Ready to share your work?"
+
+#: src/routes/(app)/+page.svelte
+msgid "Submit your module and reach Discord bot developers worldwide."
+msgstr "Submit your module and reach Discord bot developers worldwide."
+
+#: src/routes/(app)/+page.svelte
+msgid "Submit Module <0/>"
+msgstr "Submit Module <0/>"
+
+#: src/routes/(app)/+page.svelte
+msgid "Explore"
+msgstr "Explore"
+
+#: src/routes/admin/+layout.svelte
+#: src/routes/admin/+page.svelte
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: src/routes/admin/+layout.svelte
+#: src/routes/admin/users/+page.svelte
+msgid "Users"
+msgstr "Users"
+
+#: src/routes/admin/+page.svelte
+msgid "Admin Dashboard — Zumito Modules"
+msgstr "Admin Dashboard — Zumito Modules"
+
+#: src/routes/admin/+page.svelte
+msgid "Total Modules"
+msgstr "Total Modules"
+
+#: src/routes/admin/+page.svelte
+msgid "Pending Approval"
+msgstr "Pending Approval"
+
+#: src/routes/admin/+page.svelte
+msgid "Total Users"
+msgstr "Total Users"
+
+#: src/routes/admin/+page.svelte
+msgid "Total Installs"
+msgstr "Total Installs"
+
+#: src/lib/components/auth/RegisterForm.svelte
+#: src/lib/components/auth/RegisterForm.svelte
+msgid "Creating account..."
+msgstr "Creating account..."
+
+#: src/lib/components/auth/LoginForm.svelte
+#: src/lib/components/auth/RegisterForm.svelte
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Please wait"
+msgstr "Please wait"
+
+#: src/lib/components/auth/RegisterForm.svelte
+msgid "Account created!"
+msgstr "Account created!"
+
+#: src/lib/components/auth/RegisterForm.svelte
+msgid "Welcome to Zumito Modules"
+msgstr "Welcome to Zumito Modules"
+
+#: src/lib/components/auth/RegisterForm.svelte
+msgid "Registration failed"
+msgstr "Registration failed"
+
+#: src/lib/components/auth/RegisterForm.svelte
+msgid "Please try again"
+msgstr "Please try again"
+
+#: src/lib/components/auth/RegisterForm.svelte
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Username"
+msgstr "Username"
+
+#: src/lib/components/auth/LoginForm.svelte
+#: src/lib/components/auth/RegisterForm.svelte
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Email"
+msgstr "Email"
+
+#: src/lib/components/auth/LoginForm.svelte
+#: src/lib/components/auth/RegisterForm.svelte
+msgid "Password"
+msgstr "Password"
+
+#: src/lib/components/auth/RegisterForm.svelte
+#: src/routes/(auth)/register/+page.svelte
+msgid "Create account"
+msgstr "Create account"
+
+#: src/lib/components/auth/LoginForm.svelte
+#: src/lib/components/auth/LoginForm.svelte
+msgid "Signing in..."
+msgstr "Signing in..."
+
+#: src/lib/components/auth/LoginForm.svelte
+msgid "Welcome back!"
+msgstr "Welcome back!"
+
+#: src/lib/components/auth/LoginForm.svelte
+msgid "Logged in successfully"
+msgstr "Logged in successfully"
+
+#: src/lib/components/auth/LoginForm.svelte
+msgid "Login failed"
+msgstr "Login failed"
+
+#: src/lib/components/auth/LoginForm.svelte
+msgid "Check your credentials"
+msgstr "Check your credentials"
+
+#: src/lib/components/auth/LoginForm.svelte
+#: src/lib/components/layout/Navbar.svelte
+#: src/routes/(auth)/login/+page.svelte
+msgid "Sign in"
+msgstr "Sign in"
+
+#. 0: new Date().getFullYear()
+#: src/lib/components/layout/Footer.svelte
+msgid "© {0} <0>Zumito</0> Modules"
+msgstr "© {0} <0>Zumito</0> Modules"
+
+#: src/lib/components/layout/Navbar.svelte
+msgid "<0>Zumito</0> Modules"
+msgstr "<0>Zumito</0> Modules"
+
+#: src/lib/components/layout/Navbar.svelte
+msgid "Browse"
+msgstr "Browse"
+
+#: src/lib/components/layout/Navbar.svelte
+msgid "Submit"
+msgstr "Submit"
+
+#: src/lib/components/layout/Navbar.svelte
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Profile"
+msgstr "Profile"
+
+#: src/lib/components/layout/Navbar.svelte
+msgid "Logout"
+msgstr "Logout"
+
+#: src/lib/components/layout/Navbar.svelte
+msgid "Register"
+msgstr "Register"
+
+#: src/routes/(app)/modules/+page.svelte
+msgid "Browse Modules — Zumito Modules"
+msgstr "Browse Modules — Zumito Modules"
+
+#: src/routes/(app)/modules/+page.svelte
+msgid "All Modules"
+msgstr "All Modules"
+
+#: src/routes/(app)/modules/+page.svelte
+msgid "Search modules..."
+msgstr "Search modules..."
+
+#: src/routes/(app)/modules/+page.svelte
+msgid "Most Installed"
+msgstr "Most Installed"
+
+#: src/routes/(app)/modules/+page.svelte
+msgid "Most Recent"
+msgstr "Most Recent"
+
+#: src/routes/(app)/modules/+page.svelte
+msgid "Apply"
+msgstr "Apply"
+
+#: src/routes/(app)/modules/+page.svelte
+msgid "Clear"
+msgstr "Clear"
+
+#: src/routes/(app)/modules/+page.svelte
+msgid "No modules found"
+msgstr "No modules found"
+
+#: src/routes/(app)/modules/+page.svelte
+msgid "Try adjusting your search or filters."
+msgstr "Try adjusting your search or filters."
+
+#: src/lib/components/ui/Modal.svelte
+msgid "Escape"
+msgstr "Escape"
+
+#: src/lib/components/ui/Pagination.svelte
+msgid "Previous"
+msgstr "Previous"
+
+#. 0: currentPage; 1: totalPages
+#: src/lib/components/ui/Pagination.svelte
+msgid "Page {0} of {1}"
+msgstr "Page {0} of {1}"
+
+#: src/lib/components/ui/Pagination.svelte
+msgid "Next"
+msgstr "Next"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Submit Module — Zumito Modules"
+msgstr "Submit Module — Zumito Modules"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Share your <0>module</0> with the world"
+msgstr "Share your <0>module</0> with the world"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Publish your Zumito Framework module and reach thousands of Discord bot developers."
+msgstr "Publish your Zumito Framework module and reach thousands of Discord bot developers."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Sign In to Submit"
+msgstr "Sign In to Submit"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Create Account"
+msgstr "Create Account"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "What can you submit?"
+msgstr "What can you submit?"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Commands — slash and prefix bot commands"
+msgstr "Commands — slash and prefix bot commands"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Events — Discord and framework event handlers"
+msgstr "Events — Discord and framework event handlers"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Modules — complete feature packages"
+msgstr "Modules — complete feature packages"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Database models, routes, embeds, and more"
+msgstr "Database models, routes, embeds, and more"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Create your module"
+msgstr "Create your module"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Build it with the Zumito Framework. Use the CLI to scaffold commands, events, and models."
+msgstr "Build it with the Zumito Framework. Use the CLI to scaffold commands, events, and models."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Publish to npm"
+msgstr "Publish to npm"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Release your package on the npm registry with a version tag."
+msgstr "Release your package on the npm registry with a version tag."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Submit here"
+msgstr "Submit here"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Fill in the details, add screenshots, choose features. We review quickly."
+msgstr "Fill in the details, add screenshots, choose features. We review quickly."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Get discovered"
+msgstr "Get discovered"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Once approved, your module appears in the marketplace. Developers install via Zumito Studio."
+msgstr "Once approved, your module appears in the marketplace. Developers install via Zumito Studio."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Requirements"
+msgstr "Requirements"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Published npm package"
+msgstr "<0/> Published npm package"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Built with Zumito Framework"
+msgstr "<0/> Built with Zumito Framework"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Clear description and instructions"
+msgstr "<0/> Clear description and instructions"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Review Process"
+msgstr "Review Process"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Quick manual review"
+msgstr "<0/> Quick manual review"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Usually within 24h"
+msgstr "<0/> Usually within 24h"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Feedback if needed"
+msgstr "<0/> Feedback if needed"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "After Publishing"
+msgstr "After Publishing"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Track installs & comments"
+msgstr "<0/> Track installs & comments"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Push updates via npm"
+msgstr "<0/> Push updates via npm"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> Edit listing anytime"
+msgstr "<0/> Edit listing anytime"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Fill in the details below to publish your module to the marketplace. All fields marked with <0/> are required."
+msgstr "Fill in the details below to publish your module to the marketplace. All fields marked with <0/> are required."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "<0/> There was a problem with your submission"
+msgstr "<0/> There was a problem with your submission"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Module Name <0/>"
+msgstr "Module Name <0/>"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "The display name shown in the marketplace."
+msgstr "The display name shown in the marketplace."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "My Awesome Command Module"
+msgstr "My Awesome Command Module"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "URL Slug <0/>"
+msgstr "URL Slug <0/>"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Auto-generated from name. Use lowercase letters and dashes."
+msgstr "Auto-generated from name. Use lowercase letters and dashes."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Short Description"
+msgstr "Short Description"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "A one-line summary shown in module cards. Max ~120 characters."
+msgstr "A one-line summary shown in module cards. Max ~120 characters."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Adds a powerful music queue system with Spotify and YouTube support"
+msgstr "Adds a powerful music queue system with Spotify and YouTube support"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Description <0/>"
+msgstr "Description <0/>"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Full description in Markdown. Explain what the module does, its features, and how to use it."
+msgstr "Full description in Markdown. Explain what the module does, its features, and how to use it."
+
+#. 0: descriptionValue.length
+#: src/routes/(app)/submit/+page.svelte
+msgid "{0} characters"
+msgstr "{0} characters"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Installation Instructions"
+msgstr "Installation Instructions"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Step-by-step guide in Markdown. Include npm install command, setup steps, and configuration."
+msgstr "Step-by-step guide in Markdown. Include npm install command, setup steps, and configuration."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "NPM Package Name <0/>"
+msgstr "NPM Package Name <0/>"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "The exact name used in <0/>."
+msgstr "The exact name used in <0/>."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Source Code URL"
+msgstr "Source Code URL"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Link to the GitHub repository or source code."
+msgstr "Link to the GitHub repository or source code."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Pricing"
+msgstr "Pricing"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Free"
+msgstr "Free"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Paid"
+msgstr "Paid"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Paid modules will be available soon. All modules are free for now."
+msgstr "Paid modules will be available soon. All modules are free for now."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Existing tags to categorize your module. You can add new ones."
+msgstr "Existing tags to categorize your module. You can add new ones."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Or type a new feature name and press Enter..."
+msgstr "Or type a new feature name and press Enter..."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Enter"
+msgstr "Enter"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Dependencies"
+msgstr "Dependencies"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Other modules yours depends on. Hold Ctrl/Cmd to select multiple."
+msgstr "Other modules yours depends on. Hold Ctrl/Cmd to select multiple."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Publish Module"
+msgstr "Publish Module"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "Your module will be reviewed before appearing in the marketplace."
+msgstr "Your module will be reviewed before appearing in the marketplace."
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "More options coming soon"
+msgstr "More options coming soon"
+
+#: src/routes/(app)/submit/+page.svelte
+msgid "You'll be able to add screenshots, an icon, FAQ entries, and manage module dependencies after publishing. For now, submit the basics and edit later."
+msgstr "You'll be able to add screenshots, an icon, FAQ entries, and manage module dependencies after publishing. For now, submit the basics and edit later."
+
+#: src/routes/(auth)/login/+page.svelte
+msgid "Welcome back to <0>Zumito</0> Modules"
+msgstr "Welcome back to <0>Zumito</0> Modules"
+
+#: src/routes/(auth)/login/+page.svelte
+msgid "No account? <0>Register</0>"
+msgstr "No account? <0>Register</0>"
+
+#: src/routes/(app)/user/profile/+page.svelte
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Saving..."
+msgstr "Saving..."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Updating your profile"
+msgstr "Updating your profile"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Profile updated"
+msgstr "Profile updated"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Your changes have been saved."
+msgstr "Your changes have been saved."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Update failed"
+msgstr "Update failed"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Please try again."
+msgstr "Please try again."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Changing password..."
+msgstr "Changing password..."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Password changed"
+msgstr "Password changed"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Your password has been updated."
+msgstr "Your password has been updated."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Change failed"
+msgstr "Change failed"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Current password is incorrect."
+msgstr "Current password is incorrect."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Profile — Zumito Modules"
+msgstr "Profile — Zumito Modules"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Manage your account settings and preferences."
+msgstr "Manage your account settings and preferences."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Public Profile"
+msgstr "Public Profile"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "This information appears on your published modules."
+msgstr "This information appears on your published modules."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Your unique handle. Letters, numbers, and underscores."
+msgstr "Your unique handle. Letters, numbers, and underscores."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Avatar URL"
+msgstr "Avatar URL"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Link to an image for your profile avatar."
+msgstr "Link to an image for your profile avatar."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Save Changes"
+msgstr "Save Changes"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Change Password"
+msgstr "Change Password"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Use a strong password you don't use elsewhere."
+msgstr "Use a strong password you don't use elsewhere."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Current Password"
+msgstr "Current Password"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "New Password"
+msgstr "New Password"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Minimum 8 characters."
+msgstr "Minimum 8 characters."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Updating..."
+msgstr "Updating..."
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Update Password"
+msgstr "Update Password"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Account"
+msgstr "Account"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Member since"
+msgstr "Member since"
+
+#: src/routes/(app)/user/profile/+page.svelte
+msgid "Published modules"
+msgstr "Published modules"
+
+#: src/routes/admin/modules/+page.svelte
+msgid "Modules — Admin"
+msgstr "Modules — Admin"
+
+#: src/routes/admin/modules/+page.svelte
+msgid "All"
+msgstr "All"
+
+#: src/routes/(app)/user/modules/+page.svelte
+#: src/routes/admin/modules/+page.svelte
+msgid "Pending"
+msgstr "Pending"
+
+#: src/routes/admin/modules/+page.svelte
+msgid "Approved"
+msgstr "Approved"
+
+#. 0: mod.author.username; 1: mod._count.installs
+#: src/routes/admin/modules/+page.svelte
+msgid "by {0} · {1} installs"
+msgstr "by {0} · {1} installs"
+
+#: src/routes/admin/modules/+page.svelte
+msgid "Approve"
+msgstr "Approve"
+
+#: src/routes/admin/modules/+page.svelte
+msgid "Reject"
+msgstr "Reject"
+
+#: src/routes/admin/modules/+page.svelte
+msgid "View"
+msgstr "View"
+
+#: src/routes/admin/features/+page.svelte
+msgid "Features — Admin"
+msgstr "Features — Admin"
+
+#: src/routes/admin/features/+page.svelte
+msgid "Feature name"
+msgstr "Feature name"
+
+#: src/routes/admin/features/+page.svelte
+msgid "Add"
+msgstr "Add"
+
+#. 0: f._count.modules
+#: src/routes/admin/features/+page.svelte
+msgid "{0} modules"
+msgstr "{0} modules"
+
+#: src/routes/admin/features/+page.svelte
+msgid "Delete"
+msgstr "Delete"
+
+#: src/routes/(auth)/register/+page.svelte
+msgid "Join the <0>Zumito</0> community"
+msgstr "Join the <0>Zumito</0> community"
+
+#: src/routes/(auth)/register/+page.svelte
+msgid "Already have an account? <0>Sign in</0>"
+msgstr "Already have an account? <0>Sign in</0>"
+
+#: src/routes/admin/users/+page.svelte
+msgid "Users — Admin"
+msgstr "Users — Admin"
+
+#: src/routes/admin/users/+page.svelte
+msgid "Search..."
+msgstr "Search..."
+
+#: src/routes/admin/users/+page.svelte
+msgid "Search"
+msgstr "Search"
+
+#: src/routes/admin/users/+page.svelte
+msgid "Banned"
+msgstr "Banned"
+
+#: src/routes/admin/users/+page.svelte
+msgid "Demote"
+msgstr "Demote"
+
+#: src/routes/admin/users/+page.svelte
+msgid "Make Admin"
+msgstr "Make Admin"
+
+#: src/routes/admin/users/+page.svelte
+msgid "Unban"
+msgstr "Unban"
+
+#: src/routes/admin/users/+page.svelte
+msgid "Ban"
+msgstr "Ban"
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "My Modules — Zumito Modules"
+msgstr "My Modules — Zumito Modules"
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "My Modules"
+msgstr "My Modules"
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "Draft"
+msgstr "Draft"
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "Live"
+msgstr "Live"
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "You haven't submitted any modules yet."
+msgstr "You haven't submitted any modules yet."
+
+#. 0: data.mod.name
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Edit {0} — Zumito Modules"
+msgstr "Edit {0} — Zumito Modules"
+
+#. 0: data.mod.name
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Edit: {0}"
+msgstr "Edit: {0}"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Name <0/>"
+msgstr "Name <0/>"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Description (Markdown) <0/>"
+msgstr "Description (Markdown) <0/>"
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+msgid "Price (USD)"
+msgstr "Price (USD)"
+
+#. 0: data.mod.name
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "{0} — Zumito Modules"
+msgstr "{0} — Zumito Modules"
+
+#. 0: data.mod._count.comments
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "{0} comments"
+msgstr "{0} comments"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "<0/> Installed"
+msgstr "<0/> Installed"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Install with Zumito <0/>"
+msgstr "Install with Zumito <0/>"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Mark as Installed"
+msgstr "Mark as Installed"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Gallery"
+msgstr "Gallery"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Description"
+msgstr "Description"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Installation"
+msgstr "Installation"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "FAQ"
+msgstr "FAQ"
+
+#. 0: data.mod._count.comments
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Comments ({0})"
+msgstr "Comments ({0})"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Write a comment..."
+msgstr "Write a comment..."
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Post Comment"
+msgstr "Post Comment"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Required By"
+msgstr "Required By"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Source Code"
+msgstr "Source Code"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "View on GitHub <0/>"
+msgstr "View on GitHub <0/>"

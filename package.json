@@ -39,6 +39,6 @@
 		"prisma": "^7.8.0",
 		"svelte-sileo": "^1.1.0",
 		"web-haptics": "^0.0.6",
-		"wuchale": "^0.24.2"
+		"wuchale": "^0.23.4"
 	}
 }
