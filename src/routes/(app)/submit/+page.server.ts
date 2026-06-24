@@ -26,7 +26,9 @@ export const actions: Actions = {
 		const npm = form.get('npm') as string;
 		const sourceCode = form.get('sourceCode') as string;
 		const price = parseFloat(form.get('price') as string) || 0;
-		const featureNames = form.getAll('features') as string[];
+		const featureNames = (form.getAll('features') as string[])
+			.flatMap(f => f.split(',').map(s => s.trim()))
+			.filter(Boolean);
 		const dependencyIds = form.getAll('dependencies') as string[];
 		const addonIds = form.getAll('addons') as string[];
 
