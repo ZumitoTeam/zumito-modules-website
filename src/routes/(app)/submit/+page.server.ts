@@ -3,8 +3,6 @@ import { redirect, fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
-	if (!locals.user) throw redirect(303, '/login');
-
 	const features = await prisma.moduleFeature.findMany({ orderBy: { name: 'asc' } });
 	const modules = await prisma.module.findMany({
 		where: { published: true, approved: true },
@@ -12,7 +10,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		orderBy: { name: 'asc' },
 	});
 
-	return { features, modules };
+	return { user: locals.user, features, modules };
 };
 
 export const actions: Actions = {

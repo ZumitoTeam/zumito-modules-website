@@ -14,12 +14,12 @@ export const load: PageServerLoad = async () => {
 		prisma.moduleFeature.findMany({
 			select: { id: true, name: true, emoji: true, _count: { select: { modules: true } } },
 			orderBy: { modules: { _count: 'desc' } },
-			take: 6,
+			take: 12,
 		}),
 		prisma.module.findMany({
 			where: { published: true, approved: true },
 			orderBy: { installs: { _count: 'desc' } },
-			take: 6,
+			take: 5,
 			select: {
 				id: true,
 				slug: true,
@@ -35,12 +35,7 @@ export const load: PageServerLoad = async () => {
 	]);
 
 	return {
-		stats: {
-			modules: moduleCount,
-			installs: installCount,
-			developers: developerCount.length,
-			features: featureCount,
-		},
+		stats: { modules: moduleCount, installs: installCount, developers: developerCount.length, features: featureCount },
 		popularFeatures,
 		latestModules,
 	};

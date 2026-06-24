@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  --color-zumito-50: #fff5f7;
+  --color-zumito-100: #ffe4ea;
+  --color-zumito-200: #fecdd5;
+  --color-zumito-300: #fda4b3;
+  --color-zumito-400: #f982a2;
+  --color-zumito-500: #f472b6;
+  --color-zumito-600: #e11d48;
+  --color-zumito-700: #be123c;
+  --color-zumito-800: #9f1239;
+  --color-zumito-900: #881337;
+}
