@@ -12,3 +12,14 @@
   --color-zumito-800: #9f1239;
   --color-zumito-900: #881337;
 }
+
+/* Sileo toasts: below navbar, subtle border */
+[data-sileo-viewport] {
+  top: 4rem !important;
+}
+
+[data-sileo-toast] {
+  border: 1px solid oklch(from currentColor l c h / 0.12) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
