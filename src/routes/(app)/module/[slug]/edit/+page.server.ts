@@ -123,7 +123,8 @@ export const actions: Actions = {
 			return fail(400, { error: 'Name, description, and npm package are required.' });
 		}
 
-		await prisma.module.update({
+		try {
+			await prisma.module.update({
 			where: { slug: params.slug },
 			data: {
 				name,
@@ -134,7 +135,7 @@ export const actions: Actions = {
 				sourceCode: sourceCode || null,
 				price,
 				...(iconUrl !== undefined ? { icon: iconUrl } : {}),
-				images: { deleteMany: {}, create: finalImages },
+				images: { deleteMany: {}, create: finalImages.length > 0 ? finalImages : [] },
 				features: {
 					set: [],
 					connect: await Promise.all(
@@ -149,7 +150,11 @@ export const actions: Actions = {
 				addonTargets: { deleteMany: {}, create: addonIds.map(id => ({ baseModuleId: id })) },
 				...(faqs.length > 0 ? { faqs: { deleteMany: {}, create: faqs } } : {}),
 			},
-		});
+			});
+		} catch (e) {
+			console.error('Module update error:', e);
+			return fail(400, { error: e instanceof Error ? e.message : 'Failed to update module.' });
+		}
 
 		throw redirect(303, `/module/${params.slug}`);
 	},
