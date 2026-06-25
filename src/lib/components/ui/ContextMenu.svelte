@@ -8,7 +8,6 @@
 	let { items }: { items: Item[] } = $props();
 
 	let open = $state(false);
-	let btnEl = $state<HTMLElement>();
 
 	function toggle(e: Event) {
 		e.stopPropagation();
@@ -28,29 +27,26 @@
 <svelte:window onclick={close} />
 
 <div class="relative inline-flex" onclick={(e: Event) => e.stopPropagation()}>
-	<button bind:this={btnEl} onclick={toggle}
+	<button onclick={toggle}
 		class="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-600 cursor-pointer dark:hover:bg-zinc-800 dark:hover:text-zinc-300">
 		<Icon icon="tabler:dots-vertical" class="h-4 w-4" />
 	</button>
-</div>
 
-{#if open && btnEl}
-	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div class="fixed inset-0 z-30" onclick={close} />
-	<div class="fixed z-40 min-w-[160px] rounded-xl border border-zinc-200 bg-white p-1 shadow-xl dark:border-zinc-800 dark:bg-zinc-950"
-		style="top: {btnEl.getBoundingClientRect().bottom + 4}px; right: {window.innerWidth - btnEl.getBoundingClientRect().right}px;"
-		transition:scale={{ start: 0.92, duration: 150, easing: expoOut }}>
-		{#each items as item}
-			<button onclick={(e: Event) => handle(item, e)}
-				class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors
-				{item.danger ? 'text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10' : 'text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800'}">
-				{#if item.icon}
-					<Icon icon={item.icon} class="h-4 w-4 shrink-0" />
-				{:else}
-					<span class="w-4 shrink-0" />
-				{/if}
-				{item.label}
-			</button>
-		{/each}
-	</div>
-{/if}
+	{#if open}
+		<div class="absolute right-0 top-full z-50 mt-1 min-w-[160px] rounded-xl border border-zinc-200 bg-white p-1 shadow-xl dark:border-zinc-800 dark:bg-zinc-950"
+			transition:scale={{ start: 0.92, duration: 150, easing: expoOut }}>
+			{#each items as item}
+				<button onclick={(e: Event) => handle(item, e)}
+					class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors
+					{item.danger ? 'text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10' : 'text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800'}">
+					{#if item.icon}
+						<Icon icon={item.icon} class="h-4 w-4 shrink-0" />
+					{:else}
+						<span class="w-4 shrink-0" />
+					{/if}
+					{item.label}
+				</button>
+			{/each}
+		</div>
+	{/if}
+</div>
