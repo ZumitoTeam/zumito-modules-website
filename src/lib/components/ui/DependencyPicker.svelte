@@ -1,5 +1,5 @@
 <script lang="ts">
-	import autoAnimate from '@formkit/auto-animate/svelte';
+	import autoAnimate from '@formkit/auto-animate';
 	import Icon from '@iconify/svelte';
 
 	type ModuleOption = { id: string; name: string; slug: string };
