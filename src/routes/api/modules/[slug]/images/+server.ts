@@ -26,14 +26,19 @@ export const POST: RequestHandler = async ({ params, request, locals }) => {
 				if (!file.type.startsWith('image/')) throw error(400, 'Only images allowed');
 				if (file.size > 5_000_000) throw error(400, 'Max 5MB');
 
+				const type = form.get('type') as string || 'screenshot';
 				const ext = file.name.split('.').pop() || 'png';
-				const key = `screenshots/${randomBytes(8).toString('hex')}.${ext}`;
+				const key = type === 'icon' ? `modules/${mod.slug}/icon.${ext}` : `modules/${mod.slug}/screenshots/${randomBytes(8).toString('hex')}.${ext}`;
 				const buf = Buffer.from(await file.arrayBuffer());
 				const url = await adapter.upload(key, buf, file.type);
 
-				await prisma.moduleImage.create({
-					data: { url, altText: '', moduleId: mod.id },
-				});
+				if (type === 'icon') {
+					await prisma.module.update({ where: { id: mod.id }, data: { icon: url } });
+				} else {
+					await prisma.moduleImage.create({
+						data: { url, altText: '', moduleId: mod.id },
+					});
+				}
 
 				return json({ ok: true, url });
 			}

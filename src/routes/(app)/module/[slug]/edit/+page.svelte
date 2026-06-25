@@ -96,7 +96,7 @@
 
 			<div class="transition-all duration-200 {activeTab === 2 ? 'relative' : 'absolute inset-0 invisible opacity-0 pointer-events-none'}">
 				<div class="space-y-6">
-					<ImagePicker name="icon" label="Module Icon" moduleSlug={data.mod.slug} existingPreviews={data.mod.icon ? [data.mod.icon] : []} />
+					<ImagePicker name="icon" label="Module Icon" type="icon" moduleSlug={data.mod.slug} existingPreviews={data.mod.icon ? [data.mod.icon] : []} />
 					<ImagePicker name="screenshots" label="Screenshots" moduleSlug={data.mod.slug} multiple existingPreviews={data.mod.images?.map((i: any) => i.url) ?? []} />
 				</div>
 			</div>

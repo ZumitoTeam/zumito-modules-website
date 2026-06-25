@@ -15,7 +15,8 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	try {
 		const adapter = getFileAdapter();
 		const ext = file.name.split('.').pop() || 'png';
-		const key = `uploads/${randomBytes(8).toString('hex')}.${ext}`;
+		const type = form.get('type') as string;
+		const key = type === 'icon' ? `uploads/icons/${randomBytes(8).toString('hex')}.${ext}` : `uploads/${randomBytes(8).toString('hex')}.${ext}`;
 		const buf = Buffer.from(await file.arrayBuffer());
 		const url = await adapter.upload(key, buf, file.type);
 		return json({ ok: true, url });

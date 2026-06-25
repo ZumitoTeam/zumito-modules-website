@@ -124,7 +124,7 @@
 					<!-- TAB 2: Images -->
 					<div class="transition-all duration-200 {activeTab === 2 ? 'relative' : 'absolute inset-0 invisible opacity-0 pointer-events-none'}">
 						<div class="space-y-6">
-							<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." />
+							<ImagePicker name="icon" label="Module Icon" type="icon" description="A square image shown in module cards. PNG or JPG." />
 							<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple />
 						</div>
 					</div>

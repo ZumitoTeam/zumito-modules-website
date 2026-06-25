@@ -11,7 +11,8 @@
 		maxFiles?: number;
 		maxSize?: number;
 		existingPreviews?: string[];
-		moduleSlug?: string; // for edit mode (auto-associate with module)
+		moduleSlug?: string;
+		type?: string;
 	}
 
 	let {
@@ -23,6 +24,7 @@
 		maxSize = 5_000_000,
 		existingPreviews = [],
 		moduleSlug,
+		type = 'screenshot',
 	}: Props = $props();
 
 	let inputEl: HTMLInputElement;
@@ -51,7 +53,10 @@
 
 			const form = new FormData();
 			form.append('file', file);
-			if (moduleSlug) form.append('action', 'upload');
+			if (moduleSlug) {
+				form.append('action', 'upload');
+				form.append('type', type);
+			}
 
 			try {
 				const res = await fetch(uploadEndpoint, { method: 'POST', body: form });
