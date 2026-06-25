@@ -31,7 +31,7 @@ export const load: PageServerLoad = async ({ url }) => {
 export const actions: Actions = {
 	approve: async ({ request }) => {
 		const form = await request.formData();
-		await prisma.module.update({ where: { id: form.get('id') as string }, data: { approved: true } });
+		await prisma.module.update({ where: { id: form.get('id') as string }, data: { approved: true, published: true } });
 	},
 	reject: async ({ request }) => {
 		const form = await request.formData();
