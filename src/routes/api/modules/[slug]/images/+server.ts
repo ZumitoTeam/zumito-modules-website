@@ -5,7 +5,7 @@ import { randomBytes } from 'node:crypto';
 import type { RequestHandler } from './$types';
 
 async function requireOwnership(slug: string, userId: string) {
-	const mod = await prisma.module.findUnique({ where: { slug }, select: { id: true, authorId: true } });
+	const mod = await prisma.module.findUnique({ where: { slug }, select: { id: true, authorId: true, slug: true } });
 	if (!mod || mod.authorId !== userId) throw error(403, 'Not authorized');
 	return mod;
 }
