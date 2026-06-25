@@ -766,6 +766,7 @@ msgstr "Rechazar"
 
 #: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/(admin)/admin/pending/+page.svelte
+#: src/routes/(app)/user/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "View"
 msgstr "Ver"
@@ -1358,3 +1359,11 @@ msgstr "Vista previa del módulo"
 #: src/routes/(admin)/admin/modules/+page.svelte
 msgid "Unapprove"
 msgstr "Desaprobar"
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "Unpublish"
+msgstr "Despublicar"
+
+#: src/routes/(app)/user/modules/+page.svelte
+msgid "Publish"
+msgstr "Publicar"

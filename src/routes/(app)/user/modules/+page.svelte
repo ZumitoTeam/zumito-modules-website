@@ -2,7 +2,22 @@
 	import type { PageData } from './$types';
 	import Container from '$lib/components/layout/Container.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
+	import ContextMenu from '$lib/components/ui/ContextMenu.svelte';
 	let { data }: { data: PageData } = $props();
+
+	function togglePublish(id: string) {
+		const form = document.createElement('form');
+		form.method = 'POST';
+		form.action = '?/togglePublish';
+		form.style.display = 'none';
+		const input = document.createElement('input');
+		input.type = 'hidden';
+		input.name = 'id';
+		input.value = id;
+		form.appendChild(input);
+		document.body.appendChild(form);
+		form.submit();
+	}
 </script>
 
 <svelte:head><title>My Modules — Zumito Modules</title></svelte:head>
@@ -32,7 +47,15 @@
 						{:else}
 							<span class="rounded-full border border-green-200 bg-green-50 px-2.5 py-0.5 text-xs font-medium text-green-700 dark:border-green-800 dark:bg-green-950 dark:text-green-400">Live</span>
 						{/if}
-						<a href="/module/{mod.slug}/edit" class="text-xs text-zinc-400 transition-colors hover:text-zumito-600">Edit</a>
+						<ContextMenu
+							items={[
+								{ label: 'View', icon: 'tabler:eye', href: `/module/${mod.slug}` },
+								{ label: 'Edit', icon: 'tabler:edit', href: `/module/${mod.slug}/edit` },
+								mod.published
+									? { label: 'Unpublish', icon: 'tabler:eye-off', onclick: () => togglePublish(mod.id) }
+									: { label: 'Publish', icon: 'tabler:eye', onclick: () => togglePublish(mod.id) },
+							]}
+						/>
 					</div>
 				</div>
 			</Card>
