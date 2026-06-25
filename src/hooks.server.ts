@@ -9,7 +9,6 @@ const localeHandle: Handle = async ({ event, resolve }) => {
 	const cookieLocale = event.cookies.get('app-locale');
 	const acceptLanguage = event.request.headers.get('accept-language') ?? '';
 	const locale = cookieLocale || (acceptLanguage.includes('es') ? 'es' : 'en');
-
 	event.locals.locale = locale;
 	return resolve(event);
 };
@@ -19,7 +18,7 @@ const authHandle: Handle = async ({ event, resolve }) => {
 	const session = await auth.api.getSession({ headers: event.request.headers });
 	event.locals.user = session?.user ?? null;
 	event.locals.session = session?.session ?? null;
-	return svelteKitHandler({ event, resolve, auth, building: !dev });
+	return svelteKitHandler({ event, resolve, auth });
 };
 
-export const handle = sequence(localeHandle, authHandle);
+export const handle = sequence(authHandle, localeHandle);
