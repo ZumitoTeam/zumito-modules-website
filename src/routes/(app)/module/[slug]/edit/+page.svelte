@@ -66,7 +66,7 @@
 	<p class="mt-2 text-zinc-500 dark:text-zinc-400">Update your module details. All fields marked with <span class="text-zumito-600">*</span> are required.</p>
 
 	<Card variant="border" padding="lg" class="mt-8">
-		<Tabs tabs={['General', 'Description', 'Images', 'FAQ']} bind:active={activeTab} />
+		<Tabs tabs={[{ label: 'General', icon: 'tabler:settings' }, { label: 'Description', icon: 'tabler:align-left' }, { label: 'Images', icon: 'tabler:photo' }, { label: 'FAQ', icon: 'tabler:help-circle' }]} bind:active={activeTab} />
 		<form method="POST" use:enhance={onUpdate} enctype="multipart/form-data" class="mt-8 space-y-8">
 			<div class:hidden={activeTab !== 0}>
 				<div class="grid gap-6 sm:grid-cols-2">
