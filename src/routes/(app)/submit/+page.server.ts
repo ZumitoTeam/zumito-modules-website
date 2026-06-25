@@ -52,7 +52,7 @@ export const actions: Actions = {
 				images: screenshots.length > 0 ? { create: screenshots.map(url => ({ url, altText: '' })) } : undefined,
 				features: { connect: await Promise.all(featureNames.map(async (n) => { let f = await prisma.moduleFeature.findUnique({ where: { name: n } }); if (!f) f = await prisma.moduleFeature.create({ data: { name: n } }); return { id: f.id }; })) },
 				dependencies: dependencyIds.length > 0 ? { create: dependencyIds.map(id => ({ dependencyId: id })) } : undefined,
-				addons: addonIds.length > 0 ? { create: addonIds.map(id => ({ baseModuleId: id })) } : undefined,
+				addonTargets: addonIds.length > 0 ? { create: addonIds.map(id => ({ baseModuleId: id })) } : undefined,
 				faqs: faqs.length > 0 ? { create: faqs } : undefined,
 			},
 		});

@@ -88,7 +88,8 @@ export const actions: Actions = {
 					...(iconUrl ? { icon: iconUrl } : {}),
 					features: { set: [], connect: await Promise.all(featureNames.map(async (n) => { let f = await prisma.moduleFeature.findUnique({ where: { name: n } }); if (!f) f = await prisma.moduleFeature.create({ data: { name: n } }); return { id: f.id }; })) },
 					dependencies: { deleteMany: {}, create: dependencyIds.map(id => ({ dependencyId: id })) },
-					addons: { deleteMany: {}, create: addonIds.map(id => ({ baseModuleId: id })) },
+					addons: { deleteMany: {} },
+					addonTargets: { deleteMany: {}, create: addonIds.map(id => ({ baseModuleId: id })) },
 					...(faqs.length > 0 ? { faqs: { deleteMany: {}, create: faqs } } : {}),
 				},
 			});
