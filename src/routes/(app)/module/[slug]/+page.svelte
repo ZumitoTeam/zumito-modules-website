@@ -21,9 +21,7 @@
 		if (e.key === 'ArrowLeft') prevImage();
 	}
 	function scrollTo(id: string) {
-		const d = document.getElementById(id + '-d');
-		const m = document.getElementById(id + '-m');
-		const el = (d?.offsetParent ? d : null) ?? (m?.offsetParent ? m : null) ?? document.getElementById(id);
+		const el = document.querySelector(`#${id}-d:not(.hidden), #${id}-m, #${id}`);
 		el?.scrollIntoView({ behavior: 'smooth' });
 	}
 </script>
