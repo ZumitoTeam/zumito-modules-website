@@ -37,7 +37,7 @@
 			transition:scale={{ start: 0.92, duration: 150, easing: expoOut }}>
 			{#each items as item}
 				<button onclick={(e: Event) => handle(item, e)}
-					class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors
+					class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors cursor-pointer
 					{item.danger ? 'text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-500/10' : 'text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800'}">
 					{#if item.icon}
 						<Icon icon={item.icon} class="h-4 w-4 shrink-0" />
