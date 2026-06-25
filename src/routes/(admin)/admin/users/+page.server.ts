@@ -31,7 +31,7 @@ export const actions: Actions = {
 		const userId = form.get('userId') as string;
 		const user = await prisma.user.findUnique({ where: { id: userId } });
 		if (!user) return;
-		const newRole = user.role === 'admin' ? 'user' : 'admin';
+		const newRole = (user.role ?? '').includes('admin') ? 'user' : 'admin';
 		await prisma.user.update({ where: { id: userId }, data: { role: newRole } });
 	},
 };

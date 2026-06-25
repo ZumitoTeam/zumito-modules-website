@@ -38,6 +38,7 @@ msgstr "Submit a Module"
 msgid "By the numbers"
 msgstr "By the numbers"
 
+#: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/(app)/+page.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/modules/+page.svelte
@@ -53,6 +54,8 @@ msgstr "Installs"
 msgid "Creators"
 msgstr "Creators"
 
+#: src/routes/(admin)/admin/+layout.svelte
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/(app)/+page.svelte
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -113,11 +116,13 @@ msgstr "Submit Module <0/>"
 msgid "Explore"
 msgstr "Explore"
 
+#: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/+page.svelte
 msgid "Dashboard"
 msgstr "Dashboard"
 
+#: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Users"
@@ -742,23 +747,29 @@ msgstr "Reject"
 msgid "View"
 msgstr "View"
 
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "Features — Admin"
 msgstr "Features — Admin"
 
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "Feature name"
 msgstr "Feature name"
 
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "Add"
 msgstr "Add"
 
 #. 0: f._count.modules
+#. 0: f._count.modules
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "{0} modules"
 msgstr "{0} modules"
 
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "Delete"
 msgstr "Delete"
@@ -1226,3 +1237,15 @@ msgstr "Open menu"
 #: src/lib/components/layout/Navbar.svelte
 msgid "<0/> Logout"
 msgstr "<0/> Logout"
+
+#: src/routes/(admin)/admin/+layout.svelte
+msgid "Back to site"
+msgstr "Back to site"
+
+#: src/routes/(admin)/admin/+layout.svelte
+msgid "Z"
+msgstr "Z"
+
+#: src/routes/(admin)/admin/+layout.svelte
+msgid "Zumito Admin"
+msgstr "Zumito Admin"

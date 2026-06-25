@@ -38,6 +38,7 @@ msgstr "Enviar un Módulo"
 msgid "By the numbers"
 msgstr "En números"
 
+#: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/(app)/+page.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/modules/+page.svelte
@@ -53,6 +54,8 @@ msgstr "Instalaciones"
 msgid "Creators"
 msgstr "Creadores"
 
+#: src/routes/(admin)/admin/+layout.svelte
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/(app)/+page.svelte
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
@@ -113,11 +116,13 @@ msgstr "Enviar Módulo <0/>"
 msgid "Explore"
 msgstr "Explorar"
 
+#: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/+page.svelte
 msgid "Dashboard"
 msgstr "Panel"
 
+#: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Users"
@@ -742,23 +747,29 @@ msgstr "Rechazar"
 msgid "View"
 msgstr "Ver"
 
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "Features — Admin"
 msgstr "Funcionalidades — Admin"
 
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "Feature name"
 msgstr "Nombre de la funcionalidad"
 
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "Add"
 msgstr "Agregar"
 
 #. 0: f._count.modules
+#. 0: f._count.modules
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "{0} modules"
 msgstr "{0} módulos"
 
+#: src/routes/(admin)/admin/features/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "Delete"
 msgstr "Eliminar"
@@ -1226,3 +1237,15 @@ msgstr "Abrir menú"
 #: src/lib/components/layout/Navbar.svelte
 msgid "<0/> Logout"
 msgstr "<0/> Cerrar sesión"
+
+#: src/routes/(admin)/admin/+layout.svelte
+msgid "Back to site"
+msgstr "Volver al sitio"
+
+#: src/routes/(admin)/admin/+layout.svelte
+msgid "Z"
+msgstr "Z"
+
+#: src/routes/(admin)/admin/+layout.svelte
+msgid "Zumito Admin"
+msgstr "Zumito Admin"
