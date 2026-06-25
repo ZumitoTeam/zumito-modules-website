@@ -13,14 +13,14 @@
 	<div class="mt-8 space-y-4">
 		{#each data.modules as mod}
 			<Card variant="border" padding="md">
-				<div class="flex items-center justify-between">
-					<div class="flex items-center gap-3">
+				<div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+					<div class="flex items-center gap-3 min-w-0">
 						<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-500">
 							{#if mod.icon}<img src={mod.icon} alt="" class="h-full w-full rounded-xl object-cover" />{:else}<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /></svg>{/if}
 						</div>
-						<div>
-							<a href="/module/{mod.slug}" class="font-semibold text-zinc-900 transition-colors hover:text-zumito-600 dark:text-zinc-100">{mod.name}</a>
-							<p class="text-sm text-zinc-500">{mod.shortDescription ?? ''}</p>
+						<div class="min-w-0">
+							<a href="/module/{mod.slug}" class="font-semibold text-zinc-900 transition-colors hover:text-zumito-600 dark:text-zinc-100 truncate">{mod.name}</a>
+							<p class="text-sm text-zinc-500 truncate">{mod.shortDescription ?? ''}</p>
 						</div>
 					</div>
 					<div class="flex items-center gap-3 text-sm shrink-0">
