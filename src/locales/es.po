@@ -572,6 +572,7 @@ msgid "Enter"
 msgstr "Enter"
 
 #: src/lib/components/ui/DependencyPicker.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Dependencies"
 msgstr "Dependencias"
 
@@ -1375,6 +1376,7 @@ msgstr "Buscar módulos para agregar como dependencias. Mantén presionada Ctrl/
 msgid "Add more..."
 msgstr "Añadir más..."
 
+#: src/routes/(app)/module/[slug]/+page.svelte
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
 #: src/routes/(app)/submit/+page.svelte
 msgid "Addons"
@@ -1389,3 +1391,7 @@ msgstr "<0/> Complementos"
 #: src/routes/(app)/module/[slug]/+page.svelte
 msgid "<0/> Addon for"
 msgstr "<0/> Complemento para"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "Addon for"
+msgstr "Complemento para"

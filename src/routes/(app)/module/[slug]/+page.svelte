@@ -21,7 +21,8 @@
 		if (e.key === 'ArrowLeft') prevImage();
 	}
 	function scrollTo(id: string) {
-		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+		const el = document.querySelector(`[data-section="${id}"]:not(.hidden)`) || document.getElementById(id);
+		el?.scrollIntoView({ behavior: 'smooth' });
 	}
 </script>
 
@@ -138,7 +139,7 @@
 		<!-- Mobile: Deps / Addons / Addon-for below comments -->
 		<div class="mt-8 flex flex-col gap-5 lg:hidden">
 			{#if data.mod.dependencies?.length > 0}
-				<Card variant="shadow" padding="md">
+				<Card variant="shadow" padding="md" data-section="addons">
 					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 						<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6.857 4.5h10.286c.955 0 1.857.536 2.329 1.401l1.143 2.057c.388.697.388 1.543 0 2.24l-1.143 2.057a2.571 2.571 0 01-2.329 1.401H6.857a2.571 2.571 0 01-2.329-1.401L3.385 10.2a2.571 2.571 0 010-2.24l1.143-2.057A2.571 2.571 0 016.857 4.5z"/></svg>
 						Dependencies
@@ -158,7 +159,7 @@
 				</Card>
 			{/if}
 			{#if data.mod.addons?.length > 0}
-				<Card variant="shadow" padding="md">
+				<Card variant="shadow" padding="md" data-section="addons">
 					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 						<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg>
 						Addons
@@ -178,7 +179,7 @@
 				</Card>
 			{/if}
 			{#if data.mod.addonTargets?.length > 0}
-				<Card variant="shadow" padding="md">
+				<Card variant="shadow" padding="md" data-section="addonfor">
 					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 						<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
 						Addon for
@@ -228,7 +229,7 @@
 
 		<!-- Dependencies -->
 		{#if data.mod.dependencies?.length > 0}
-			<Card variant="shadow" padding="md" class="hidden lg:block">
+			<Card variant="shadow" padding="md" class="hidden lg:block" data-section="deps">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6.857 4.5h10.286c.955 0 1.857.536 2.329 1.401l1.143 2.057c.388.697.388 1.543 0 2.24l-1.143 2.057a2.571 2.571 0 01-2.329 1.401H6.857a2.571 2.571 0 01-2.329-1.401L3.385 10.2a2.571 2.571 0 010-2.24l1.143-2.057A2.571 2.571 0 016.857 4.5z"/></svg>
 					Dependencies
@@ -250,7 +251,7 @@
 
 		<!-- Addons (modules that extend this one) -->
 		{#if data.mod.addons?.length > 0}
-			<Card variant="shadow" padding="md" class="hidden lg:block">
+			<Card variant="shadow" padding="md" class="hidden lg:block" data-section="addons">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg>
 					Addons
@@ -272,7 +273,7 @@
 
 		<!-- Addon for (this module extends these) -->
 		{#if data.mod.addonTargets?.length > 0}
-			<Card variant="shadow" padding="md" class="hidden lg:block">
+			<Card variant="shadow" padding="md" class="hidden lg:block" data-section="addonfor">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
 					Addon for
@@ -294,6 +295,27 @@
 
 		<!-- Sidebar links: FAQ, Comments -->
 		<Card variant="shadow" padding="sm" class="overflow-hidden !p-0">
+			{#if data.mod.dependencies?.length > 0}
+				<button onclick={() => scrollTo('deps')} class="flex w-full items-center gap-3 border-b border-zinc-200 px-5 py-3 text-left text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
+					<svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6.857 4.5h10.286c.955 0 1.857.536 2.329 1.401l1.143 2.057c.388.697.388 1.543 0 2.24l-1.143 2.057a2.571 2.571 0 01-2.329 1.401H6.857a2.571 2.571 0 01-2.329-1.401L3.385 10.2a2.571 2.571 0 010-2.24l1.143-2.057A2.571 2.571 0 016.857 4.5z"/></svg>
+					<span class="flex-1">Dependencies</span>
+					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+				</button>
+			{/if}
+			{#if data.mod.addons?.length > 0}
+				<button onclick={() => scrollTo('addons')} class="flex w-full items-center gap-3 border-b border-zinc-200 px-5 py-3 text-left text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
+					<svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg>
+					<span class="flex-1">Addons</span>
+					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+				</button>
+			{/if}
+			{#if data.mod.addonTargets?.length > 0}
+				<button onclick={() => scrollTo('addonfor')} class="flex w-full items-center gap-3 border-b border-zinc-200 px-5 py-3 text-left text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
+					<svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+					<span class="flex-1">Addon for</span>
+					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+				</button>
+			{/if}
 			{#if data.mod.faqs?.length > 0}
 				<button onclick={() => scrollTo('faq-section')} class="flex w-full items-center gap-3 border-b border-zinc-200 px-5 py-3 text-left text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100">
 					<svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M20.975 11.33a9 9 0 10-5.673 9.043"/><path d="M3.6 9h16.8"/><path d="M3.6 15h9.9"/><path d="M11.5 3a17 17 0 000 18"/><path d="M12.5 3a16.988 16.988 0 012.57 9.518"/></svg>
