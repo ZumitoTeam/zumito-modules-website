@@ -78,7 +78,7 @@
 {/if}
 
 <!-- Content + Sidebar -->
-<div class="mx-auto flex max-w-screen-xl flex-col gap-12 px-4 py-12 lg:flex-row">
+<div class="mx-auto flex max-w-screen-xl flex-col-reverse gap-12 px-4 py-12 lg:flex-row">
 	<!-- Main content (left, 2/3) -->
 	<div class="w-full lg:w-4/6">
 		<div class="mb-4 text-2xl font-semibold text-zinc-900 dark:text-white">
@@ -134,6 +134,70 @@
 				<button type="submit" class="mt-3 rounded-full bg-zumito-600 px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-zumito-700 active:scale-[0.98]">Post Comment</button>
 			</form>
 		</Card>
+
+		<!-- Mobile: Deps / Addons / Addon-for below comments -->
+		<div class="flex flex-col gap-5 lg:hidden">
+			{#if data.mod.dependencies?.length > 0}
+				<Card variant="shadow" padding="md">
+					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
+						<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6.857 4.5h10.286c.955 0 1.857.536 2.329 1.401l1.143 2.057c.388.697.388 1.543 0 2.24l-1.143 2.057a2.571 2.571 0 01-2.329 1.401H6.857a2.571 2.571 0 01-2.329-1.401L3.385 10.2a2.571 2.571 0 010-2.24l1.143-2.057A2.571 2.571 0 016.857 4.5z"/></svg>
+						Dependencies
+					</div>
+					<div class="flex flex-col gap-3">
+						{#each data.mod.dependencies as dep}
+							<a href="/module/{dep.dependency.slug}" class="flex items-start gap-3 rounded-lg border border-zinc-200 p-3 transition hover:border-zumito-300 hover:shadow-md dark:border-zinc-800 dark:hover:border-zumito-600">
+								{#if dep.dependency.icon}
+									<img src={dep.dependency.icon} alt="" class="h-10 w-10 rounded border border-zinc-200 object-cover dark:border-zinc-800" />
+								{/if}
+								<div>
+									<div class="text-sm font-semibold text-zinc-900 dark:text-white">{dep.dependency.name}</div>
+								</div>
+							</a>
+						{/each}
+					</div>
+				</Card>
+			{/if}
+			{#if data.mod.addons?.length > 0}
+				<Card variant="shadow" padding="md">
+					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
+						<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg>
+						Addons
+					</div>
+					<div class="flex flex-col gap-3">
+						{#each data.mod.addons as a}
+							<a href="/module/{a.addonModule.slug}" class="flex items-start gap-3 rounded-lg border border-zinc-200 p-3 transition hover:border-zumito-300 hover:shadow-md dark:border-zinc-800 dark:hover:border-zumito-600">
+								{#if a.addonModule.icon}
+									<img src={a.addonModule.icon} alt="" class="h-10 w-10 rounded border border-zinc-200 object-cover dark:border-zinc-800" />
+								{/if}
+								<div>
+									<div class="text-sm font-semibold text-zinc-900 dark:text-white">{a.addonModule.name}</div>
+								</div>
+							</a>
+						{/each}
+					</div>
+				</Card>
+			{/if}
+			{#if data.mod.addonTargets?.length > 0}
+				<Card variant="shadow" padding="md">
+					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
+						<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+						Addon for
+					</div>
+					<div class="flex flex-col gap-3">
+						{#each data.mod.addonTargets as a}
+							<a href="/module/{a.baseModule.slug}" class="flex items-start gap-3 rounded-lg border border-zinc-200 p-3 transition hover:border-zumito-300 hover:shadow-md dark:border-zinc-800 dark:hover:border-zumito-600">
+								{#if a.baseModule.icon}
+									<img src={a.baseModule.icon} alt="" class="h-10 w-10 rounded border border-zinc-200 object-cover dark:border-zinc-800" />
+								{/if}
+								<div>
+									<div class="text-sm font-semibold text-zinc-900 dark:text-white">{a.baseModule.name}</div>
+								</div>
+							</a>
+						{/each}
+					</div>
+				</Card>
+			{/if}
+		</div>
 	</div>
 
 	<!-- Sidebar (right, 1/3) -->
@@ -164,7 +228,7 @@
 
 		<!-- Dependencies -->
 		{#if data.mod.dependencies?.length > 0}
-			<Card variant="shadow" padding="md">
+			<Card variant="shadow" padding="md" class="hidden lg:block">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6.857 4.5h10.286c.955 0 1.857.536 2.329 1.401l1.143 2.057c.388.697.388 1.543 0 2.24l-1.143 2.057a2.571 2.571 0 01-2.329 1.401H6.857a2.571 2.571 0 01-2.329-1.401L3.385 10.2a2.571 2.571 0 010-2.24l1.143-2.057A2.571 2.571 0 016.857 4.5z"/></svg>
 					Dependencies
@@ -186,7 +250,7 @@
 
 		<!-- Addons (modules that extend this one) -->
 		{#if data.mod.addons?.length > 0}
-			<Card variant="shadow" padding="md">
+			<Card variant="shadow" padding="md" class="hidden lg:block">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg>
 					Addons
@@ -208,7 +272,7 @@
 
 		<!-- Addon for (this module extends these) -->
 		{#if data.mod.addonTargets?.length > 0}
-			<Card variant="shadow" padding="md">
+			<Card variant="shadow" padding="md" class="hidden lg:block">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
 					Addon for

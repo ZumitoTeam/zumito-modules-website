@@ -1010,6 +1010,7 @@ msgid "Install with Zumito"
 msgstr "Install with Zumito"
 
 #: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
 msgid "<0/> Dependencies"
 msgstr "<0/> Dependencies"
 
@@ -1380,9 +1381,11 @@ msgid "Addons"
 msgstr "Addons"
 
 #: src/routes/(app)/module/[slug]/+page.svelte
+#: src/routes/(app)/module/[slug]/+page.svelte
 msgid "<0/> Addons"
 msgstr "<0/> Addons"
 
+#: src/routes/(app)/module/[slug]/+page.svelte
 #: src/routes/(app)/module/[slug]/+page.svelte
 msgid "<0/> Addon for"
 msgstr "<0/> Addon for"
