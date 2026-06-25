@@ -118,6 +118,7 @@ msgid "Explore"
 msgstr "Explorar"
 
 #: src/routes/(admin)/admin/+layout.svelte
+#: src/routes/(admin)/admin/+page.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/+page.svelte
 msgid "Dashboard"
@@ -130,22 +131,27 @@ msgstr "Panel"
 msgid "Users"
 msgstr "Usuarios"
 
+#: src/routes/(admin)/admin/+page.svelte
 #: src/routes/admin/+page.svelte
 msgid "Admin Dashboard — Zumito Modules"
 msgstr "Panel de Administración — Módulos de Zumito"
 
+#: src/routes/(admin)/admin/+page.svelte
 #: src/routes/admin/+page.svelte
 msgid "Total Modules"
 msgstr "Total de Módulos"
 
+#: src/routes/(admin)/admin/+page.svelte
 #: src/routes/admin/+page.svelte
 msgid "Pending Approval"
 msgstr "Pendientes de Aprobación"
 
+#: src/routes/(admin)/admin/+page.svelte
 #: src/routes/admin/+page.svelte
 msgid "Total Users"
 msgstr "Total de Usuarios"
 
+#: src/routes/(admin)/admin/+page.svelte
 #: src/routes/admin/+page.svelte
 msgid "Total Installs"
 msgstr "Total de Instalaciones"
