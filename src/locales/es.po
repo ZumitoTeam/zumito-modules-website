@@ -1378,3 +1378,11 @@ msgstr "Añadir más..."
 #: src/routes/(app)/submit/+page.svelte
 msgid "Addons"
 msgstr "Complementos"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "<0/> Addons"
+msgstr "<0/> Complementos"
+
+#: src/routes/(app)/module/[slug]/+page.svelte
+msgid "<0/> Addon for"
+msgstr "<0/> Complemento para"
