@@ -1277,3 +1277,8 @@ msgstr "Zumito Admin"
 #: src/routes/(admin)/admin/+layout.svelte
 msgid "<0/> Back to site"
 msgstr "<0/> Volver al sitio"
+
+#: src/lib/components/layout/Navbar.svelte
+#: src/lib/components/layout/Navbar.svelte
+msgid "Admin"
+msgstr "Admin"
