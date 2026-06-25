@@ -38,9 +38,9 @@
 
 {#if open}
 	<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-	<div class="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto p-4 pt-16 sm:p-6 sm:pt-20" onclick={close} transition:fade={{ duration: 150 }}>
+	<div class="fixed inset-0 z-[100] flex items-center justify-center bg-zinc-950/50 backdrop-blur-sm p-4" onclick={close} transition:fade={{ duration: 150 }}>
 		<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-		<div class="relative w-full {sizeMap[size]} rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-950" onclick={(e: Event) => e.stopPropagation()} transition:fade={{ duration: 150 }}>
+		<div class="relative max-h-[calc(100vh-2rem)] w-full {sizeMap[size]} overflow-y-auto rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-950" onclick={(e: Event) => e.stopPropagation()} transition:fade={{ duration: 150 }}>
 			<!-- Header -->
 			<div class="flex items-center justify-between border-b border-zinc-200 px-5 py-4 dark:border-zinc-800">
 				<h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{title}</h2>
