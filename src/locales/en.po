@@ -39,6 +39,7 @@ msgid "By the numbers"
 msgstr "By the numbers"
 
 #: src/routes/(admin)/admin/+layout.svelte
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/(app)/+page.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/modules/+page.svelte
@@ -123,6 +124,7 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: src/routes/(admin)/admin/+layout.svelte
+#: src/routes/(admin)/admin/users/+page.svelte
 #: src/routes/admin/+layout.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Users"
@@ -714,35 +716,44 @@ msgstr "Member since"
 msgid "Published modules"
 msgstr "Published modules"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Modules — Admin"
 msgstr "Modules — Admin"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "All"
 msgstr "All"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Pending"
 msgstr "Pending"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Approved"
 msgstr "Approved"
 
 #. 0: mod.author.username; 1: mod._count.installs
+#. 0: mod.author.username; 1: mod._count.installs
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "by {0} · {1} installs"
 msgstr "by {0} · {1} installs"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Approve"
 msgstr "Approve"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Reject"
 msgstr "Reject"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "View"
 msgstr "View"
@@ -782,34 +793,42 @@ msgstr "Join the <0>Zumito</0> community"
 msgid "Already have an account? <0>Sign in</0>"
 msgstr "Already have an account? <0>Sign in</0>"
 
+#: src/routes/(admin)/admin/users/+page.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Users — Admin"
 msgstr "Users — Admin"
 
+#: src/routes/(admin)/admin/users/+page.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Search..."
 msgstr "Search..."
 
+#: src/routes/(admin)/admin/users/+page.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Search"
 msgstr "Search"
 
+#: src/routes/(admin)/admin/users/+page.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Banned"
 msgstr "Banned"
 
+#: src/routes/(admin)/admin/users/+page.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Demote"
 msgstr "Demote"
 
+#: src/routes/(admin)/admin/users/+page.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Make Admin"
 msgstr "Make Admin"
 
+#: src/routes/(admin)/admin/users/+page.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Unban"
 msgstr "Unban"
 
+#: src/routes/(admin)/admin/users/+page.svelte
 #: src/routes/admin/users/+page.svelte
 msgid "Ban"
 msgstr "Ban"

@@ -59,7 +59,7 @@
 		<nav class="flex-1 overflow-y-auto px-3 py-4">
 			<div class="space-y-1">
 				{#each nav as item}
-					<a {href} onclick={closeSidebar}
+					<a href={item.href} onclick={closeSidebar}
 						class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors
 						{isActive(item.href) ? 'bg-white/10 text-white' : 'text-zinc-400 hover:bg-white/5 hover:text-zinc-200'}">
 						<Icon icon={item.icon} class="h-5 w-5 shrink-0" />
@@ -70,7 +70,7 @@
 
 			<div class="mt-6 border-t border-white/10 pt-4">
 				{#each bottomNav as item}
-					<a {href} onclick={closeSidebar}
+					<a href={item.href} onclick={closeSidebar}
 						class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-zinc-500 transition-colors hover:bg-white/5 hover:text-zinc-300">
 						<Icon icon={item.icon} class="h-5 w-5 shrink-0" />
 						{item.label}
