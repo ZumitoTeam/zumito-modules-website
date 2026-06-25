@@ -7,11 +7,13 @@
 		variant = 'border' as Variant,
 		padding = 'md' as Padding,
 		class: className = '',
+		id = undefined as string | undefined,
 	}: {
 		children: any;
 		variant?: Variant;
 		padding?: Padding;
 		class?: string;
+		id?: string;
 	} = $props();
 
 	const pad = { sm: 'p-3 sm:p-4', md: 'p-4 sm:p-6', lg: 'p-5 sm:p-8' };
@@ -22,6 +24,6 @@
 	};
 </script>
 
-<div class="{styles[variant]} {pad[padding]} {className}">
+<div class="{styles[variant]} {pad[padding]} {className}" id={id || undefined}>
 	{@render children()}
 </div>
