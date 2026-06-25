@@ -16,6 +16,8 @@ function getS3Adapter(): FileAdapter {
 	if (!s3Adapter) {
 		const bucket = process.env.S3_BUCKET!;
 		const publicUrl = process.env.S3_PUBLIC_URL || `https://${process.env.S3_ENDPOINT}/${bucket}`;
+		const baseUrl = publicUrl.endsWith('/') ? publicUrl.slice(0, -1) : publicUrl;
+		const urlPrefix = baseUrl.includes(`/${bucket}`) ? baseUrl : `${baseUrl}/${bucket}`;
 		const client = getS3Client();
 
 		client.setBucketPolicy(bucket, JSON.stringify({
@@ -34,7 +36,7 @@ function getS3Adapter(): FileAdapter {
 					'Content-Type': contentType,
 					'x-amz-acl': 'public-read',
 				});
-				return `${publicUrl}/${key}`;
+				return `${urlPrefix}/${key}`;
 			},
 			async delete(key: string): Promise<void> {
 				await client.removeObject(bucket, key);
