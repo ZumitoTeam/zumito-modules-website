@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { tick } from 'svelte';
 	import { scale } from 'svelte/transition';
 	import { expoOut } from 'svelte/easing';
 	import Icon from '@iconify/svelte';
@@ -19,8 +20,11 @@
 	function handle(item: Item, e: Event) {
 		e.stopPropagation();
 		open = false;
-		if (item.href) window.location.href = item.href;
-		else if (item.onclick) item.onclick();
+		if (item.onclick) {
+			tick().then(() => item.onclick!());
+		} else if (item.href) {
+			window.location.href = item.href;
+		}
 	}
 </script>
 
