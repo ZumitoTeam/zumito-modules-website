@@ -9,6 +9,8 @@
 
 	let menuOpen = $state(false);
 
+	let isAdmin = $derived(($page.data.user?.role ?? '').includes('admin'));
+
 	function toggleMenu() {
 		menuOpen = !menuOpen;
 	}
@@ -50,6 +52,9 @@
 			{#if $page.data.user}
 				<a href="/user/profile" class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">Profile</a>
 				<a href="/user/modules" class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">My Modules</a>
+				{#if isAdmin}
+					<a href="/admin" class="rounded-full border border-zumito-200 bg-zumito-50 px-3 py-1 text-xs font-semibold text-zumito-600 transition-all hover:bg-zumito-600 hover:text-white dark:border-zumito-600/30 dark:bg-zumito-600/10 dark:text-zumito-400 dark:hover:bg-zumito-600 dark:hover:text-white">Admin</a>
+				{/if}
 				<button onclick={handleLogout} class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 cursor-pointer dark:text-zinc-400 dark:hover:text-zinc-100">Logout</button>
 			{:else}
 				<a href="/login" class="text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100">Sign in</a>
@@ -124,6 +129,15 @@
 							</div>
 							<span class="text-sm font-semibold text-zinc-700 dark:text-zinc-200">My Modules</span>
 						</a>
+						{#if isAdmin}
+							<a href="/admin" onclick={closeMenu} class="group flex flex-col items-center gap-2 rounded-2xl border border-zumito-200 bg-zumito-50 p-4 text-center transition-all hover:bg-zumito-600 active:scale-[0.97] dark:border-zumito-600/30 dark:bg-zumito-600/10"
+								in:fly={{ y: 16, duration: 250, delay: 200, easing: quartOut }}>
+								<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-zumito-600/10 text-zumito-600 transition-colors group-hover:bg-zumito-600 group-hover:text-white">
+									<Icon icon="tabler:shield-check" class="h-6 w-6" />
+								</div>
+								<span class="text-sm font-semibold text-zumito-600 dark:text-zumito-400">Admin</span>
+							</a>
+						{/if}
 					{:else}
 						<a href="/login" onclick={closeMenu} class="group flex flex-col items-center gap-2 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 text-center transition-all hover:border-zumito-200 hover:bg-zumito-50 active:scale-[0.97] dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zumito-600/30 dark:hover:bg-zumito-600/5"
 							in:fly={{ y: 16, duration: 250, delay: 120, easing: quartOut }}>
