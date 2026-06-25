@@ -21,8 +21,10 @@
 		if (e.key === 'ArrowLeft') prevImage();
 	}
 	function scrollTo(id: string) {
-		const el = document.getElementById(id) || document.getElementById(id + '-m') || document.getElementById(id + '-d');
-		if (el && el.offsetParent) el.scrollIntoView({ behavior: 'smooth' });
+		const d = document.getElementById(id + '-d');
+		const m = document.getElementById(id + '-m');
+		const el = (d && d.offsetParent) ? d : (m && m.offsetParent) ? m : document.getElementById(id);
+		el?.scrollIntoView({ behavior: 'smooth' });
 	}
 </script>
 
@@ -99,7 +101,7 @@
 		{/if}
 
 		{#if data.mod.faqs?.length > 0}
-			<div id="faq-section" class="mb-4 mt-12 text-2xl font-semibold text-zinc-900 dark:text-white">
+			<div id="faq-section" class="mb-4 mt-12 scroll-mt-20 text-2xl font-semibold text-zinc-900 dark:text-white">
 				FAQ
 			</div>
 		<Card variant="shadow" padding="md" class="flex flex-col gap-5">
@@ -115,7 +117,7 @@
 		</Card>
 	{/if}
 
-		<div id="comments-section" class="mb-4 mt-12 text-2xl font-semibold text-zinc-900 dark:text-white">
+		<div id="comments-section" class="mb-4 mt-12 scroll-mt-20 text-2xl font-semibold text-zinc-900 dark:text-white">
 			Comments ({data.mod._count.comments})
 		</div>
 		<Card variant="shadow" padding="md">
@@ -139,7 +141,7 @@
 		<!-- Mobile: Deps / Addons / Addon-for below comments -->
 		<div class="mt-8 flex flex-col gap-5 lg:hidden">
 			{#if data.mod.dependencies?.length > 0}
-				<Card variant="shadow" padding="md" id="deps-section-m">
+				<Card variant="shadow" padding="md" id="deps-section-m" class="scroll-mt-20">
 					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 						<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6.857 4.5h10.286c.955 0 1.857.536 2.329 1.401l1.143 2.057c.388.697.388 1.543 0 2.24l-1.143 2.057a2.571 2.571 0 01-2.329 1.401H6.857a2.571 2.571 0 01-2.329-1.401L3.385 10.2a2.571 2.571 0 010-2.24l1.143-2.057A2.571 2.571 0 016.857 4.5z"/></svg>
 						Dependencies
@@ -159,7 +161,7 @@
 				</Card>
 			{/if}
 			{#if data.mod.addons?.length > 0}
-				<Card variant="shadow" padding="md" id="addons-section-m">
+				<Card variant="shadow" padding="md" id="addons-section-m" class="scroll-mt-20">
 					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 						<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg>
 						Addons
@@ -179,7 +181,7 @@
 				</Card>
 			{/if}
 			{#if data.mod.addonTargets?.length > 0}
-				<Card variant="shadow" padding="md" id="addonfor-section-m">
+				<Card variant="shadow" padding="md" id="addonfor-section-m" class="scroll-mt-20">
 					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 						<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
 						Addon for
@@ -229,7 +231,7 @@
 
 		<!-- Dependencies -->
 		{#if data.mod.dependencies?.length > 0}
-			<Card variant="shadow" padding="md" class="hidden lg:block" id="deps-section-d">
+			<Card variant="shadow" padding="md" class="hidden lg:block scroll-mt-20" id="deps-section-d">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6.857 4.5h10.286c.955 0 1.857.536 2.329 1.401l1.143 2.057c.388.697.388 1.543 0 2.24l-1.143 2.057a2.571 2.571 0 01-2.329 1.401H6.857a2.571 2.571 0 01-2.329-1.401L3.385 10.2a2.571 2.571 0 010-2.24l1.143-2.057A2.571 2.571 0 016.857 4.5z"/></svg>
 					Dependencies
@@ -251,7 +253,7 @@
 
 		<!-- Addons (modules that extend this one) -->
 		{#if data.mod.addons?.length > 0}
-			<Card variant="shadow" padding="md" class="hidden lg:block" id="addons-section-d">
+			<Card variant="shadow" padding="md" class="hidden lg:block scroll-mt-20" id="addons-section-d">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5"/><path d="M12 12v9"/><path d="M12 12L4 7.5"/></svg>
 					Addons
@@ -273,7 +275,7 @@
 
 		<!-- Addon for (this module extends these) -->
 		{#if data.mod.addonTargets?.length > 0}
-			<Card variant="shadow" padding="md" class="hidden lg:block" id="addonfor-section-d">
+			<Card variant="shadow" padding="md" class="hidden lg:block scroll-mt-20" id="addonfor-section-d">
 				<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
 					<svg class="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
 					Addon for
