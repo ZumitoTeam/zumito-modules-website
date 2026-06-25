@@ -78,7 +78,7 @@
 {/if}
 
 <!-- Content + Sidebar -->
-<div class="mx-auto flex max-w-screen-xl flex-col-reverse gap-12 px-4 py-12 lg:flex-row">
+<div class="mx-auto flex max-w-screen-xl flex-col gap-12 px-4 py-12 lg:flex-row">
 	<!-- Main content (left, 2/3) -->
 	<div class="w-full lg:w-4/6">
 		<div class="mb-4 text-2xl font-semibold text-zinc-900 dark:text-white">
