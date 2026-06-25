@@ -3,7 +3,7 @@
 	import Icon from '@iconify/svelte';
 	import { tick } from 'svelte';
 
-	let { open = $bindable(false), title = '', size = 'md' }: { open?: boolean; title?: string; size?: 'sm' | 'md' | 'lg' | 'xl' | 'full' } = $props();
+	let { open = $bindable(false), title = '', size = 'md', children }: { open?: boolean; title?: string; size?: 'sm' | 'md' | 'lg' | 'xl' | 'full'; children: import('svelte').Snippet } = $props();
 
 	const sizeMap: Record<string, string> = {
 		sm: 'max-w-sm',
@@ -50,7 +50,7 @@
 			</div>
 			<!-- Body -->
 			<div class="p-5">
-				{@render children?.()}
+				{#if children}{@render children()}{/if}
 			</div>
 		</div>
 	</div>
