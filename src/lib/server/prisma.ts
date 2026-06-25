@@ -1,13 +1,14 @@
 import { dev } from '$app/environment';
 import { PrismaClient } from '$lib/generated/prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { env } from '$env/dynamic/private';
 import pg from 'pg';
+
+const DATABASE_URL = process.env.DATABASE_URL!;
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient; pool: pg.Pool };
 
 const pool = globalForPrisma.pool || new pg.Pool({
-	connectionString: env.DATABASE_URL,
+	connectionString: DATABASE_URL,
 	max: 5,
 	idleTimeoutMillis: 30000,
 	connectionTimeoutMillis: 10000,
