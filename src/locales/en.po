@@ -1354,3 +1354,7 @@ msgstr "Module Preview"
 #: src/routes/(admin)/admin/pending/+page.svelte
 msgid "Module preview"
 msgstr "Module preview"
+
+#: src/routes/(admin)/admin/modules/+page.svelte
+msgid "Unapprove"
+msgstr "Unapprove"

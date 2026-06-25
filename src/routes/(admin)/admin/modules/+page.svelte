@@ -4,7 +4,7 @@
 	import ContextMenu from '$lib/components/ui/ContextMenu.svelte';
 	import Modal from '$lib/components/ui/Modal.svelte';
 	import type { PageData } from './$types';
-	let { data }: { data: PageData } = $props();
+	let { data, form }: { data: PageData; form?: any } = $props();
 
 	let searchValue = $state(data.search ?? '');
 	let previewOpen = $state(false);
@@ -13,6 +13,20 @@
 	function openPreview(slug: string) {
 		previewUrl = `/module/${slug}`;
 		previewOpen = true;
+	}
+
+	function unapproveModule(id: string) {
+		const form = document.createElement('form');
+		form.method = 'POST';
+		form.action = '?/unapprove';
+		form.style.display = 'none';
+		const input = document.createElement('input');
+		input.type = 'hidden';
+		input.name = 'id';
+		input.value = id;
+		form.appendChild(input);
+		document.body.appendChild(form);
+		form.submit();
 	}
 
 	function formatDate(d: string) {
@@ -93,6 +107,7 @@
 							items={[
 								{ label: 'View', icon: 'tabler:eye', onclick: () => openPreview(mod.slug) },
 								{ label: 'Edit', icon: 'tabler:edit', href: `/module/${mod.slug}/edit` },
+								...(mod.approved ? [{ label: 'Unapprove', icon: 'tabler:x', danger: true, onclick: () => unapproveModule(mod.id) }] : []),
 							]}
 						/>
 					</td>

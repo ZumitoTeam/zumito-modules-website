@@ -46,6 +46,7 @@ export const actions: Actions = {
 			data: {
 				name, slug, description, shortDescription, instructions, npm,
 				sourceCode: sourceCode || null, price, authorId: locals.user.id,
+				published: true, approved: false,
 				icon: iconUrl || '',
 				images: screenshots.length > 0 ? { create: screenshots.map(url => ({ url, altText: '' })) } : undefined,
 				features: { connect: await Promise.all(featureNames.map(async (n) => { let f = await prisma.moduleFeature.findUnique({ where: { name: n } }); if (!f) f = await prisma.moduleFeature.create({ data: { name: n } }); return { id: f.id }; })) },

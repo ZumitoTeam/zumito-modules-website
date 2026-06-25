@@ -1,5 +1,5 @@
 import prisma from '$lib/server/prisma';
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad, Actions } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
 	const filter = url.searchParams.get('filter') ?? 'all';
@@ -27,4 +27,11 @@ export const load: PageServerLoad = async ({ url }) => {
 	]);
 
 	return { modules: JSON.parse(JSON.stringify(modules)), filter, search, page, totalPages: Math.ceil(total / 20), total };
+};
+
+export const actions: Actions = {
+	unapprove: async ({ request }) => {
+		const form = await request.formData();
+		await prisma.module.update({ where: { id: form.get('id') as string }, data: { approved: false } });
+	},
 };
