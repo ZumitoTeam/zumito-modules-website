@@ -1,11 +1,57 @@
 <script lang="ts">
-	let { children, open = $bindable(false), class: className = '' }: { children: any; open?: boolean; class?: string } = $props();
+	import { fade } from 'svelte/transition';
+	import Icon from '@iconify/svelte';
+	import { tick } from 'svelte';
+
+	let { open = $bindable(false), title = '', size = 'md' }: { open?: boolean; title?: string; size?: 'sm' | 'md' | 'lg' | 'xl' | 'full' } = $props();
+
+	const sizeMap: Record<string, string> = {
+		sm: 'max-w-sm',
+		md: 'max-w-lg',
+		lg: 'max-w-2xl',
+		xl: 'max-w-4xl',
+		full: 'max-w-[calc(100vw-2rem)]',
+	};
+
+	function close() { open = false; }
+	function onKeydown(e: KeyboardEvent) { if (e.key === 'Escape') close(); }
+
+	$effect(() => {
+		if (open) {
+			document.body.style.overflow = 'hidden';
+			window.addEventListener('keydown', onKeydown);
+		}
+		return () => {
+			document.body.style.overflow = '';
+			window.removeEventListener('keydown', onKeydown);
+		};
+	});
+
+	$effect(() => {
+		if (!open) return;
+		const currentFocus = document.activeElement as HTMLElement;
+		return () => {
+			if (currentFocus) currentFocus.focus();
+		};
+	});
 </script>
 
 {#if open}
-	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onclick={() => open = false} onkeydown={(e) => e.key === 'Escape' && (open = false)} role="dialog">
-		<div class="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-zinc-900 {className}" onclick={(e: Event) => e.stopPropagation()} onkeydown={() => {}}>
-			{@render children()}
+	<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+	<div class="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto p-4 pt-16 sm:p-6 sm:pt-20" onclick={close} transition:fade={{ duration: 150 }}>
+		<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
+		<div class="relative w-full {sizeMap[size]} rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-950" onclick={(e: Event) => e.stopPropagation()} transition:fade={{ duration: 150 }}>
+			<!-- Header -->
+			<div class="flex items-center justify-between border-b border-zinc-200 px-5 py-4 dark:border-zinc-800">
+				<h2 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{title}</h2>
+				<button onclick={close} class="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-500 transition-colors hover:bg-zinc-100 cursor-pointer dark:hover:bg-zinc-800 dark:text-zinc-400">
+					<Icon icon="tabler:x" class="h-5 w-5" />
+				</button>
+			</div>
+			<!-- Body -->
+			<div class="p-5">
+				{@render children?.()}
+			</div>
 		</div>
 	</div>
 {/if}

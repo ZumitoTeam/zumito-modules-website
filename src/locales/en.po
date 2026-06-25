@@ -1344,3 +1344,13 @@ msgstr "All modules have been reviewed."
 #: src/routes/(admin)/admin/pending/+page.svelte
 msgid "{0} pending"
 msgstr "{0} pending"
+
+#: src/routes/(admin)/admin/modules/+page.svelte
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "Module Preview"
+msgstr "Module Preview"
+
+#: src/routes/(admin)/admin/modules/+page.svelte
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "Module preview"
+msgstr "Module preview"

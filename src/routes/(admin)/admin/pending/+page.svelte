@@ -2,10 +2,18 @@
 	import { enhance } from '$app/forms';
 	import Icon from '@iconify/svelte';
 	import ContextMenu from '$lib/components/ui/ContextMenu.svelte';
+	import Modal from '$lib/components/ui/Modal.svelte';
 	import type { PageData } from './$types';
 	let { data }: { data: PageData } = $props();
 
 	let searchValue = $state(data.search ?? '');
+	let previewOpen = $state(false);
+	let previewUrl = $state('');
+
+	function openPreview(slug: string) {
+		previewUrl = `/module/${slug}`;
+		previewOpen = true;
+	}
 </script>
 
 <svelte:head><title>Pending Approval — Admin</title></svelte:head>
@@ -56,7 +64,7 @@
 				</form>
 				<ContextMenu
 					items={[
-						{ label: 'View', icon: 'tabler:eye', href: `/module/${mod.slug}` },
+						{ label: 'View', icon: 'tabler:eye', onclick: () => openPreview(mod.slug) },
 						{ label: 'Edit', icon: 'tabler:edit', href: `/module/${mod.slug}/edit` },
 					]}
 				/>
@@ -87,3 +95,7 @@
 		</div>
 	</div>
 {/if}
+
+<Modal bind:open={previewOpen} title="Module Preview" size="full">
+	<iframe src={previewUrl} class="h-[75vh] w-full rounded-xl border border-zinc-200" title="Module preview" />
+</Modal>
