@@ -144,6 +144,7 @@ msgstr "Total Modules"
 
 #: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/(admin)/admin/+page.svelte
+#: src/routes/(admin)/admin/pending/+page.svelte
 #: src/routes/admin/+page.svelte
 msgid "Pending Approval"
 msgstr "Pending Approval"
@@ -748,7 +749,9 @@ msgstr "Pending"
 msgid "Approved"
 msgstr "Approved"
 
+#. 0: mod.author?.username; 1: mod._count.installs
 #. 0: mod.author.username; 1: mod._count.installs
+#: src/routes/(admin)/admin/pending/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "by {0} · {1} installs"
 msgstr "by {0} · {1} installs"
@@ -762,6 +765,7 @@ msgid "Reject"
 msgstr "Reject"
 
 #: src/routes/(admin)/admin/modules/+page.svelte
+#: src/routes/(admin)/admin/pending/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "View"
 msgstr "View"
@@ -1019,6 +1023,7 @@ msgid "View Source Code"
 msgstr "View Source Code"
 
 #: src/routes/(admin)/admin/modules/+page.svelte
+#: src/routes/(admin)/admin/pending/+page.svelte
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "Edit"
 msgstr "Edit"
@@ -1310,3 +1315,32 @@ msgstr "Date"
 #: src/routes/(admin)/admin/modules/+page.svelte
 msgid "{0} · {1} installs"
 msgstr "{0} · {1} installs"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "Pending Approval — Admin"
+msgstr "Pending Approval — Admin"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "Search pending modules..."
+msgstr "Search pending modules..."
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "<0/> Approve"
+msgstr "<0/> Approve"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "<0/> Reject"
+msgstr "<0/> Reject"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "No pending modules"
+msgstr "No pending modules"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "All modules have been reviewed."
+msgstr "All modules have been reviewed."
+
+#. 0: data.total ?? 0
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "{0} pending"
+msgstr "{0} pending"

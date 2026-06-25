@@ -144,6 +144,7 @@ msgstr "Total de Módulos"
 
 #: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/(admin)/admin/+page.svelte
+#: src/routes/(admin)/admin/pending/+page.svelte
 #: src/routes/admin/+page.svelte
 msgid "Pending Approval"
 msgstr "Pendientes de Aprobación"
@@ -748,7 +749,9 @@ msgstr "Pendiente"
 msgid "Approved"
 msgstr "Aprobado"
 
+#. 0: mod.author?.username; 1: mod._count.installs
 #. 0: mod.author.username; 1: mod._count.installs
+#: src/routes/(admin)/admin/pending/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "by {0} · {1} installs"
 msgstr "por {0} · {1} instalaciones"
@@ -762,6 +765,7 @@ msgid "Reject"
 msgstr "Rechazar"
 
 #: src/routes/(admin)/admin/modules/+page.svelte
+#: src/routes/(admin)/admin/pending/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "View"
 msgstr "Ver"
@@ -1019,6 +1023,7 @@ msgid "View Source Code"
 msgstr "Ver código fuente"
 
 #: src/routes/(admin)/admin/modules/+page.svelte
+#: src/routes/(admin)/admin/pending/+page.svelte
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "Edit"
 msgstr "Editar"
@@ -1310,3 +1315,32 @@ msgstr "Fecha"
 #: src/routes/(admin)/admin/modules/+page.svelte
 msgid "{0} · {1} installs"
 msgstr "{0} · {1} instalaciones"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "Pending Approval — Admin"
+msgstr "Pendiente de aprobación — Admin"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "Search pending modules..."
+msgstr "Buscar módulos pendientes..."
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "<0/> Approve"
+msgstr "<0/> Aprobar"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "<0/> Reject"
+msgstr "<0/> Rechazar"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "No pending modules"
+msgstr "No hay módulos pendientes"
+
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "All modules have been reviewed."
+msgstr "Todos los módulos han sido revisados."
+
+#. 0: data.total ?? 0
+#: src/routes/(admin)/admin/pending/+page.svelte
+msgid "{0} pending"
+msgstr "{0} pendientes"
