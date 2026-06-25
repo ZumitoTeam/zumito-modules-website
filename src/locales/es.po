@@ -46,6 +46,7 @@ msgstr "En números"
 msgid "Modules"
 msgstr "Módulos"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/(app)/+page.svelte
 #: src/routes/(app)/module/[slug]/+page.svelte
 msgid "Installs"
@@ -141,6 +142,7 @@ msgstr "Panel de Administración — Módulos de Zumito"
 msgid "Total Modules"
 msgstr "Total de Módulos"
 
+#: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/(admin)/admin/+page.svelte
 #: src/routes/admin/+page.svelte
 msgid "Pending Approval"
@@ -271,10 +273,12 @@ msgstr "Registrarse"
 msgid "Browse Modules — Zumito Modules"
 msgstr "Explorar Módulos — Zumito Modules"
 
+#: src/routes/(admin)/admin/+layout.svelte
 #: src/routes/(app)/modules/+page.svelte
 msgid "All Modules"
 msgstr "Todos los módulos"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/(app)/modules/+page.svelte
 msgid "Search modules..."
 msgstr "Buscar módulos..."
@@ -295,6 +299,7 @@ msgstr "Aplicar"
 msgid "Clear"
 msgstr "Limpiar"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/(app)/modules/+page.svelte
 msgid "No modules found"
 msgstr "No se encontraron módulos"
@@ -733,6 +738,7 @@ msgid "All"
 msgstr "Todos"
 
 #: src/routes/(admin)/admin/modules/+page.svelte
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Pending"
 msgstr "Pendiente"
@@ -743,18 +749,14 @@ msgid "Approved"
 msgstr "Aprobado"
 
 #. 0: mod.author.username; 1: mod._count.installs
-#. 0: mod.author.username; 1: mod._count.installs
-#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "by {0} · {1} installs"
 msgstr "por {0} · {1} instalaciones"
 
-#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Approve"
 msgstr "Aprobar"
 
-#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/modules/+page.svelte
 msgid "Reject"
 msgstr "Rechazar"
@@ -780,8 +782,10 @@ msgid "Add"
 msgstr "Agregar"
 
 #. 0: f._count.modules
+#. 0: data.total ?? 0
 #. 0: f._count.modules
 #: src/routes/(admin)/admin/features/+page.svelte
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/admin/features/+page.svelte
 msgid "{0} modules"
 msgstr "{0} módulos"
@@ -849,10 +853,12 @@ msgstr "Mis Módulos — Zumito Modules"
 msgid "My Modules"
 msgstr "Mis Módulos"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "Draft"
 msgstr "Borrador"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "Live"
 msgstr "Activo"
@@ -1012,6 +1018,7 @@ msgstr "Comentarios"
 msgid "View Source Code"
 msgstr "Ver código fuente"
 
+#: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "Edit"
 msgstr "Editar"
@@ -1282,3 +1289,24 @@ msgstr "<0/> Volver al sitio"
 #: src/lib/components/layout/Navbar.svelte
 msgid "Admin"
 msgstr "Admin"
+
+#: src/routes/(admin)/admin/modules/+page.svelte
+msgid "Module"
+msgstr "Módulo"
+
+#: src/routes/(admin)/admin/modules/+page.svelte
+msgid "Author"
+msgstr "Autor"
+
+#: src/routes/(admin)/admin/modules/+page.svelte
+msgid "Status"
+msgstr "Estado"
+
+#: src/routes/(admin)/admin/modules/+page.svelte
+msgid "Date"
+msgstr "Fecha"
+
+#. 0: mod.author?.username; 1: mod._count.installs
+#: src/routes/(admin)/admin/modules/+page.svelte
+msgid "{0} · {1} installs"
+msgstr "{0} · {1} instalaciones"
