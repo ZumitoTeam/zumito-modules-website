@@ -23,7 +23,7 @@
 	function scrollTo(id: string) {
 		const d = document.getElementById(id + '-d');
 		const m = document.getElementById(id + '-m');
-		const el = (d && d.offsetParent) ? d : (m && m.offsetParent) ? m : document.getElementById(id);
+		const el = (d?.offsetParent ? d : null) ?? (m?.offsetParent ? m : null) ?? document.getElementById(id);
 		el?.scrollIntoView({ behavior: 'smooth' });
 	}
 </script>
