@@ -136,7 +136,7 @@
 		</Card>
 
 		<!-- Mobile: Deps / Addons / Addon-for below comments -->
-		<div class="flex flex-col gap-5 lg:hidden">
+		<div class="mt-8 flex flex-col gap-5 lg:hidden">
 			{#if data.mod.dependencies?.length > 0}
 				<Card variant="shadow" padding="md">
 					<div class="mb-3 flex items-center gap-2 text-lg font-semibold text-zinc-900 dark:text-white">
