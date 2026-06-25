@@ -86,8 +86,9 @@
 						</div>
 					{/if}
 
-					<!-- TAB 0: General (hidden when not active) -->
-					<div class:hidden={activeTab !== 0}>
+					<div class="grid [grid-template-areas:'stack']">
+					<!-- TAB 0: General -->
+					<div class="[grid-area:stack] transition-all duration-200 {activeTab === 0 ? '' : 'invisible opacity-0 pointer-events-none'}">
 						<div class="grid gap-6 sm:grid-cols-2">
 							<div><div class="min-h-[4rem]"><label for="name" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Module Name <span class="text-zumito-600">*</span></label><p class="mt-1 text-xs leading-relaxed text-zinc-400">The display name shown in the marketplace.</p></div><input id="name" name="name" required placeholder="My Awesome Command Module" bind:value={nameValue} oninput={generateSlug} class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" /></div>
 							<div><div class="min-h-[4rem]"><label for="slug" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">URL Slug <span class="text-zumito-600">*</span></label><p class="mt-1 text-xs leading-relaxed text-zinc-400">Auto-generated from name. Use lowercase letters and dashes.</p></div><input id="slug" name="slug" required placeholder="my-awesome-command-module" value={slugValue} oninput={onSlugInput} class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-mono text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" /></div>
@@ -105,8 +106,8 @@
 						{#if data.modules.length > 0}<div><label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Dependencies</label><p class="mt-1 text-xs text-zinc-400">Other modules yours depends on. Hold Ctrl/Cmd to select multiple.</p><select name="dependencies" multiple class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" size={6}>{#each data.modules as m}<option value={m.id}>{m.name}</option>{/each}</select></div>{/if}
 					</div>
 
-					<!-- TAB 1: Description (hidden when not active) -->
-					<div class:hidden={activeTab !== 1}>
+					<!-- TAB 1: Description -->
+					<div class="[grid-area:stack] transition-all duration-200 {activeTab === 1 ? '' : 'invisible opacity-0 pointer-events-none'}">
 						<div>
 							<div class="flex items-center justify-between"><label for="description" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Description <span class="text-zumito-600">*</span></label><button type="button" onclick={loadReadme} disabled={loadingReadme || !npmValue.trim()} class="flex items-center gap-1.5 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 transition-all hover:border-zumito-300 hover:text-zumito-600 disabled:opacity-50 cursor-pointer dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:border-zumito-600/40">{#if loadingReadme}<svg class="h-3.5 w-3.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>{/if}Load from npm</button></div>
 							{#if descriptionLocked}
@@ -121,15 +122,15 @@
 					</div>
 
 					<!-- TAB 2: Images -->
-					<div class:hidden={activeTab !== 2}>
+					<div class="[grid-area:stack] transition-all duration-200 {activeTab === 2 ? '' : 'invisible opacity-0 pointer-events-none'}">
 						<div class="space-y-6">
 							<ImagePicker name="icon" label="Module Icon" description="A square image shown in module cards. PNG or JPG." />
 							<ImagePicker name="screenshots" label="Screenshots" description="Upload screenshots showing your module in action." multiple />
 						</div>
 					</div>
 
-					<!-- TAB 3: FAQ (hidden when not active) -->
-					<div class:hidden={activeTab !== 3}>
+					<!-- TAB 3: FAQ -->
+					<div class="[grid-area:stack] transition-all duration-200 {activeTab === 3 ? '' : 'invisible opacity-0 pointer-events-none'}">
 						<div><div class="flex items-center justify-between"><label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Frequently Asked Questions</label><button type="button" onclick={addFaq} class="flex items-center gap-1 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 transition-all hover:border-zumito-300 hover:text-zumito-600 cursor-pointer dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400"><svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add FAQ</button></div>
 						<div class="mt-4 space-y-4">
 							{#each faqItems as faq, i}
@@ -141,6 +142,7 @@
 							{/each}
 							{#if faqItems.length === 0}<p class="text-sm text-zinc-400 text-center py-8">No FAQs added yet. Click "Add FAQ" to get started.</p>{/if}
 						</div></div>
+					</div>
 					</div>
 
 					<div class="flex items-center gap-4 pt-4 border-t border-zinc-200 dark:border-zinc-800">
