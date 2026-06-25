@@ -48,19 +48,21 @@
 
 	<div class="mt-2 rounded-xl border border-zinc-300 bg-white transition-colors focus-within:border-zumito-500 focus-within:ring-1 focus-within:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950">
 		<!-- Selected chips -->
-		<div class="flex flex-wrap gap-1.5 p-2" use:autoAnimate>
-			{#each selected as mod (mod.id)}
-				<span class="inline-flex items-center gap-1 rounded-lg bg-zumito-50 px-2.5 py-1 text-xs font-medium text-zumito-600 dark:bg-zumito-600/10 dark:text-zumito-400">
-					{mod.name}
-					<button onclick={() => remove(mod.id)} class="flex h-4 w-4 items-center justify-center rounded-full text-zumito-400 transition-colors hover:bg-zumito-200 hover:text-zumito-600 cursor-pointer dark:hover:bg-zumito-600/30">
-						<Icon icon="tabler:x" class="h-3 w-3" />
-					</button>
-				</span>
-			{/each}
-		</div>
+		{#if selected.length > 0}
+			<div class="flex flex-wrap gap-1.5 p-2" use:autoAnimate>
+				{#each selected as mod (mod.id)}
+					<span class="inline-flex items-center gap-1 rounded-lg bg-zumito-50 px-2.5 py-1 text-xs font-medium text-zumito-600 dark:bg-zumito-600/10 dark:text-zumito-400">
+						{mod.name}
+						<button onclick={() => remove(mod.id)} class="flex h-4 w-4 items-center justify-center rounded-full text-zumito-400 transition-colors hover:bg-zumito-200 hover:text-zumito-600 cursor-pointer dark:hover:bg-zumito-600/30">
+							<Icon icon="tabler:x" class="h-3 w-3" />
+						</button>
+					</span>
+				{/each}
+			</div>
+		{/if}
 
 		<!-- Search input -->
-		<div class="flex items-center border-t border-zinc-200 dark:border-zinc-800">
+		<div class="flex items-center {selected.length > 0 ? 'border-t border-zinc-200 dark:border-zinc-800' : ''}">
 			<Icon icon="tabler:search" class="ml-3 h-4 w-4 text-zinc-400 shrink-0" />
 			<input
 				type="text"

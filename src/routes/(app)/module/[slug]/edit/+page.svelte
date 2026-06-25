@@ -24,6 +24,9 @@
 	let selectedDeps = $state<{ id: string; name: string; slug: string }[]>(
 		(data.mod.dependencies as any[])?.map((d: any) => ({ id: d.dependencyId, name: d.dependency?.name ?? '', slug: d.dependency?.slug ?? '' })) ?? []
 	);
+	let selectedAddons = $state<{ id: string; name: string; slug: string }[]>(
+		(data.mod.addonTargets as any[])?.map((a: any) => ({ id: a.baseModuleId, name: a.baseModule?.name ?? '', slug: a.baseModule?.slug ?? '' })) ?? []
+	);
 
 	let faqItems = $state<{ question: string; answer: string }[]>(
 		(data.mod.faqs as any[])?.map((f: any) => ({ question: f.question, answer: f.answer })) ?? []
@@ -89,7 +92,8 @@
 					<div><div class="min-h-[4rem]"><label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Pricing</label></div><div class="mt-2 flex rounded-xl border border-zinc-300 bg-zinc-50 p-1 dark:border-zinc-800 dark:bg-zinc-900"><button type="button" class="flex-1 rounded-lg px-4 py-2 text-sm font-medium text-zinc-900 shadow-sm cursor-pointer dark:bg-zinc-800 dark:text-zinc-100">Free</button><button type="button" disabled class="flex-1 rounded-lg px-4 py-2 text-sm font-medium text-zinc-300 line-through cursor-pointer dark:text-zinc-600">Paid</button></div><p class="mt-2 text-xs text-zinc-400">Paid modules will be available soon. All modules are free for now.</p><input type="hidden" name="price" value={String(data.mod.price)} /></div>
 					<div><div class="min-h-[4rem]"><label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Features</label><p class="mt-1 text-xs leading-relaxed text-zinc-400">Existing tags to categorize your module. You can add new ones.</p></div><div class="mt-2 flex flex-wrap gap-1.5">{#each data.features as f}<label class="cursor-pointer rounded-full border px-3 py-1.5 text-xs transition-all has-[:checked]:border-zumito-600 has-[:checked]:bg-zumito-50 has-[:checked]:text-zumito-700 dark:border-zinc-800 dark:has-[:checked]:border-zumito-600 dark:has-[:checked]:bg-zumito-600/10 dark:has-[:checked]:text-zumito-400" class:border-zumito-600={data.mod.features?.some((mf: any) => mf.name === f.name)} class:bg-zumito-50={data.mod.features?.some((mf: any) => mf.name === f.name)} class:text-zumito-700={data.mod.features?.some((mf: any) => mf.name === f.name)}><input type="checkbox" name="features" value={f.name} checked={data.mod.features?.some((mf: any) => mf.name === f.name)} class="sr-only" />{f.emoji} {f.name}</label>{/each}</div><input name="features" placeholder="Or type a new feature and press Enter..." onkeydown={(e) => { if (e.key === 'Enter') e.preventDefault(); }} class="mt-2 block w-full rounded-xl border border-dashed border-zinc-300 bg-zinc-50 px-4 py-2 text-xs text-zinc-500 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:placeholder:text-zinc-600" /></div>
 				</div>
-				{#if data.modules.length > 0}<div><DependencyPicker available={data.modules} bind:selected={selectedDeps} /></div>{/if}
+				{#if data.modules.length > 0}<div><DependencyPicker available={data.modules} bind:selected={selectedDeps} /></div>
+				<div><DependencyPicker available={data.modules} bind:selected={selectedAddons} name="addons" label="Addons" /></div>{/if}
 			</div>
 
 			<div class="transition-all duration-200 {activeTab === 1 ? 'relative' : 'absolute inset-0 invisible opacity-0 pointer-events-none'}">

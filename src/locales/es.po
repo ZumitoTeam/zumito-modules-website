@@ -572,13 +572,11 @@ msgid "Enter"
 msgstr "Enter"
 
 #: src/lib/components/ui/DependencyPicker.svelte
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
 msgid "Dependencies"
 msgstr "Dependencias"
 
-#: src/routes/(app)/module/[slug]/edit/+page.svelte
-msgid "Other modules yours depends on. Hold Ctrl/Cmd to select multiple."
-msgstr "Otros módulos de los que depende el tuyo. Mantén presionado Ctrl/Cmd para seleccionar varios."
+#~ msgid "Other modules yours depends on. Hold Ctrl/Cmd to select multiple."
+#~ msgstr "Otros módulos de los que depende el tuyo. Mantén presionado Ctrl/Cmd para seleccionar varios."
 
 #: src/routes/(app)/submit/+page.svelte
 msgid "Publish Module"
@@ -1375,3 +1373,8 @@ msgstr "Buscar módulos para agregar como dependencias. Mantén presionada Ctrl/
 #: src/lib/components/ui/DependencyPicker.svelte
 msgid "Add more..."
 msgstr "Añadir más..."
+
+#: src/routes/(app)/module/[slug]/edit/+page.svelte
+#: src/routes/(app)/submit/+page.svelte
+msgid "Addons"
+msgstr "Complementos"

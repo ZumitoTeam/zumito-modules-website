@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			icon: true,
 			features: { select: { name: true } },
 			dependencies: { select: { dependencyId: true, dependency: { select: { name: true, slug: true } } } },
-			addonTargets: { select: { baseModuleId: true } },
+			addonTargets: { select: { baseModuleId: true, baseModule: { select: { name: true, slug: true } } } },
 			faqs: { select: { question: true, answer: true } },
 			images: { select: { url: true, altText: true } },
 		},
@@ -50,6 +50,7 @@ export const actions: Actions = {
 		const price = parseFloat(form.get('price') as string) || 0;
 		const featureNames = (form.getAll('features') as string[]).flatMap(f => f.split(',').map(s => s.trim())).filter(Boolean);
 		const dependencyIds = form.getAll('dependencies') as string[];
+		const addonIds = form.getAll('addons') as string[];
 		const faqQuestions = form.getAll('faq_question') as string[];
 		const faqAnswers = form.getAll('faq_answer') as string[];
 		const faqs = faqQuestions.map((q, i) => ({ question: q.trim(), answer: (faqAnswers[i] || '').trim() })).filter(f => f.question && f.answer);
@@ -87,6 +88,7 @@ export const actions: Actions = {
 					...(iconUrl ? { icon: iconUrl } : {}),
 					features: { set: [], connect: await Promise.all(featureNames.map(async (n) => { let f = await prisma.moduleFeature.findUnique({ where: { name: n } }); if (!f) f = await prisma.moduleFeature.create({ data: { name: n } }); return { id: f.id }; })) },
 					dependencies: { deleteMany: {}, create: dependencyIds.map(id => ({ dependencyId: id })) },
+					addons: { deleteMany: {}, create: addonIds.map(id => ({ baseModuleId: id })) },
 					...(faqs.length > 0 ? { faqs: { deleteMany: {}, create: faqs } } : {}),
 				},
 			});
