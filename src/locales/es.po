@@ -279,6 +279,7 @@ msgstr "Explorar Módulos — Zumito Modules"
 msgid "All Modules"
 msgstr "Todos los módulos"
 
+#: src/lib/components/ui/DependencyPicker.svelte
 #: src/routes/(admin)/admin/modules/+page.svelte
 #: src/routes/(app)/modules/+page.svelte
 msgid "Search modules..."
@@ -570,13 +571,12 @@ msgstr "Etiquetas existentes para categorizar tu módulo. Puedes añadir nuevas.
 msgid "Enter"
 msgstr "Enter"
 
+#: src/lib/components/ui/DependencyPicker.svelte
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
-#: src/routes/(app)/submit/+page.svelte
 msgid "Dependencies"
 msgstr "Dependencias"
 
 #: src/routes/(app)/module/[slug]/edit/+page.svelte
-#: src/routes/(app)/submit/+page.svelte
 msgid "Other modules yours depends on. Hold Ctrl/Cmd to select multiple."
 msgstr "Otros módulos de los que depende el tuyo. Mantén presionado Ctrl/Cmd para seleccionar varios."
 
@@ -1367,3 +1367,11 @@ msgstr "Despublicar"
 #: src/routes/(app)/user/modules/+page.svelte
 msgid "Publish"
 msgstr "Publicar"
+
+#: src/lib/components/ui/DependencyPicker.svelte
+msgid "Search modules to add as dependencies. Hold Ctrl/Cmd to select multiple."
+msgstr "Buscar módulos para agregar como dependencias. Mantén presionada Ctrl/Cmd para seleccionar múltiples."
+
+#: src/lib/components/ui/DependencyPicker.svelte
+msgid "Add more..."
+msgstr "Añadir más..."

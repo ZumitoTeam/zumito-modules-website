@@ -12,7 +12,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 			instructions: true, npm: true, sourceCode: true, price: true, authorId: true,
 			icon: true,
 			features: { select: { name: true } },
-			dependencies: { select: { dependencyId: true } },
+			dependencies: { select: { dependencyId: true, dependency: { select: { name: true, slug: true } } } },
 			addonTargets: { select: { baseModuleId: true } },
 			faqs: { select: { question: true, answer: true } },
 			images: { select: { url: true, altText: true } },
