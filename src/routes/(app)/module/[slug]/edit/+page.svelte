@@ -68,8 +68,8 @@
 	<Card variant="border" padding="lg" class="mt-8">
 		<Tabs tabs={[{ label: 'General', icon: 'tabler:settings' }, { label: 'Description', icon: 'tabler:align-left' }, { label: 'Images', icon: 'tabler:photo' }, { label: 'FAQ', icon: 'tabler:help-circle' }]} bind:active={activeTab} />
 		<form method="POST" use:enhance={onUpdate} enctype="multipart/form-data" class="mt-8 space-y-8">
-			<div class="grid [grid-template-areas:'stack']">
-			<div class="[grid-area:stack] transition-all duration-200 {activeTab === 0 ? '' : 'invisible opacity-0 pointer-events-none'}">
+			<div class="relative">
+			<div class="transition-all duration-200 {activeTab === 0 ? 'relative' : 'absolute inset-0 invisible opacity-0 pointer-events-none'}">
 				<div class="grid gap-6 sm:grid-cols-2">
 					<div><div class="min-h-[4rem]"><label for="name" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Module Name <span class="text-zumito-600">*</span></label><p class="mt-1 text-xs leading-relaxed text-zinc-400">The display name shown in the marketplace.</p></div><input id="name" name="name" required value={data.mod.name} class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" /></div>
 					<div><div class="min-h-[4rem]"><label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">URL Slug</label><p class="mt-1 text-xs leading-relaxed text-zinc-400">Cannot be changed after creation.</p></div><div class="mt-2 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-2.5 text-sm font-mono text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900">{data.mod.slug}</div></div>
@@ -87,21 +87,21 @@
 				{#if data.modules.length > 0}<div><label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Dependencies</label><p class="mt-1 text-xs text-zinc-400">Other modules yours depends on. Hold Ctrl/Cmd to select multiple.</p><select name="dependencies" multiple class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm text-zinc-900 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100" size={6}>{#each data.modules as m}<option value={m.id} selected={data.mod.dependencies?.some((d: any) => d.dependencyId === m.id)}>{m.name}</option>{/each}</select></div>{/if}
 			</div>
 
-			<div class="[grid-area:stack] transition-all duration-200 {activeTab === 1 ? '' : 'invisible opacity-0 pointer-events-none'}">
+			<div class="transition-all duration-200 {activeTab === 1 ? 'relative' : 'absolute inset-0 invisible opacity-0 pointer-events-none'}">
 				<div><div class="flex items-center justify-between"><label for="description" class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Description <span class="text-zumito-600">*</span></label><button type="button" onclick={loadReadme} disabled={loadingReadme || !npmValue.trim()} class="flex items-center gap-1.5 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 transition-all hover:border-zumito-300 hover:text-zumito-600 disabled:opacity-50 cursor-pointer dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400 dark:hover:border-zumito-600/40">{#if loadingReadme}<svg class="h-3.5 w-3.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>{/if}Load from npm</button></div>
 					{#if descriptionLocked}<div class="mt-2 rounded-xl border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950"><div class="flex items-center justify-between mb-2"><span class="text-xs font-medium text-green-700 dark:text-green-400">Loaded from npm README</span><button type="button" onclick={() => descriptionLocked = false} class="text-xs text-zinc-500 hover:text-zinc-700 cursor-pointer dark:hover:text-zinc-300 transition-colors">Unlock to edit</button></div><div class="prose prose-sm max-w-none text-zinc-600 dark:text-zinc-400 line-clamp-6">{@html marked.parse(descriptionValue)}</div></div><textarea name="description" class="hidden">{descriptionValue}</textarea>
 					{:else}<p class="mt-1 text-xs text-zinc-400">Full description in Markdown. Use the Load from npm button above to auto-fill from the package README.</p><textarea id="description" name="description" rows={16} required class="mt-2 block w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 text-sm font-mono leading-relaxed text-zinc-900 placeholder:text-zinc-400 transition-colors focus:border-zumito-500 focus:ring-1 focus:ring-zumito-500 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-600" bind:value={descriptionValue}></textarea>{/if}
 				</div>
 			</div>
 
-			<div class="[grid-area:stack] transition-all duration-200 {activeTab === 2 ? '' : 'invisible opacity-0 pointer-events-none'}">
+			<div class="transition-all duration-200 {activeTab === 2 ? 'relative' : 'absolute inset-0 invisible opacity-0 pointer-events-none'}">
 				<div class="space-y-6">
 					<ImagePicker name="icon" label="Module Icon" moduleSlug={data.mod.slug} existingPreviews={data.mod.icon ? [data.mod.icon] : []} />
 					<ImagePicker name="screenshots" label="Screenshots" moduleSlug={data.mod.slug} multiple existingPreviews={data.mod.images?.map((i: any) => i.url) ?? []} />
 				</div>
 			</div>
 
-			<div class="[grid-area:stack] transition-all duration-200 {activeTab === 3 ? '' : 'invisible opacity-0 pointer-events-none'}">
+			<div class="transition-all duration-200 {activeTab === 3 ? 'relative' : 'absolute inset-0 invisible opacity-0 pointer-events-none'}">
 				<div><div class="flex items-center justify-between"><label class="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">Frequently Asked Questions</label><button type="button" onclick={addFaq} class="flex items-center gap-1 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 transition-all hover:border-zumito-300 hover:text-zumito-600 cursor-pointer dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400"><svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add FAQ</button></div>
 				<div class="mt-4 space-y-4">
 					{#each faqItems as faq, i}
