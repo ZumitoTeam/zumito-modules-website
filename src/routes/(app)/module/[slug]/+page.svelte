@@ -206,7 +206,14 @@
 		{#if data.userHasInstalled}
 			<span class="flex w-full items-center justify-center gap-1.5 rounded-lg bg-green-500 px-5 py-2.5 text-sm font-medium text-white">Installed</span>
 		{:else}
-			<button onclick={() => { (window as any).zumito?.installModule?.(data.mod.npm); }}
+			<button onclick={() => {
+					const z = (window as any).zumito;
+					if (z?.installModule) {
+						z.installModule(data.mod.npm);
+					} else {
+						window.parent.postMessage({ zumito: 'installModule', name: data.mod.npm }, '*');
+					}
+				}}
 				class="w-full rounded-lg bg-zumito-600 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-zumito-700 focus:outline-none focus:ring-4 focus:ring-zumito-300 active:scale-[0.98] dark:focus:ring-zumito-800">
 				Install with Zumito
 			</button>
